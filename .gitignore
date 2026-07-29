@@ -1,0 +1,5 @@
+# Ignore all dotfiles except those needed for the repo
+.*
+!.gitignore
+!.github
+!.github/**
