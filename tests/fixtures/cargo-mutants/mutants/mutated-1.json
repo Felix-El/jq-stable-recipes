@@ -1,0 +1,115 @@
+{
+  "cargo_mutants_version": "27.1.0",
+  "end_time": "2026-07-30T08:43:22.626893723Z",
+  "start_time": "2026-07-30T07:57:46.155518257Z",
+  "success": 0,
+  "unviable": 11,
+  "timeout": 0,
+  "caught": 256,
+  "missed": 19,
+  "total_mutants": 286,
+  "outcomes": [
+    {
+      "scenario": "mutant::utils::strip_paths",
+      "summary": "Missed",
+      "phase_results": [
+        {
+          "phase": "Test",
+          "duration": 3.456789,
+          "process_status": "Success",
+          "argv": [
+            "/home/runner/.rustup/toolchains/1.92.0-x86_64-unknown-linux-gnu/bin/cargo",
+            "test",
+            "--verbose",
+            "--package=myapp@0.2.0",
+            "-p",
+            "myapp",
+            "--all-targets"
+          ]
+        },
+        {
+          "phase": "Build",
+          "duration": 8.912345,
+          "process_status": "Success",
+          "argv": [
+            "/home/runner/.rustup/toolchains/1.92.0-x86_64-unknown-linux-gnu/bin/cargo",
+            "test",
+            "--no-run",
+            "--verbose",
+            "--package=myapp@0.2.0"
+          ]
+        }
+      ],
+      "diff_path": "/home/runner/work/repo/target/mutants/diffs/mutant-utils-strip_paths.diff",
+      "log_path": "/home/runner/work/repo/target/mutants/log/mutant-utils-strip_paths.log"
+    },
+    {
+      "scenario": "Baseline",
+      "summary": "Success",
+      "log_path": "/home/runner/work/repo/log/baseline.log",
+      "diff_path": null,
+      "phase_results": [
+        {
+          "phase": "Test",
+          "duration": 2.061440983,
+          "process_status": "Success",
+          "argv": [
+            "/home/runner/.rustup/toolchains/1.92.0-x86_64-unknown-linux-gnu/bin/cargo",
+            "test",
+            "--verbose",
+            "--package=myapp@0.2.0",
+            "-p",
+            "myapp",
+            "--all-targets"
+          ]
+        },
+        {
+          "phase": "Build",
+          "duration": 34.789968821,
+          "process_status": "Success",
+          "argv": [
+            "/home/runner/.rustup/toolchains/1.92.0-x86_64-unknown-linux-gnu/bin/cargo",
+            "test",
+            "--no-run",
+            "--verbose",
+            "--package=myapp@0.2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "mutant::core::parse_number",
+      "summary": "Caught",
+      "log_path": "/home/runner/work/repo/target/mutants/log/mutant-core-parse_number.log",
+      "diff_path": "/home/runner/work/repo/target/mutants/diffs/mutant-core-parse_number.diff",
+      "phase_results": [
+        {
+          "phase": "Test",
+          "duration": 1.234567,
+          "process_status": "Success",
+          "argv": [
+            "/home/runner/.rustup/toolchains/1.92.0-x86_64-unknown-linux-gnu/bin/cargo",
+            "test",
+            "--verbose",
+            "--package=myapp@0.2.0",
+            "-p",
+            "myapp",
+            "--all-targets"
+          ]
+        },
+        {
+          "phase": "Build",
+          "duration": 12.456789,
+          "process_status": "Success",
+          "argv": [
+            "/home/runner/.rustup/toolchains/1.92.0-x86_64-unknown-linux-gnu/bin/cargo",
+            "test",
+            "--no-run",
+            "--verbose",
+            "--package=myapp@0.2.0"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "caught": 256,
+  "missed": 19,
+  "outcomes": [
+    {
+      "phase_results": [
+        {
+          "phase": "Build",
+          "process_status": "Success"
+        },
+        {
+          "phase": "Test",
+          "process_status": "Success"
+        }
+      ],
+      "scenario": "Baseline",
+      "summary": "Success"
+    },
+    {
+      "phase_results": [
+        {
+          "phase": "Build",
+          "process_status": "Success"
+        },
+        {
+          "phase": "Test",
+          "process_status": "Success"
+        }
+      ],
+      "scenario": "mutant::core::parse_number",
+      "summary": "Caught"
+    },
+    {
+      "phase_results": [
+        {
+          "phase": "Build",
+          "process_status": "Success"
+        },
+        {
+          "phase": "Test",
+          "process_status": "Success"
+        }
+      ],
+      "scenario": "mutant::utils::strip_paths",
+      "summary": "Missed"
+    }
+  ],
+  "success": 0,
+  "timeout": 0,
+  "total_mutants": 286,
+  "unviable": 11
+}

@@ -4,7 +4,7 @@ Tested jq recipes that produce stable JSON from non-deterministic tool output.
 
 ## Problem
 
-Tools like `cargo build --message-format json` emit JSON that varies between runs: parallel execution reorders messages, build artifacts carry fresh hashes, arrays come in arbitrary order. These filters normalize such output into a stable fingerprint — use it for caching, change detection, or reproducible builds.
+Tools like `cargo build --message-format json` and `cargo-mutants outcomes.json` emit JSON that varies between runs: parallel execution reorders messages, build artifacts carry fresh hashes, arrays come in arbitrary order, runtime timing shifts. These filters normalize such output into a stable fingerprint — use it for caching, change detection, or reproducible builds.
 
 ## Usage
 
@@ -13,6 +13,9 @@ cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/nor
 
 # Or for a minimal fingerprint:
 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/identity.jq
+
+# For cargo-mutants outcomes (single JSON object, not NDJSON):
+jq -f filters/cargo-mutants/normalize.jq target/mutants/outcomes.json
 ```
 
 ## Filters
@@ -20,6 +23,9 @@ cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/ide
 - [**cargo-build**](filters/cargo-build/) — Two filters for `cargo build --message-format json`:
   - [`normalize.jq`](filters/cargo-build/) — Full normalization: stable JSON, all fields preserved
   - [`identity.jq`](filters/cargo-build/) — Minimal fingerprint: only fields needed to identify if two builds are the same
+- [**cargo-mutants**](filters/cargo-mutants/) — Two filters for `cargo-mutants outcomes.json`:
+  - [`normalize.jq`](filters/cargo-mutants/) — Full normalization: stable JSON, all meaningful fields preserved
+  - [`identity.jq`](filters/cargo-mutants/) — Minimal fingerprint: mutation counts, scenario names, phase pass/fail
 
 Each filter directory has its own README with detailed documentation and known limitations.
 
@@ -55,20 +61,33 @@ Create a subdirectory in `filters/<name>/` with:
 - one or more `.jq` filter files (each self-contained, with env var headers)
 - `README.md` — documentation and limitations
 
-Add test fixtures in `tests/fixtures/<name>/`, then generate goldens:
+Add test fixtures under `tests/fixtures/<name>/mutants/`, then generate goldens:
 
 ```bash
 # Generate expected output for default env
-jq -s -f filters/<name>/<filter>.jq tests/fixtures/<name>/input.json \
-  > tests/fixtures/<name>/<filter>.default.expected.json
+jq -s -f filters/<name>/<filter>.jq tests/fixtures/<name>/mutants/input.json \
+  > tests/fixtures/<name>/output-<filter>/output.default.json
 
 # For each @env: variant, generate with that env set
 env STRIP_PATHS=1 jq -s -f filters/<name>/<filter>.jq \
-  tests/fixtures/<name>/input.json \
-  > tests/fixtures/<name>/<filter>.strip_paths.expected.json
+  tests/fixtures/<name>/mutants/input.json \
+  > tests/fixtures/<name>/output-<filter>/output.strip_paths.json
 ```
 
-Write a `<filter>.golden.json` dispatcher referencing these files, run `cd tests && bash run-tests.sh`, then add a link to `filters/<name>/` in the filter list above.
+Write a `<filter>.test.json` dispatcher referencing these files, run `cd tests && bash run-tests.sh`, then add a link to `filters/<name>/` in the filter list above.
+
+### Fixture file layout
+
+```
+tests/fixtures/<name>/
+  mutants/
+    input.json          # base input fixture
+    mutated-1.json      # shuffled variant (mutation test)
+    mutated-2.json      # another shuffled variant
+  output-<filter>/
+    output.<variant>.json   # expected output per variant
+  <filter>.test.json        # golden dispatcher
+```
 
 ## License
 
