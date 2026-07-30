@@ -1,14 +1,59 @@
 # cargo-build
 
-Normalizes `cargo build --message-format json` output into a stable fingerprint, invariant under non-deterministic build variation.
+Two filters for `cargo build --message-format json` output, at different levels of projection.
 
-## Usage
+## normalize.jq
+
+Full normalization: produces stable JSON from non-deterministic build output. Keeps all fields, but normalizes order, hashes, and removes caching noise.
 
 ```
-cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/cargo-build.jq
+cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/normalize.jq
 ```
 
-## What It Normalizes
+### Stripping machine-specific paths
+
+Set `STRIP_PATHS=1` to erase all absolute paths to just the filename:
+
+```
+STRIP_PATHS=1 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/normalize.jq
+```
+
+### Limitations
+
+- **Machine-specific paths are preserved** without `STRIP_PATHS=1`. The fingerprint is stable across rebuilds on the same machine, not across different machines or CI runners.
+- **Procedural macro / build script stdout** outside cargo's JSON framework is silently skipped.
+- **Compiler diagnostics** are normalized for key order only — content is preserved verbatim.
+
+## identity.jq
+
+Minimal fingerprint variant. Projects each message down to only the fields needed to determine if two builds are semantically identical. Suitable as a stable build key or piped to `sha256sum`.
+
+```
+cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/identity.jq
+```
+
+With path stripping:
+
+```
+STRIP_PATHS=1 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/identity.jq
+```
+
+### Projected Fields
+
+| Message type | Kept fields |
+|---|---|
+| `compiler-artifact` | `package`, `target`, `kind`, `features` |
+| `compiler-message` | `package`, `target`, `level`, `code` |
+| `build-script-executed` | `package`, `cfgs`, `linked_libs`, `linked_paths` |
+| `build-finished` | `success` |
+
+### Limitations
+
+- **No path information** — paths are excluded by design.
+- **No diagnostic details** — only the error/warning code is kept, not the message text or source location.
+- **Profile metadata is dropped** — `opt_level`, `debuginfo`, etc. reflect project config, not build output.
+
+## What Both Normalize
 
 | Variation | Treatment |
 |---|---|
@@ -17,9 +62,3 @@ cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/car
 | Array element order (`features`, `filenames`, `cfgs`, `env`, etc.) | Sort each array deterministically |
 | `fresh` / `executable` fields | Remove (vary with caching state) |
 | Object key ordering | Recursively sort keys alphabetically |
-
-## Limitations
-
-- **Machine-specific paths are preserved.** Absolute paths like `manifest_path`, `src_path`, and the directory portions of `filenames` remain as-is. The fingerprint is stable across rebuilds on the **same machine**, not across different machines or CI runners.
-- **Procedural macro / build script output** that writes to stdout outside cargo's JSON framework is silently skipped (lines not starting with `{}` are filtered out).
-- **Compiler diagnostics** (`compiler-message`) are normalized for key order only — the diagnostic content (`message`, `spans`, `rendered`) is preserved verbatim.

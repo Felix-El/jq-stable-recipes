@@ -1,3 +1,9 @@
+# Normalizes cargo build --message-format json NDJSON into stable,
+# order-independent JSON. Handles message reordering from parallel
+# compilation, hash suffixes in artifact filenames, array ordering,
+# and caching state. All fields are preserved.
+#
+# @env:STRIP_PATHS?:1
 def sort_array($key):
   if (.[$key] | type) == "array" then .[$key] |= sort else . end;
 
@@ -29,3 +35,6 @@ def sort_object_keys:
 map(select(type == "object" and has("reason")) | normalize_message)
 | sort_by(.package_id // "", .reason // "")
 | sort_object_keys
+| if (env.STRIP_PATHS // "") == "1" then
+    walk(if type == "string" and startswith("/") then sub(".*/"; "") else . end)
+  else . end

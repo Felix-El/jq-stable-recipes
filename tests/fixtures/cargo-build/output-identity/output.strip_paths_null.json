@@ -1,0 +1,71 @@
+[
+  {
+    "reason": "result",
+    "success": true
+  },
+  {
+    "features": [],
+    "kind": [
+      "bin"
+    ],
+    "package": "myapp@0.1.0",
+    "reason": "artifact",
+    "target": "myapp"
+  },
+  {
+    "code": "unused_imports",
+    "level": "warning",
+    "package": "myapp@0.1.0",
+    "reason": "diagnostic",
+    "target": "myapp"
+  },
+  {
+    "features": [
+      "default"
+    ],
+    "kind": [
+      "lib"
+    ],
+    "package": "mylib@0.1.0",
+    "reason": "artifact",
+    "target": "mylib"
+  },
+  {
+    "code": "unused_variables",
+    "level": "warning",
+    "package": "mylib@0.1.0",
+    "reason": "diagnostic",
+    "target": "mylib"
+  },
+  {
+    "features": [],
+    "kind": [
+      "lib"
+    ],
+    "package": "myutil@0.1.0",
+    "reason": "artifact",
+    "target": "myutil"
+  },
+  {
+    "features": [
+      "derive",
+      "std"
+    ],
+    "kind": [
+      "lib"
+    ],
+    "package": "serde@1.0.193",
+    "reason": "artifact",
+    "target": "serde"
+  },
+  {
+    "cfgs": [
+      "serde_build_cfg_feature",
+      "serde_build_no_std"
+    ],
+    "linked_libs": [],
+    "linked_paths": [],
+    "package": "serde@1.0.193",
+    "reason": "build_script"
+  }
+]

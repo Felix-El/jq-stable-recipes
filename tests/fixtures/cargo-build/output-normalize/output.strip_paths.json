@@ -1,0 +1,320 @@
+[
+  {
+    "reason": "build-finished",
+    "success": true
+  },
+  {
+    "features": [],
+    "filenames": [
+      "myapp"
+    ],
+    "manifest_path": "Cargo.toml",
+    "package_id": "myapp@0.1.0",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "bin"
+      ],
+      "doc": true,
+      "doctest": false,
+      "edition": "2021",
+      "kind": [
+        "bin"
+      ],
+      "name": "myapp",
+      "src_path": "main.rs",
+      "test": true
+    }
+  },
+  {
+    "manifest_path": "Cargo.toml",
+    "message": {
+      "$message_type": "diagnostic",
+      "children": [
+        {
+          "code": null,
+          "level": "help",
+          "message": "remove the unused import",
+          "spans": [
+            {
+              "byte_end": 32,
+              "byte_start": 20,
+              "column_end": 33,
+              "column_start": 21,
+              "expansion": null,
+              "file_name": "main.rs",
+              "is_primary": true,
+              "label": null,
+              "line_end": 1,
+              "line_start": 1,
+              "suggested_replacement": "",
+              "suggestion_applicability": "MachineApplicable",
+              "text": [
+                {
+                  "highlight_end": 33,
+                  "highlight_start": 21,
+                  "text": "use std::collections::HashMap;"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "code": {
+        "code": "unused_imports",
+        "explanation": null
+      },
+      "level": "warning",
+      "message": "unused import: `HashMap`",
+      "rendered": "warning: unused import: `HashMap`\n --> myapp/src/main.rs:1:21\n  |\n1 | use std::collections::HashMap;\n  |                     ^^^^^^^\n  |\n  = help: remove the unused import\n  |\n",
+      "spans": [
+        {
+          "byte_end": 32,
+          "byte_start": 20,
+          "column_end": 33,
+          "column_start": 21,
+          "expansion": null,
+          "file_name": "main.rs",
+          "is_primary": true,
+          "label": null,
+          "line_end": 1,
+          "line_start": 1,
+          "suggested_replacement": null,
+          "suggestion_applicability": null,
+          "text": [
+            {
+              "highlight_end": 33,
+              "highlight_start": 21,
+              "text": "use std::collections::HashMap;"
+            }
+          ]
+        }
+      ]
+    },
+    "package_id": "myapp@0.1.0",
+    "reason": "compiler-message",
+    "target": {
+      "crate_types": [
+        "bin"
+      ],
+      "doc": true,
+      "doctest": false,
+      "edition": "2021",
+      "kind": [
+        "bin"
+      ],
+      "name": "myapp",
+      "src_path": "main.rs",
+      "test": true
+    }
+  },
+  {
+    "features": [
+      "default"
+    ],
+    "filenames": [
+      "libmylib-HASH.rlib",
+      "libmylib-HASH.rmeta"
+    ],
+    "manifest_path": "Cargo.toml",
+    "package_id": "mylib@0.1.0",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "mylib",
+      "src_path": "lib.rs",
+      "test": true
+    }
+  },
+  {
+    "manifest_path": "Cargo.toml",
+    "message": {
+      "$message_type": "diagnostic",
+      "children": [
+        {
+          "code": null,
+          "level": "help",
+          "message": "if `count` is intentionally unused, prefix it with an underscore",
+          "spans": [
+            {
+              "byte_end": 45,
+              "byte_start": 39,
+              "column_end": 15,
+              "column_start": 9,
+              "expansion": null,
+              "file_name": "lib.rs",
+              "is_primary": true,
+              "label": null,
+              "line_end": 8,
+              "line_start": 8,
+              "suggested_replacement": "_count",
+              "suggestion_applicability": "MaybeIncorrect",
+              "text": [
+                {
+                  "highlight_end": 15,
+                  "highlight_start": 9,
+                  "text": "    let count = 0;"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "code": {
+        "code": "unused_variables",
+        "explanation": null
+      },
+      "level": "warning",
+      "message": "unused variable `count`",
+      "rendered": "warning: unused variable `count`\n --> mylib/src/lib.rs:8:9\n  |\n8 |     let count = 0;\n  |         ^^^^^ help: if `count` is intentionally unused, prefix it with an underscore: `_count`\n  |\n",
+      "spans": [
+        {
+          "byte_end": 45,
+          "byte_start": 39,
+          "column_end": 15,
+          "column_start": 9,
+          "expansion": null,
+          "file_name": "lib.rs",
+          "is_primary": true,
+          "label": null,
+          "line_end": 8,
+          "line_start": 8,
+          "suggested_replacement": null,
+          "suggestion_applicability": null,
+          "text": [
+            {
+              "highlight_end": 15,
+              "highlight_start": 9,
+              "text": "    let count = 0;"
+            }
+          ]
+        }
+      ]
+    },
+    "package_id": "mylib@0.1.0",
+    "reason": "compiler-message",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "mylib",
+      "src_path": "lib.rs",
+      "test": true
+    }
+  },
+  {
+    "features": [],
+    "filenames": [
+      "libmyutil-HASH.rlib",
+      "libmyutil-HASH.rmeta"
+    ],
+    "manifest_path": "Cargo.toml",
+    "package_id": "myutil@0.1.0",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "myutil",
+      "src_path": "lib.rs",
+      "test": true
+    }
+  },
+  {
+    "cfgs": [
+      "serde_build_cfg_feature",
+      "serde_build_no_std"
+    ],
+    "env": [
+      [
+        "CARGO_MANIFEST_DIR",
+        "serde-1.0.193"
+      ],
+      [
+        "OUT_DIR",
+        "out"
+      ]
+    ],
+    "linked_libs": [],
+    "linked_paths": [],
+    "manifest_path": "Cargo.toml",
+    "out_dir": "out",
+    "package_id": "serde@1.0.193",
+    "reason": "build-script-executed"
+  },
+  {
+    "features": [
+      "derive",
+      "std"
+    ],
+    "filenames": [
+      "libserde-HASH.rlib",
+      "libserde-HASH.rmeta"
+    ],
+    "manifest_path": "Cargo.toml",
+    "package_id": "serde@1.0.193",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "serde",
+      "src_path": "lib.rs",
+      "test": true
+    }
+  }
+]
