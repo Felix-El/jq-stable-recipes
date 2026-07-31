@@ -16,7 +16,7 @@ Every `.jq` file starts with a comment block structured as follows:
 # @env:OTHER?:val1|val2|val3   Optional var, null/unset also valid
 ```
 
-- **SPDX tag** — the first line of the header is the license identifier (`# SPDX-License-Identifier: MIT`), followed by a blank line. CI enforces this via `tests/spdx-check.sh`.
+- **SPDX tag** — the first line of the header is the license identifier (`# SPDX-License-Identifier: MIT`), followed by a blank line. CI enforces this via `just lint`.
 - **Free-form text** — describes the purpose and behavior of the filter.
 - **Blank `#` line** separates the description from the `@env:` declarations.
 - **`@env:NAME:VALUE`** — declares a required environment variable the filter reads. The golden file must contain at least one entry where this var is set to a non-null value.
@@ -38,10 +38,10 @@ CI measures how many of the possible `@env:` combinations each filter actually e
 - **Tested combinations** — each golden entry's `.env` object, projected onto the declared variable names.
 - **Coverage** — `|possible ∩ tested| / |possible|`, reported per filter and overall.
 
-The check runs as part of CI via `tests/coverage.sh`. It fails when any filter's coverage, or the overall coverage, is below the target percentage.
+The check runs as part of CI via `just coverage`. It fails when any filter's coverage, or the overall coverage, is below the target percentage.
 
 - **`ENV_COVERAGE_TARGET`** — target percentage, default `50`. Configure it as a [GitHub Actions variable](https://docs.github.com/en/actions/learn-github-actions/variables) named `ENV_COVERAGE_TARGET`; CI picks it up automatically and the default applies when unset.
-- Run locally: `ENV_COVERAGE_TARGET=90 bash tests/coverage.sh` from the repo root.
+- Run locally: `ENV_COVERAGE_TARGET=90 just coverage` from the repo root.
 
 To raise a filter's score, add golden dispatcher entries that exercise the missing combinations (e.g. an entry with the var set to another declared value, or one where an optional var is absent).
 
@@ -64,7 +64,7 @@ env STRIP_PATHS=1 jq -s -f filters/<name>/<filter>.jq \
   > tests/fixtures/<name>/output-<filter>/output.strip_paths.json
 ```
 
-Write a `<filter>.test.json` dispatcher referencing these files, run `cd tests && bash run-tests.sh`, then add a link to `filters/<name>/` in the filter list of the README.
+Write a `<filter>.test.json` dispatcher referencing these files, run `just test <name>`, then add a link to `filters/<name>/` in the filter list of the README.
 
 ### Fixture file layout
 
