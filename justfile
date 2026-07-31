@@ -1,22 +1,50 @@
-set positional-arguments
+# jq-stable-recipes justfile
+# ================================================================
+# Quick start:
+#   just                    # show recipe list, filter inventory, and usage (default)
+#   just --list             # list all public recipes with their docs
+#   just run <family/name>  # run a filter on its fixture input,
+#                           #   e.g. just run cargo-build/stable
+#   just test [family/name] # run tests: all, one family, or one filter
+#   just lint               # check SPDX license headers on all filter files
+#   just coverage           # check env-combination coverage
+#   just check-json [family]# validate version-controlled JSON fixtures
+#
+# Conventions:
+#   - Public recipes carry a [doc('...')] attribute; internal helpers are
+#     [private] (hidden from `just --list`).
+#   - Every recipe body runs as a bash script under `bash -euo pipefail`
+#     via the [script] attribute + `set script-interpreter` — no per-recipe
+#     shebang or `set -euo pipefail` boilerplate.
+#   - Recipes that read shell positional arguments ($1, $@, shift) opt in
+#     with a per-recipe [positional-arguments] attribute.
+#   - Self-invocation uses {{ just_cmd }} (= just_executable() +
+#     --justfile quote(justfile())), so recipes always re-invoke this
+#     justfile no matter how `just` was installed or invoked.
+# ================================================================
 
-# Show recipe list, filter inventory, and usage hints
-default: _discover
+set script-interpreter := ['bash', '-euo', 'pipefail']
 
-# Alias for `just default` (recipe list + filter inventory)
-list: _discover
+# Absolute just binary + explicit (quoted) justfile path
 
-# Run a filter on its fixture input: just run <family/name>
+just_cmd := just_executable() + ' --justfile ' + quote(justfile())
+
+[doc('Show recipe list, filter inventory, and usage hints')]
+default: discover
+
+[doc('Alias for `just default` (recipe list + filter inventory)')]
+list: discover
+
+[doc('Run a filter on its fixture input: just run <family/name>')]
+[script]
 run filter:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    arg={{quote(filter)}}
+    arg={{ quote(filter) }}
 
     if [[ "$arg" != */* ]]; then
         echo "ERROR: filter must be <family>/<name>, got '$arg'" >&2
         echo >&2
         echo "Available filters:" >&2
-        just --justfile {{justfile()}} _filters >&2
+        {{ just_cmd }} filter-inventory >&2
         exit 1
     fi
     family="${arg%%/*}"
@@ -26,7 +54,7 @@ run filter:
         echo "ERROR: filter file not found: $filter_file" >&2
         echo >&2
         echo "Available filters:" >&2
-        just --justfile {{justfile()}} _filters >&2
+        {{ just_cmd }} filter-inventory >&2
         exit 1
     fi
     input_file="tests/fixtures/$family/mutants/input.json"
@@ -36,55 +64,53 @@ run filter:
     fi
     jq -s -f "$filter_file" "$input_file"
 
-# Run tests: just test (all), just test <family>, just test <family/name>
+[doc('Run tests: just test (all), just test <family>, just test <family/name>')]
+[script]
 test filter="":
-    #!/usr/bin/env bash
-    set -euo pipefail
-    arg={{quote(filter)}}
+    arg={{ quote(filter) }}
     if [ -z "$arg" ]; then
-        just --justfile {{justfile()}} _test
+        {{ just_cmd }} test-suite
     elif [[ "$arg" == */* ]]; then
-        just --justfile {{justfile()}} _test "${arg%%/*}" "${arg#*/}"
+        {{ just_cmd }} test-suite "${arg%%/*}" "${arg#*/}"
     else
-        just --justfile {{justfile()}} _test "$arg"
+        {{ just_cmd }} test-suite "$arg"
     fi
 
-# Check SPDX license headers on all filter files
-lint: _spdx-check
+[doc('Check SPDX license headers on all filter files')]
+lint: spdx-check
 
-# Check env-combination coverage (ENV_COVERAGE_TARGET, default 50)
-coverage: _coverage-check
+[doc('Check env-combination coverage (ENV_COVERAGE_TARGET, default 50)')]
+coverage: coverage-check
 
-# Validate JSON fixtures: just check-json [family]
+[doc('Validate JSON fixtures: just check-json [family]')]
+[script]
 check-json family="":
-    #!/usr/bin/env bash
-    set -euo pipefail
-    fam={{quote(family)}}
+    fam={{ quote(family) }}
     if [ -z "$fam" ]; then
-        just --justfile {{justfile()}} _check-json
+        {{ just_cmd }} check-json-all
     else
-        just --justfile {{justfile()}} _check-json "$fam"
+        {{ just_cmd }} check-json-all "$fam"
     fi
 
 # ================================================================
 # Private recipes — internal helpers, hidden from `just --list`.
 # ================================================================
 
-# (private) discovery output: recipe list + filter inventory + usage hint
-_discover:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    just --justfile {{justfile()}} --list
+# discovery output: recipe list + filter inventory + usage hint
+[private]
+[script]
+discover:
+    {{ just_cmd }} --list
     echo
     echo "Available filters:"
-    just --justfile {{justfile()}} _filters
+    {{ just_cmd }} filter-inventory
     echo
     echo "Usage: just run <family/name>, just test [family/name], just check-json [family]"
 
-# (private) filter inventory: one indented `<family>/<name>` per line
-_filters:
-    #!/usr/bin/env bash
-    set -euo pipefail
+# filter inventory: one indented `<family>/<name>` per line
+[private]
+[script]
+filter-inventory:
     for d in filters/*/; do
         [ -d "$d" ] || continue
         fam="$(basename "$d")"
@@ -94,11 +120,12 @@ _filters:
         done
     done
 
-# (private) parse `# @env:` declarations from a filter header
-#   output: one line per var: "name|optional|values"
-_env-decls file:
-    #!/usr/bin/env bash
-    set -euo pipefail
+# parse `# @env:` declarations from a filter header
+
+# output: one line per var: "name|optional|values"
+[private]
+[script]
+env-decls file:
     while IFS= read -r line; do
         if [[ "$line" =~ ^#\ @env:([^?:\ ]+)\??:(.+)$ ]]; then
             name="${BASH_REMATCH[1]}"
@@ -110,13 +137,15 @@ _env-decls file:
                 echo "$name|no|$rest"
             fi
         fi
-    done < {{quote(file)}}
+    done < {{ quote(file) }}
 
-# (private) print `NAME=VALUE` env override lines from a golden entry's env object
-#   (null values are skipped — those vars stay unset)
-_env-args entry:
-    #!/usr/bin/env bash
-    set -euo pipefail
+# print `NAME=VALUE` env override lines from a golden entry's env object
+
+# (null values are skipped — those vars stay unset)
+[positional-arguments]
+[private]
+[script]
+env-args entry:
     env_obj="$(echo "$1" | jq -c '.value.env')"
     [ "$env_obj" = "null" ] && exit 0
     while IFS= read -r key; do
@@ -127,11 +156,13 @@ _env-args entry:
         fi
     done < <(echo "$env_obj" | jq -r 'keys[]')
 
-# (private) mutation test: apply filter to all fixture inputs under given env,
-#   verify all outputs match. Trailing args are `NAME=VALUE` env overrides.
-_mutation-test label filter_file fixture_dir *env_args:
-    #!/usr/bin/env bash
-    set -euo pipefail
+# mutation test: apply filter to all fixture inputs under given env,
+
+# verify all outputs match. Trailing args are `NAME=VALUE` env overrides.
+[positional-arguments]
+[private]
+[script]
+mutation-test label filter_file fixture_dir *env_args:
     label="$1"
     filter_file="$2"
     fixture_dir="$3"
@@ -173,12 +204,14 @@ _mutation-test label filter_file fixture_dir *env_args:
 
     echo "PASS: $label mutation (${#fixtures[@]} fixtures)"
 
-# (private) golden test: apply filter to a specific input with given env,
+# golden test: apply filter to a specific input with given env,
 #   compare output byte-for-byte against the expected file.
-#   Trailing args are `NAME=VALUE` env overrides.
-_golden-test label filter_file input_file expected_file *env_args:
-    #!/usr/bin/env bash
-    set -euo pipefail
+
+# Trailing args are `NAME=VALUE` env overrides.
+[positional-arguments]
+[private]
+[script]
+golden-test label filter_file input_file expected_file *env_args:
     label="$1"
     filter_file="$2"
     input_file="$3"
@@ -217,11 +250,13 @@ _golden-test label filter_file input_file expected_file *env_args:
 
     echo "PASS: $label golden"
 
-# (private) validate that every @env: declaration is covered by golden entries.
-#   Trailing args are `name|optional|values` declaration lines.
-_validate-coverage label golden_file *decls:
-    #!/usr/bin/env bash
-    set -euo pipefail
+# validate that every @env: declaration is covered by golden entries.
+
+# Trailing args are `name|optional|values` declaration lines.
+[positional-arguments]
+[private]
+[script]
+validate-coverage label golden_file *decls:
     label="$1"
     golden_file="$2"
     shift 2
@@ -267,14 +302,14 @@ _validate-coverage label golden_file *decls:
 
     exit $ok
 
-# (private) test runner: golden + mutation tests + @env coverage validation.
-#   just _test               all filters
-#   just _test <family>      one family
-#   just _test <family> <f>  one filter file
-_test family="" filter="":
-    #!/usr/bin/env bash
-    set -euo pipefail
+# test runner: golden + mutation tests + @env coverage validation.
+#   just test-suite               all filters
+#   just test-suite <family>      one family
 
+# just test-suite <family> <f>  one filter file
+[private]
+[script]
+test-suite family="" filter="":
     if ! command -v jq &>/dev/null; then
         echo "ERROR: jq is not installed. Install it first (e.g. sudo apt-get install jq)."
         exit 1
@@ -282,8 +317,8 @@ _test family="" filter="":
 
     FILTER_DIR="filters"
     FIXTURE_DIR="tests/fixtures"
-    FAMILY_FILTER={{quote(family)}}
-    FILTER_FILTER={{quote(filter)}}
+    FAMILY_FILTER={{ quote(family) }}
+    FILTER_FILTER={{ quote(filter) }}
     exit_code=0
     tests_run=0
 
@@ -327,7 +362,7 @@ _test family="" filter="":
             label_base="$dir_name/$filter_name"
 
             # Parse @env: declarations from header
-            mapfile -t env_decls < <(just --justfile {{justfile()}} _env-decls "$filter_file")
+            mapfile -t env_decls < <({{ just_cmd }} env-decls "$filter_file")
 
             # Look for golden dispatcher
             golden_file="$fixture_base/$filter_name.test.json"
@@ -342,25 +377,25 @@ _test family="" filter="":
                     variant="$label_base ($entry_label)"
 
                     # Build env args from this entry
-                    mapfile -t env_args < <(just --justfile {{justfile()}} _env-args "$entry")
+                    mapfile -t env_args < <({{ just_cmd }} env-args "$entry")
                     local_input="$(echo "$entry" | jq -r '.value.input // "mutants/input.json"')"
                     local_input_path="$fixture_base/$local_input"
                     expected_file="$fixture_base/$(echo "$entry" | jq -r '.value.expected')"
 
-                    just --justfile {{justfile()}} _mutation-test "$variant" "$filter_file" "$fixture_base" "${env_args[@]}" || exit_code=1
-                    just --justfile {{justfile()}} _golden-test "$variant" "$filter_file" "$local_input_path" "$expected_file" "${env_args[@]}" || exit_code=1
+                    {{ just_cmd }} mutation-test "$variant" "$filter_file" "$fixture_base" "${env_args[@]}" || exit_code=1
+                    {{ just_cmd }} golden-test "$variant" "$filter_file" "$local_input_path" "$expected_file" "${env_args[@]}" || exit_code=1
                 done < <(echo "$golden_entries")
 
                 # Validate coverage: every @env: declaration must be covered
                 if [ ${#env_decls[@]} -gt 0 ]; then
-                    just --justfile {{justfile()}} _validate-coverage "$label_base" "$golden_file" "${env_decls[@]}" || exit_code=1
+                    {{ just_cmd }} validate-coverage "$label_base" "$golden_file" "${env_decls[@]}" || exit_code=1
                 fi
             else
                 # ---- No golden file: default mutation test only ----
                 if [ ${#env_decls[@]} -gt 0 ]; then
                     echo "WARN: $label_base — @env: declared but no golden file (mutation only)"
                 fi
-                just --justfile {{justfile()}} _mutation-test "$label_base (default)" "$filter_file" "$fixture_base" || exit_code=1
+                {{ just_cmd }} mutation-test "$label_base (default)" "$filter_file" "$fixture_base" || exit_code=1
             fi
         done
     done
@@ -374,12 +409,12 @@ _test family="" filter="":
 
     exit $exit_code
 
-# (private) SPDX header check: every filters/*.jq must start with an SPDX
-# license tag as the first line of its header comment, followed by a blank line.
-_spdx-check:
-    #!/usr/bin/env bash
-    set -euo pipefail
+# SPDX header check: every filters/*.jq must start with an SPDX
 
+# license tag as the first line of its header comment, followed by a blank line.
+[private]
+[script]
+spdx-check:
     fail=0
     while IFS= read -r -d '' file; do
         rel="${file#filters/}"
@@ -402,11 +437,10 @@ _spdx-check:
     fi
     exit $fail
 
-# (private) env-combination coverage check (ENV_COVERAGE_TARGET, default 50)
-_coverage-check:
-    #!/usr/bin/env bash
-    set -euo pipefail
-
+# env-combination coverage check (ENV_COVERAGE_TARGET, default 50)
+[private]
+[script]
+coverage-check:
     if ! command -v jq &>/dev/null; then
         echo "ERROR: jq is not installed. Install it first (e.g. sudo apt-get install jq)."
         exit 1
@@ -449,7 +483,7 @@ _coverage-check:
                 [ "$optional" = "yes" ] && opt_json="true"
                 vals_json="$(printf '%s' "$values" | tr '|' '\n' | jq -R -s -c 'split("\n") | map(select(length > 0))')"
                 decls_json="$(printf '%s' "$decls_json" | jq -c --arg n "$name" --argjson o "$opt_json" --argjson v "$vals_json" '. + [{name: $n, optional: $o, values: $v}]')"
-            done < <(just --justfile {{justfile()}} _env-decls "$filter_file")
+            done < <({{ just_cmd }} env-decls "$filter_file")
 
             if [ "$(printf '%s' "$decls_json" | jq 'length')" -eq 0 ]; then
                 echo "SKIP: $label — no @env: declarations"
@@ -524,14 +558,16 @@ _coverage-check:
 
     exit $exit_code
 
-# (private) verify a single JSON file is in canonical pretty form.
+# verify a single JSON file is in canonical pretty form.
 #   n > 1 → NDJSON: every non-empty line must byte-match jq -c . output
 #   n = 1 → single document: file must byte-match jq . output
 #   n = 0 → unparseable: fail
+
 # n is obtained via `jq -s 'length'` (slurp all top-level JSON values).
-_check-json-file f:
-    #!/usr/bin/env bash
-    set -euo pipefail
+[positional-arguments]
+[private]
+[script]
+check-json-file f:
     f="$1"
     n=$(jq -s 'length' "$f" 2>/dev/null || echo 0)
 
@@ -566,19 +602,19 @@ _check-json-file f:
         exit 1
     fi
 
-# (private) canonical pretty-JSON check, optionally scoped to a fixture family.
-#   just _check-json             all version-controlled JSONs
-#   just _check-json <family>    only tests/fixtures/<family>/
-_check-json family="":
-    #!/usr/bin/env bash
-    set -euo pipefail
+# canonical pretty-JSON check, optionally scoped to a fixture family.
+#   just check-json-all             all version-controlled JSONs
 
+# just check-json-all <family>    only tests/fixtures/<family>/
+[private]
+[script]
+check-json-all family="":
     if ! command -v jq &>/dev/null; then
         echo "ERROR: jq is not installed. Install it first (e.g. sudo apt-get install jq)."
         exit 1
     fi
 
-    family={{quote(family)}}
+    family={{ quote(family) }}
     exit_code=0
 
     if [ -n "$family" ]; then
@@ -602,7 +638,7 @@ _check-json family="":
     while IFS= read -r rel; do
         [ -z "$rel" ] && continue
         total=$((total + 1))
-        if just --justfile {{justfile()}} _check-json-file "$rel"; then
+        if {{ just_cmd }} check-json-file "$rel"; then
             passed=$((passed + 1))
         else
             exit_code=1
