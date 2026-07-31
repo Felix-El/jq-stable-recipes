@@ -2,6 +2,10 @@
 
 Two filters for [`cargo-audit`](https://github.com/rustsec/rustsec/tree/main/cargo-audit) `--json` output, at different levels of projection.
 
+## Determinism
+
+Both filters are deterministic under filter-specific conditions: two runs produce byte-identical output iff they audited the same lockfile against the same advisory database. The database-metadata fields that change on every update (`database.last-commit`, `database.last-updated`) are dropped. `package.checksum` (the crates.io SHA-256 of the exact crate file) is a content hash of the audited input and is **preserved** by both filters — two lockfiles referencing different crate contents would differ here.
+
 ## stable.jq
 
 Full normalization: generates stable, order-independent output from `cargo audit --json` by sorting the variable parts of the JSON — vulnerability and warning lists, package dependency arrays, advisory sub-arrays, and object keys. Drops non-deterministic database metadata that resists ordering-only treatment. All semantically meaningful fields are preserved.
@@ -40,7 +44,7 @@ jq -s -f filters/cargo-audit/stable.jq cargo-audit.json
 
 ## deterministic.jq
 
-Deterministic projection. Does what `stable.jq` does, and additionally drops undeterministic data (database metadata, invocation settings, advisory prose): only the fields needed to determine if two audit runs found the same vulnerabilities remain — lockfile dependency count, vulnerability found/count flags, and per-vulnerability advisory id, cvss score, package name+version, and affected os list. Suitable as a stable cache key or piped to `sha256sum`.
+Deterministic projection. Does what `stable.jq` does, and additionally drops undeterministic data (database metadata, invocation settings, advisory prose): only the fields needed to determine if two audit runs found the same vulnerabilities remain — lockfile dependency count, vulnerability found/count flags, and per-vulnerability advisory id, cvss score, package name+version, checksum, and affected os list. Suitable as a stable cache key or piped to `sha256sum`.
 
 ```
 cargo audit --json 2>/dev/null | jq -s -f filters/cargo-audit/deterministic.jq
@@ -55,7 +59,7 @@ jq -s -f filters/cargo-audit/deterministic.jq cargo-audit.json
 |---|---|
 | Lockfile | `dependency-count` |
 | Vulnerabilities summary | `found`, `count` |
-| Per vulnerability | `advisory.id`, `advisory.cvss`, `package.name`, `package.version`, `affected.os` |
+| Per vulnerability | `advisory.id`, `advisory.cvss`, `package.name`, `package.version`, `package.checksum`, `affected.os` |
 
 ### What deterministic.jq Drops
 
@@ -69,7 +73,7 @@ jq -s -f filters/cargo-audit/deterministic.jq cargo-audit.json
 | `advisory.references`, `advisory.related` | Informational, not identity |
 | `versions.patched`, `versions.unaffected` | Advisory metadata, not finding |
 | `affected.arch`, `affected.functions` | Fine-grained detail; `affected.os` covers platform identity |
-| `package.source`, `package.checksum`, `package.dependencies` | Registry detail, not identity |
+| `package.source`, `package.dependencies` | Registry detail, not identity |
 | `package.replace` | Rarely set, not identity |
 | `warnings` | Informational only; not security vulnerabilities |
 

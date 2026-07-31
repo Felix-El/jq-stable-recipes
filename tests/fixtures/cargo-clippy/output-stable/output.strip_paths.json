@@ -6,7 +6,7 @@
   {
     "features": [],
     "filenames": [
-      "libtools_test-HASH.rmeta"
+      "libtools_test-4630876fe6d422b8.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "path+file:///tmp/opencode/tools-test#0.1.0",
@@ -134,7 +134,7 @@
       "std"
     ],
     "filenames": [
-      "libaho_corasick-HASH.rmeta"
+      "libaho_corasick-59c951e6da5f6ef3.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#aho-corasick@1.1.4",
@@ -164,7 +164,7 @@
   {
     "features": [],
     "filenames": [
-      "libatty-HASH.rmeta"
+      "libatty-3d1f20e5c53db3c3.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#atty@0.2.2",
@@ -194,7 +194,7 @@
   {
     "features": [],
     "filenames": [
-      "libitoa-HASH.rmeta"
+      "libitoa-6ddde9f8d1eacb1c.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#itoa@1.0.18",
@@ -271,7 +271,7 @@
       "std"
     ],
     "filenames": [
-      "liblibc-HASH.rmeta"
+      "liblibc-72577fe584cae775.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#libc@0.2.189",
@@ -304,7 +304,7 @@
       "std"
     ],
     "filenames": [
-      "libmemchr-HASH.rmeta"
+      "libmemchr-0263503a7d6f4437.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#memchr@2.8.3",
@@ -381,8 +381,8 @@
       "proc-macro"
     ],
     "filenames": [
-      "libproc_macro2-HASH.rlib",
-      "libproc_macro2-HASH.rmeta"
+      "libproc_macro2-404452a690452e61.rlib",
+      "libproc_macro2-404452a690452e61.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107",
@@ -455,8 +455,8 @@
       "proc-macro"
     ],
     "filenames": [
-      "libquote-HASH.rlib",
-      "libquote-HASH.rmeta"
+      "libquote-1f1b0729b559a784.rlib",
+      "libquote-1f1b0729b559a784.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47",
@@ -509,7 +509,7 @@
       "unicode-word-boundary"
     ],
     "filenames": [
-      "libregex_automata-HASH.rmeta"
+      "libregex_automata-d16c76465ce75adb.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#regex-automata@0.4.16",
@@ -550,7 +550,7 @@
       "unicode-segment"
     ],
     "filenames": [
-      "libregex_syntax-HASH.rmeta"
+      "libregex_syntax-adce5f78d8a76588.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#regex-syntax@0.8.11",
@@ -598,7 +598,7 @@
       "unicode-segment"
     ],
     "filenames": [
-      "libregex-HASH.rmeta"
+      "libregex-7e140704753da6bd.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#regex@1.13.1",
@@ -679,7 +679,7 @@
       "std"
     ],
     "filenames": [
-      "libserde-HASH.rmeta"
+      "libserde-e566342cbf49a6d6.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde@1.0.229",
@@ -754,7 +754,7 @@
       "std"
     ],
     "filenames": [
-      "libserde_core-HASH.rmeta"
+      "libserde_core-c2ece60d1ccba7c9.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.229",
@@ -786,7 +786,7 @@
       "default"
     ],
     "filenames": [
-      "libserde_derive-HASH.so"
+      "libserde_derive-ff1f26ba90699cc7.so"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_derive@1.0.229",
@@ -863,7 +863,7 @@
       "std"
     ],
     "filenames": [
-      "libserde_json-HASH.rmeta"
+      "libserde_json-dfa7fbe1582cd7ab.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.151",
@@ -899,8 +899,8 @@
       "proc-macro"
     ],
     "filenames": [
-      "libsyn-HASH.rlib",
-      "libsyn-HASH.rmeta"
+      "libsyn-dee893f603239a67.rlib",
+      "libsyn-dee893f603239a67.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#syn@3.0.3",
@@ -930,7 +930,7 @@
   {
     "features": [],
     "filenames": [
-      "libtime-HASH.rmeta"
+      "libtime-77ccef7832dff4dd.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#time@0.1.45",
@@ -960,8 +960,8 @@
   {
     "features": [],
     "filenames": [
-      "libunicode_ident-HASH.rlib",
-      "libunicode_ident-HASH.rmeta"
+      "libunicode_ident-8443eb632a3fbe4c.rlib",
+      "libunicode_ident-8443eb632a3fbe4c.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#unicode-ident@1.0.24",
@@ -1030,7 +1030,7 @@
   {
     "features": [],
     "filenames": [
-      "libzmij-HASH.rmeta"
+      "libzmij-09764c09118bc5c9.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.23",

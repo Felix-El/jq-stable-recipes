@@ -120,8 +120,8 @@
       "default"
     ],
     "filenames": [
-      "libmylib-HASH.rlib",
-      "libmylib-HASH.rmeta"
+      "libmylib-3333333333333333.rlib",
+      "libmylib-3333333333333333.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "mylib@0.1.0",
@@ -233,8 +233,8 @@
   {
     "features": [],
     "filenames": [
-      "libmyutil-HASH.rlib",
-      "libmyutil-HASH.rmeta"
+      "libmyutil-1111111111111111.rlib",
+      "libmyutil-1111111111111111.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "myutil@0.1.0",
@@ -289,8 +289,8 @@
       "std"
     ],
     "filenames": [
-      "libserde-HASH.rlib",
-      "libserde-HASH.rmeta"
+      "libserde-be9f3faac0a26ef0.rlib",
+      "libserde-be9f3faac0a26ef0.rmeta"
     ],
     "manifest_path": "Cargo.toml",
     "package_id": "serde@1.0.193",

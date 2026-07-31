@@ -2,9 +2,13 @@
 
 Two filters for `cargo clippy --message-format json` output, at different levels of projection.
 
+## Determinism
+
+Both filters are deterministic under filter-specific conditions: two runs produce byte-identical output iff they were built with the same toolchain (rustc/clippy version, target), the same feature set, profile, and RUSTFLAGS, and the same dependency graph. Artifact hash suffixes (e.g. `-be9f3faac0a26ef0` in `libserde-…rlib`) are not random: they are a deterministic hash of exactly that build configuration (crate name/version/source, features, profile, target, rustc version, RUSTFLAGS, dependency graph), so they are **preserved**. Two builds that differ in any of those inputs legitimately produce different output — that difference is the point of a build fingerprint. A change in the rustc/clippy version or target triple is visible as a change in these suffixes.
+
 ## stable.jq
 
-Full normalization: generates stable output from non-deterministic clippy output by sorting the variable parts of the JSON — message order, span order, array order, and object keys. Keeps all fields (except `message.rendered`), and additionally normalizes hashes, byte offsets, and caching noise.
+Full normalization: generates stable output from non-deterministic clippy output by sorting the variable parts of the JSON — message order, span order, array order, and object keys. Keeps all fields (except `message.rendered`), and additionally normalizes byte offsets and caching noise.
 
 ```
 cargo clippy --message-format json 2>/dev/null | jq -s -f filters/cargo-clippy/stable.jq
@@ -25,7 +29,7 @@ STRIP_PATHS=1 cargo clippy --message-format json 2>/dev/null | jq -s -f filters/
 - **Drops** `byte_start` / `byte_end` from spans: byte offsets shift whenever preceding source changes.
 - **Sorts** messages by `(package_id, reason, target.name, target.kind, lint code, file, line)`.
 - **Sorts** spans by `(file_name, line_start, column_start)` and children by `(level, message)`.
-- **Normalizes** artifact hash suffixes (`-be9f3faac0a26ef0` → `-HASH`) in `filenames`, `out_dir`, and `env`.
+- **Preserves** artifact hash suffixes (`-be9f3faac0a26ef0`) in `filenames`, `out_dir`, and `env` — they are a deterministic hash of the build configuration, see the Determinism section.
 - **Sorts** all arrays: `features`, `kind`, `crate_types`, `cfgs`, `filenames`, span `text`, etc.
 - **Sorts** all object keys recursively.
 
@@ -69,7 +73,7 @@ STRIP_PATHS=1 cargo clippy --message-format json 2>/dev/null | jq -s -f filters/
 | Variation | Treatment |
 |---|---|
 | Message line order (parallel compilation) | Sort by `(package_id, reason, target.name, kind, code, file, line)` |
-| Artifact hash suffixes (`-be9f3faac0a26ef0`) | Replace with `-HASH` in filenames, `out_dir`, and `env` values |
+| Artifact hash suffixes (`-be9f3faac0a26ef0`) | Preserved (deterministic hash of build configuration, see Determinism) |
 | `byte_start` / `byte_end` in spans | Dropped (depend on source layout; semantically irrelevant) |
 | `message.rendered` | Dropped (color codes + absolute path rendering) |
 | Array element order (`features`, `filenames`, `kind`, `cfgs`, spans, children, etc.) | Sort each array deterministically |

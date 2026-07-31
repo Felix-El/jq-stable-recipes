@@ -7,6 +7,13 @@
 # are semantically identical: package identity, lint codes and primary source
 # locations, target info, build script configuration, and build result.
 #
+# Determinism contract: two runs are byte-identical iff they were built with
+# the same toolchain (rustc/clippy version, target), the same feature set,
+# profile, and RUSTFLAGS, and the same dependency graph. Dependency-version
+# changes are visible through package identity; feature changes through the
+# features list. Artifact hash suffixes encode exactly this configuration and
+# are therefore preserved, not normalized.
+#
 # @env:STRIP_PATHS?:1
 def sort_array($key):
   if (.[$key] | type) == "array" then .[$key] |= sort else . end;

@@ -5,7 +5,12 @@
 # details. Projects to the minimum fields needed to determine whether two audit
 # runs are semantically identical: lockfile dependency count, vulnerability
 # found/count, and per-vulnerability advisory id, cvss, package name+version,
-# and affected os list.
+# checksum, and affected os list.
+#
+# Determinism contract: two runs are byte-identical iff they audited the same
+# lockfile against the same advisory database. package.checksum (the crates.io
+# SHA-256 of the exact crate file) is a content hash and is therefore
+# preserved, not dropped.
 #
 # Works with both raw and -s (slurp) input: single object or [object].
 
@@ -29,8 +34,9 @@ if type == "array" then .[0] else . end
               os: ((.affected.os // []) | sort)
             },
             package: {
-              name:    .package.name,
-              version: .package.version
+              name:     .package.name,
+              version:  .package.version,
+              checksum: .package.checksum
             }
           })
       )
