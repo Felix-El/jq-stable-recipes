@@ -7,6 +7,8 @@ Thanks for contributing! This document covers the conventions every filter and c
 Every `.jq` file starts with a comment block structured as follows:
 
 ```jq
+# SPDX-License-Identifier: MIT
+#
 # Free-form description of what this filter does.
 # Can span multiple lines — this is the inline documentation.
 #
@@ -14,6 +16,7 @@ Every `.jq` file starts with a comment block structured as follows:
 # @env:OTHER?:val1|val2|val3   Optional var, null/unset also valid
 ```
 
+- **SPDX tag** — the first line of the header is the license identifier (`# SPDX-License-Identifier: MIT`), followed by a blank line. CI enforces this via `tests/spdx-check.sh`.
 - **Free-form text** — describes the purpose and behavior of the filter.
 - **Blank `#` line** separates the description from the `@env:` declarations.
 - **`@env:NAME:VALUE`** — declares a required environment variable the filter reads. The golden file must contain at least one entry where this var is set to a non-null value.

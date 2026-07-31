@@ -16,6 +16,9 @@ jobs:
       - name: Run tests
         run: cd tests && bash run-tests.sh
 
+      - name: SPDX header check
+        run: cd tests && bash spdx-check.sh
+
       - name: Env coverage check
         run: cd tests && bash coverage.sh
         env:

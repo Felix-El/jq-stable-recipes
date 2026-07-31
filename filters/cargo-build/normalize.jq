@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+#
 # Normalizes cargo build --message-format json NDJSON into stable,
 # order-independent JSON. Handles message reordering from parallel
 # compilation, hash suffixes in artifact filenames, array ordering,
