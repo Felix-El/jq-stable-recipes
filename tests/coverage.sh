@@ -90,6 +90,8 @@ for filter_dir in "$FILTER_DIR"/*/; do
     # Possible: cartesian product over vars of (values + [null] if optional).
     # Tested:   golden entries' .env projected onto declared vars.
     # Coverage: |possible ∩ tested| / |possible|.
+    # The reduce is inlined: binding a var to a reduce result is a jq < 1.8
+    # parse error (Ubuntu noble ships 1.7.1).
     result="$(jq -n -c \
       --argjson decls "$decls_json" \
       --slurpfile golden "$golden_file" \
@@ -97,11 +99,11 @@ for filter_dir in "$FILTER_DIR"/*/; do
       def canon: to_entries | sort_by(.key) | tostring;
       ($decls | map({name, states: ((if .optional then [null] else [] end) + (.values // []))})) as $vars
       | ($vars | map(.name)) as $names
-      | reduce $vars[] as $v ({combos: [{}]};
-          .combos as $prev
-          | .combos = [ $prev[] as $c | $v.states[] as $s | $c + {($v.name): $s} ]
-        ) as $prod
-      | ([ $prod.combos[] | canon ] | unique) as $possible
+      | ([ reduce $vars[] as $v ({combos: [{}]};
+            .combos as $prev
+            | .combos = [ $prev[] as $c | $v.states[] as $s | $c + {($v.name): $s} ]
+          )
+          | .combos[] | canon ] | unique) as $possible
       | ([ ($golden[0] | to_entries[] | .value.env // {}) as $e
             | (reduce $names[] as $n ({}; .[$n] = $e[$n])) | canon ] | unique) as $tested
       | ([ $possible[] | select(IN($tested[])) ] | length) as $covered
