@@ -18,6 +18,28 @@ cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/ide
 jq -f filters/cargo-mutants/normalize.jq target/mutants/outcomes.json
 ```
 
+## What the filters do
+
+Every filter family ships a `normalize.jq` (stable JSON, all fields preserved)
+and an `identity.jq` (minimal fingerprint, volatile fields dropped). See
+[`filters/simple/`](filters/simple/) for a tiny teaching example:
+
+```
+$ echo '{"name": "demo", "version": 3, "tags": ["z", "a", "m"], "score": 42}' \
+    | jq -c -f filters/simple/normalize.jq
+# before: {"name": "demo", "version": 3, "tags": ["z", "a", "m"], "score": 42}
+# after:  {"name":"demo","score":42,"tags":["a","m","z"],"version":3}
+
+$ echo '{"name": "demo", "version": 3, "tags": ["z", "a", "m"], "score": 42}' \
+    | jq -c -f filters/simple/identity.jq
+# before: {"name": "demo", "version": 3, "tags": ["z", "a", "m"], "score": 42}
+# after:  {"name":"demo","tags":["a","m","z"],"version":3}
+```
+
+`normalize.jq` sorts object keys and arrays — inputs that represent the same
+data always produce identical output. `identity.jq` also drops volatile fields
+(`score`), keeping only what identifies the object.
+
 ## Filters
 
 - [**cargo-build**](filters/cargo-build/) — Two filters for `cargo build --message-format json`:
@@ -38,6 +60,9 @@ jq -f filters/cargo-mutants/normalize.jq target/mutants/outcomes.json
 - [**cargo-geiger**](filters/cargo-geiger/) — Two filters for `cargo geiger --output-format Json`:
   - [`normalize.jq`](filters/cargo-geiger/) — Full normalization: stable JSON, all unsafety metrics preserved
   - [`identity.jq`](filters/cargo-geiger/) — Minimal fingerprint: per-crate unsafe counts, forbids_unsafe flag
+- [**simple**](filters/simple/) — Teaching showcase, not a real tool: demonstrates `normalize` vs `identity` on one tiny JSON object:
+  - [`normalize.jq`](filters/simple/) — Sorts object keys and arrays; all fields preserved
+  - [`identity.jq`](filters/simple/) — Drops volatile fields (`score`); keeps only identifying fields
 
 Each filter directory has its own README with detailed documentation and known limitations.
 
