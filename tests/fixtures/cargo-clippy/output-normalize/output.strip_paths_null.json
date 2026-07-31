@@ -1,0 +1,1060 @@
+[
+  {
+    "reason": "build-finished",
+    "success": true
+  },
+  {
+    "features": [],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libtools_test-HASH.rmeta"
+    ],
+    "manifest_path": "/tmp/opencode/tools-test/Cargo.toml",
+    "package_id": "path+file:///tmp/opencode/tools-test#0.1.0",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "bin"
+      ],
+      "doc": true,
+      "doctest": false,
+      "edition": "2021",
+      "kind": [
+        "bin"
+      ],
+      "name": "tools-test",
+      "src_path": "/tmp/opencode/tools-test/src/main.rs",
+      "test": true
+    }
+  },
+  {
+    "manifest_path": "/tmp/opencode/tools-test/Cargo.toml",
+    "message": {
+      "$message_type": "diagnostic",
+      "children": [
+        {
+          "children": [],
+          "code": null,
+          "level": "help",
+          "message": "for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#useless_vec",
+          "rendered": null,
+          "spans": []
+        },
+        {
+          "children": [],
+          "code": null,
+          "level": "help",
+          "message": "you can use an array directly",
+          "rendered": null,
+          "spans": [
+            {
+              "column_end": 26,
+              "column_start": 13,
+              "expansion": null,
+              "file_name": "src/main.rs",
+              "is_primary": true,
+              "label": null,
+              "line_end": 10,
+              "line_start": 10,
+              "suggested_replacement": "[1, 2, 3]",
+              "suggestion_applicability": "MachineApplicable",
+              "text": [
+                {
+                  "highlight_end": 26,
+                  "highlight_start": 13,
+                  "text": "    let v = vec![1, 2, 3];"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "children": [],
+          "code": null,
+          "level": "note",
+          "message": "`#[warn(clippy::useless_vec)]` on by default",
+          "rendered": null,
+          "spans": []
+        }
+      ],
+      "code": {
+        "code": "clippy::useless_vec",
+        "explanation": null
+      },
+      "level": "warning",
+      "message": "useless use of `vec!`",
+      "spans": [
+        {
+          "column_end": 26,
+          "column_start": 13,
+          "expansion": null,
+          "file_name": "src/main.rs",
+          "is_primary": true,
+          "label": null,
+          "line_end": 10,
+          "line_start": 10,
+          "suggested_replacement": null,
+          "suggestion_applicability": null,
+          "text": [
+            {
+              "highlight_end": 26,
+              "highlight_start": 13,
+              "text": "    let v = vec![1, 2, 3];"
+            }
+          ]
+        }
+      ]
+    },
+    "package_id": "path+file:///tmp/opencode/tools-test#0.1.0",
+    "reason": "compiler-message",
+    "target": {
+      "crate_types": [
+        "bin"
+      ],
+      "doc": true,
+      "doctest": false,
+      "edition": "2021",
+      "kind": [
+        "bin"
+      ],
+      "name": "tools-test",
+      "src_path": "/tmp/opencode/tools-test/src/main.rs",
+      "test": true
+    }
+  },
+  {
+    "features": [
+      "perf-literal",
+      "std"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libaho_corasick-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aho-corasick-1.1.4/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#aho-corasick@1.1.4",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "aho_corasick",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aho-corasick-1.1.4/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "features": [],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libatty-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/atty-0.2.2/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#atty@0.2.2",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2015",
+      "kind": [
+        "lib"
+      ],
+      "name": "atty",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/atty-0.2.2/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "features": [],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libitoa-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/itoa-1.0.18/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#itoa@1.0.18",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "itoa",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/itoa-1.0.18/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "cfgs": [
+      "freebsd12"
+    ],
+    "env": [],
+    "linked_libs": [],
+    "linked_paths": [],
+    "out_dir": "/tmp/opencode/tools-test/target/debug/build/libc-HASH/out",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#libc@0.2.189",
+    "reason": "build-script-executed"
+  },
+  {
+    "features": [
+      "default",
+      "std"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/build/libc-HASH/build-script-build"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.189/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#libc@0.2.189",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 0,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "bin"
+      ],
+      "doc": false,
+      "doctest": false,
+      "edition": "2021",
+      "kind": [
+        "custom-build"
+      ],
+      "name": "build-script-build",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.189/build.rs",
+      "test": false
+    }
+  },
+  {
+    "features": [
+      "default",
+      "std"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/liblibc-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.189/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#libc@0.2.189",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "libc",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.189/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "features": [
+      "alloc",
+      "std"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libmemchr-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/memchr-2.8.3/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#memchr@2.8.3",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "memchr",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/memchr-2.8.3/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "cfgs": [
+      "proc_macro_span_file",
+      "proc_macro_span_location",
+      "wrap_proc_macro"
+    ],
+    "env": [],
+    "linked_libs": [],
+    "linked_paths": [],
+    "out_dir": "/tmp/opencode/tools-test/target/debug/build/proc-macro2-HASH/out",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107",
+    "reason": "build-script-executed"
+  },
+  {
+    "features": [
+      "proc-macro"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/build/proc-macro2-HASH/build-script-build"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 0,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "bin"
+      ],
+      "doc": false,
+      "doctest": false,
+      "edition": "2021",
+      "kind": [
+        "custom-build"
+      ],
+      "name": "build-script-build",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/build.rs",
+      "test": false
+    }
+  },
+  {
+    "features": [
+      "proc-macro"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libproc_macro2-HASH.rlib",
+      "/tmp/opencode/tools-test/target/debug/deps/libproc_macro2-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 0,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "proc_macro2",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "cfgs": [],
+    "env": [],
+    "linked_libs": [],
+    "linked_paths": [],
+    "out_dir": "/tmp/opencode/tools-test/target/debug/build/quote-HASH/out",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47",
+    "reason": "build-script-executed"
+  },
+  {
+    "features": [
+      "proc-macro"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/build/quote-HASH/build-script-build"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.47/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 0,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "bin"
+      ],
+      "doc": false,
+      "doctest": false,
+      "edition": "2021",
+      "kind": [
+        "custom-build"
+      ],
+      "name": "build-script-build",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.47/build.rs",
+      "test": false
+    }
+  },
+  {
+    "features": [
+      "proc-macro"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libquote-HASH.rlib",
+      "/tmp/opencode/tools-test/target/debug/deps/libquote-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.47/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 0,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "quote",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.47/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "features": [
+      "alloc",
+      "dfa-onepass",
+      "hybrid",
+      "meta",
+      "nfa-backtrack",
+      "nfa-pikevm",
+      "nfa-thompson",
+      "perf-inline",
+      "perf-literal",
+      "perf-literal-multisubstring",
+      "perf-literal-substring",
+      "std",
+      "syntax",
+      "unicode",
+      "unicode-age",
+      "unicode-bool",
+      "unicode-case",
+      "unicode-gencat",
+      "unicode-perl",
+      "unicode-script",
+      "unicode-segment",
+      "unicode-word-boundary"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libregex_automata-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/regex-automata-0.4.16/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#regex-automata@0.4.16",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "regex_automata",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/regex-automata-0.4.16/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "features": [
+      "default",
+      "std",
+      "unicode",
+      "unicode-age",
+      "unicode-bool",
+      "unicode-case",
+      "unicode-gencat",
+      "unicode-perl",
+      "unicode-script",
+      "unicode-segment"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libregex_syntax-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/regex-syntax-0.8.11/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#regex-syntax@0.8.11",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "regex_syntax",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/regex-syntax-0.8.11/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "features": [
+      "default",
+      "perf",
+      "perf-backtrack",
+      "perf-cache",
+      "perf-dfa",
+      "perf-inline",
+      "perf-literal",
+      "perf-onepass",
+      "std",
+      "unicode",
+      "unicode-age",
+      "unicode-bool",
+      "unicode-case",
+      "unicode-gencat",
+      "unicode-perl",
+      "unicode-script",
+      "unicode-segment"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libregex-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/regex-1.13.1/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#regex@1.13.1",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "regex",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/regex-1.13.1/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "cfgs": [
+      "if_docsrs_then_no_serde_core"
+    ],
+    "env": [],
+    "linked_libs": [],
+    "linked_paths": [],
+    "out_dir": "/tmp/opencode/tools-test/target/debug/build/serde-HASH/out",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde@1.0.229",
+    "reason": "build-script-executed"
+  },
+  {
+    "features": [
+      "default",
+      "derive",
+      "serde_derive",
+      "std"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/build/serde-HASH/build-script-build"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde@1.0.229",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 0,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "bin"
+      ],
+      "doc": false,
+      "doctest": false,
+      "edition": "2021",
+      "kind": [
+        "custom-build"
+      ],
+      "name": "build-script-build",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/build.rs",
+      "test": false
+    }
+  },
+  {
+    "features": [
+      "default",
+      "derive",
+      "serde_derive",
+      "std"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libserde-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde@1.0.229",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "serde",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "cfgs": [],
+    "env": [],
+    "linked_libs": [],
+    "linked_paths": [],
+    "out_dir": "/tmp/opencode/tools-test/target/debug/build/serde_core-HASH/out",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.229",
+    "reason": "build-script-executed"
+  },
+  {
+    "features": [
+      "result",
+      "std"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/build/serde_core-HASH/build-script-build"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.229",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 0,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "bin"
+      ],
+      "doc": false,
+      "doctest": false,
+      "edition": "2021",
+      "kind": [
+        "custom-build"
+      ],
+      "name": "build-script-build",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/build.rs",
+      "test": false
+    }
+  },
+  {
+    "features": [
+      "result",
+      "std"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libserde_core-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.229",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "serde_core",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "features": [
+      "default"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libserde_derive-HASH.so"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_derive-1.0.229/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_derive@1.0.229",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 0,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "proc-macro"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "proc-macro"
+      ],
+      "name": "serde_derive",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_derive-1.0.229/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "cfgs": [
+      "fast_arithmetic=\"64\""
+    ],
+    "env": [],
+    "linked_libs": [],
+    "linked_paths": [],
+    "out_dir": "/tmp/opencode/tools-test/target/debug/build/serde_json-HASH/out",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.151",
+    "reason": "build-script-executed"
+  },
+  {
+    "features": [
+      "default",
+      "std"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/build/serde_json-HASH/build-script-build"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.151/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.151",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 0,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "bin"
+      ],
+      "doc": false,
+      "doctest": false,
+      "edition": "2021",
+      "kind": [
+        "custom-build"
+      ],
+      "name": "build-script-build",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.151/build.rs",
+      "test": false
+    }
+  },
+  {
+    "features": [
+      "default",
+      "std"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libserde_json-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.151/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.151",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "serde_json",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.151/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "features": [
+      "clone-impls",
+      "derive",
+      "parsing",
+      "printing",
+      "proc-macro"
+    ],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libsyn-HASH.rlib",
+      "/tmp/opencode/tools-test/target/debug/deps/libsyn-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/syn-3.0.3/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#syn@3.0.3",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 0,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "syn",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/syn-3.0.3/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "features": [],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libtime-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/time-0.1.45/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#time@0.1.45",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2015",
+      "kind": [
+        "lib"
+      ],
+      "name": "time",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/time-0.1.45/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "features": [],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libunicode_ident-HASH.rlib",
+      "/tmp/opencode/tools-test/target/debug/deps/libunicode_ident-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/unicode-ident-1.0.24/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#unicode-ident@1.0.24",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 0,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "unicode_ident",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/unicode-ident-1.0.24/src/lib.rs",
+      "test": true
+    }
+  },
+  {
+    "cfgs": [],
+    "env": [],
+    "linked_libs": [],
+    "linked_paths": [],
+    "out_dir": "/tmp/opencode/tools-test/target/debug/build/zmij-HASH/out",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.23",
+    "reason": "build-script-executed"
+  },
+  {
+    "features": [],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/build/zmij-HASH/build-script-build"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zmij-1.0.23/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.23",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 0,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "bin"
+      ],
+      "doc": false,
+      "doctest": false,
+      "edition": "2021",
+      "kind": [
+        "custom-build"
+      ],
+      "name": "build-script-build",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zmij-1.0.23/build.rs",
+      "test": false
+    }
+  },
+  {
+    "features": [],
+    "filenames": [
+      "/tmp/opencode/tools-test/target/debug/deps/libzmij-HASH.rmeta"
+    ],
+    "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zmij-1.0.23/Cargo.toml",
+    "package_id": "registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.23",
+    "profile": {
+      "debug_assertions": true,
+      "debuginfo": 2,
+      "opt_level": "0",
+      "overflow_checks": true,
+      "test": false
+    },
+    "reason": "compiler-artifact",
+    "target": {
+      "crate_types": [
+        "lib"
+      ],
+      "doc": true,
+      "doctest": true,
+      "edition": "2021",
+      "kind": [
+        "lib"
+      ],
+      "name": "zmij",
+      "src_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zmij-1.0.23/src/lib.rs",
+      "test": true
+    }
+  }
+]

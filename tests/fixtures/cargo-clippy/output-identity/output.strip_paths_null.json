@@ -1,0 +1,410 @@
+[
+  {
+    "reason": "result",
+    "success": true
+  },
+  {
+    "features": [],
+    "kind": [
+      "bin"
+    ],
+    "package": "path+file:///tmp/opencode/tools-test#0.1.0",
+    "reason": "artifact",
+    "target": "tools-test"
+  },
+  {
+    "code": "clippy::useless_vec",
+    "file": "src/main.rs",
+    "level": "warning",
+    "line": 10,
+    "package": "path+file:///tmp/opencode/tools-test#0.1.0",
+    "reason": "diagnostic",
+    "target": "tools-test"
+  },
+  {
+    "features": [
+      "perf-literal",
+      "std"
+    ],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#aho-corasick@1.1.4",
+    "reason": "artifact",
+    "target": "aho_corasick"
+  },
+  {
+    "features": [],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#atty@0.2.2",
+    "reason": "artifact",
+    "target": "atty"
+  },
+  {
+    "features": [],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#itoa@1.0.18",
+    "reason": "artifact",
+    "target": "itoa"
+  },
+  {
+    "features": [
+      "default",
+      "std"
+    ],
+    "kind": [
+      "custom-build"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#libc@0.2.189",
+    "reason": "artifact",
+    "target": "build-script-build"
+  },
+  {
+    "features": [
+      "default",
+      "std"
+    ],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#libc@0.2.189",
+    "reason": "artifact",
+    "target": "libc"
+  },
+  {
+    "cfgs": [
+      "freebsd12"
+    ],
+    "linked_libs": [],
+    "linked_paths": [],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#libc@0.2.189",
+    "reason": "build_script"
+  },
+  {
+    "features": [
+      "alloc",
+      "std"
+    ],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#memchr@2.8.3",
+    "reason": "artifact",
+    "target": "memchr"
+  },
+  {
+    "features": [
+      "proc-macro"
+    ],
+    "kind": [
+      "custom-build"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107",
+    "reason": "artifact",
+    "target": "build-script-build"
+  },
+  {
+    "features": [
+      "proc-macro"
+    ],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107",
+    "reason": "artifact",
+    "target": "proc_macro2"
+  },
+  {
+    "cfgs": [
+      "proc_macro_span_file",
+      "proc_macro_span_location",
+      "wrap_proc_macro"
+    ],
+    "linked_libs": [],
+    "linked_paths": [],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107",
+    "reason": "build_script"
+  },
+  {
+    "features": [
+      "proc-macro"
+    ],
+    "kind": [
+      "custom-build"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47",
+    "reason": "artifact",
+    "target": "build-script-build"
+  },
+  {
+    "features": [
+      "proc-macro"
+    ],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47",
+    "reason": "artifact",
+    "target": "quote"
+  },
+  {
+    "cfgs": [],
+    "linked_libs": [],
+    "linked_paths": [],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47",
+    "reason": "build_script"
+  },
+  {
+    "features": [
+      "alloc",
+      "dfa-onepass",
+      "hybrid",
+      "meta",
+      "nfa-backtrack",
+      "nfa-pikevm",
+      "nfa-thompson",
+      "perf-inline",
+      "perf-literal",
+      "perf-literal-multisubstring",
+      "perf-literal-substring",
+      "std",
+      "syntax",
+      "unicode",
+      "unicode-age",
+      "unicode-bool",
+      "unicode-case",
+      "unicode-gencat",
+      "unicode-perl",
+      "unicode-script",
+      "unicode-segment",
+      "unicode-word-boundary"
+    ],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#regex-automata@0.4.16",
+    "reason": "artifact",
+    "target": "regex_automata"
+  },
+  {
+    "features": [
+      "default",
+      "std",
+      "unicode",
+      "unicode-age",
+      "unicode-bool",
+      "unicode-case",
+      "unicode-gencat",
+      "unicode-perl",
+      "unicode-script",
+      "unicode-segment"
+    ],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#regex-syntax@0.8.11",
+    "reason": "artifact",
+    "target": "regex_syntax"
+  },
+  {
+    "features": [
+      "default",
+      "perf",
+      "perf-backtrack",
+      "perf-cache",
+      "perf-dfa",
+      "perf-inline",
+      "perf-literal",
+      "perf-onepass",
+      "std",
+      "unicode",
+      "unicode-age",
+      "unicode-bool",
+      "unicode-case",
+      "unicode-gencat",
+      "unicode-perl",
+      "unicode-script",
+      "unicode-segment"
+    ],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#regex@1.13.1",
+    "reason": "artifact",
+    "target": "regex"
+  },
+  {
+    "features": [
+      "default",
+      "derive",
+      "serde_derive",
+      "std"
+    ],
+    "kind": [
+      "custom-build"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#serde@1.0.229",
+    "reason": "artifact",
+    "target": "build-script-build"
+  },
+  {
+    "features": [
+      "default",
+      "derive",
+      "serde_derive",
+      "std"
+    ],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#serde@1.0.229",
+    "reason": "artifact",
+    "target": "serde"
+  },
+  {
+    "cfgs": [
+      "if_docsrs_then_no_serde_core"
+    ],
+    "linked_libs": [],
+    "linked_paths": [],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#serde@1.0.229",
+    "reason": "build_script"
+  },
+  {
+    "features": [
+      "result",
+      "std"
+    ],
+    "kind": [
+      "custom-build"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.229",
+    "reason": "artifact",
+    "target": "build-script-build"
+  },
+  {
+    "features": [
+      "result",
+      "std"
+    ],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.229",
+    "reason": "artifact",
+    "target": "serde_core"
+  },
+  {
+    "cfgs": [],
+    "linked_libs": [],
+    "linked_paths": [],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.229",
+    "reason": "build_script"
+  },
+  {
+    "features": [
+      "default"
+    ],
+    "kind": [
+      "proc-macro"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#serde_derive@1.0.229",
+    "reason": "artifact",
+    "target": "serde_derive"
+  },
+  {
+    "features": [
+      "default",
+      "std"
+    ],
+    "kind": [
+      "custom-build"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.151",
+    "reason": "artifact",
+    "target": "build-script-build"
+  },
+  {
+    "features": [
+      "default",
+      "std"
+    ],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.151",
+    "reason": "artifact",
+    "target": "serde_json"
+  },
+  {
+    "cfgs": [
+      "fast_arithmetic=\"64\""
+    ],
+    "linked_libs": [],
+    "linked_paths": [],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.151",
+    "reason": "build_script"
+  },
+  {
+    "features": [
+      "clone-impls",
+      "derive",
+      "parsing",
+      "printing",
+      "proc-macro"
+    ],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#syn@3.0.3",
+    "reason": "artifact",
+    "target": "syn"
+  },
+  {
+    "features": [],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#time@0.1.45",
+    "reason": "artifact",
+    "target": "time"
+  },
+  {
+    "features": [],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#unicode-ident@1.0.24",
+    "reason": "artifact",
+    "target": "unicode_ident"
+  },
+  {
+    "features": [],
+    "kind": [
+      "custom-build"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.23",
+    "reason": "artifact",
+    "target": "build-script-build"
+  },
+  {
+    "features": [],
+    "kind": [
+      "lib"
+    ],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.23",
+    "reason": "artifact",
+    "target": "zmij"
+  },
+  {
+    "cfgs": [],
+    "linked_libs": [],
+    "linked_paths": [],
+    "package": "registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.23",
+    "reason": "build_script"
+  }
+]
