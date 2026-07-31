@@ -1,0 +1,6 @@
+{
+  "default": {
+    "env": {},
+    "expected": "output-deterministic/output.default.json"
+  }
+}

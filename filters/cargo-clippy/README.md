@@ -2,12 +2,12 @@
 
 Two filters for `cargo clippy --message-format json` output, at different levels of projection.
 
-## normalize.jq
+## stable.jq
 
 Full normalization: generates stable output from non-deterministic clippy output by sorting the variable parts of the JSON — message order, span order, array order, and object keys. Keeps all fields (except `message.rendered`), and additionally normalizes hashes, byte offsets, and caching noise.
 
 ```
-cargo clippy --message-format json 2>/dev/null | jq -s -f filters/cargo-clippy/normalize.jq
+cargo clippy --message-format json 2>/dev/null | jq -s -f filters/cargo-clippy/stable.jq
 ```
 
 ### Stripping machine-specific paths
@@ -15,10 +15,10 @@ cargo clippy --message-format json 2>/dev/null | jq -s -f filters/cargo-clippy/n
 Set `STRIP_PATHS=1` to erase all absolute paths to just the filename:
 
 ```
-STRIP_PATHS=1 cargo clippy --message-format json 2>/dev/null | jq -s -f filters/cargo-clippy/normalize.jq
+STRIP_PATHS=1 cargo clippy --message-format json 2>/dev/null | jq -s -f filters/cargo-clippy/stable.jq
 ```
 
-### What normalize.jq does
+### What stable.jq does
 
 - **Drops** `message.rendered`: contains ANSI color codes and machine-specific absolute paths that resist normalization.
 - **Drops** `fresh` and `executable` fields: vary with caching state.
@@ -35,18 +35,18 @@ STRIP_PATHS=1 cargo clippy --message-format json 2>/dev/null | jq -s -f filters/
 - **Machine-specific paths are preserved** without `STRIP_PATHS=1`. The output is stable across rebuilds on the same machine, not across different machines or CI runners.
 - **Lint count depends on rustc/clippy version** — the set of lints fired may differ between toolchain versions even on the same code.
 
-## identity.jq
+## deterministic.jq
 
-Deterministic projection. Does what `normalize.jq` does, and additionally drops undeterministic data (rendered diagnostics, byte offsets, paths): only the fields needed to determine if two clippy runs are semantically identical remain. Suitable as a stable cache key or piped to `sha256sum`.
+Deterministic projection. Does what `stable.jq` does, and additionally drops undeterministic data (rendered diagnostics, byte offsets, paths): only the fields needed to determine if two clippy runs are semantically identical remain. Suitable as a stable cache key or piped to `sha256sum`.
 
 ```
-cargo clippy --message-format json 2>/dev/null | jq -s -f filters/cargo-clippy/identity.jq
+cargo clippy --message-format json 2>/dev/null | jq -s -f filters/cargo-clippy/deterministic.jq
 ```
 
 With path stripping:
 
 ```
-STRIP_PATHS=1 cargo clippy --message-format json 2>/dev/null | jq -s -f filters/cargo-clippy/identity.jq
+STRIP_PATHS=1 cargo clippy --message-format json 2>/dev/null | jq -s -f filters/cargo-clippy/deterministic.jq
 ```
 
 ### Projected Fields

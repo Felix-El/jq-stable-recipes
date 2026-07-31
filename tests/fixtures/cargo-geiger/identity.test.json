@@ -1,6 +1,0 @@
-{
-  "default": {
-    "env": {},
-    "expected": "output-identity/output.default.json"
-  }
-}

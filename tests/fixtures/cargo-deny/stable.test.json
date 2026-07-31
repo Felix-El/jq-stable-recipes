@@ -1,0 +1,6 @@
+{
+  "default": {
+    "env": {},
+    "expected": "output-stable/output.default.json"
+  }
+}

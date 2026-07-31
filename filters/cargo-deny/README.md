@@ -4,13 +4,13 @@ Two filters for `cargo deny --format json check` output, at different levels of 
 
 **Note:** `cargo deny` writes its JSON event stream to **stderr**; stdout is empty. Capture with `2>` redirection.
 
-## normalize.jq
+## stable.jq
 
 Full normalization: generates stable output from non-deterministic deny output by sorting the variable parts of the JSON — diagnostics, internal arrays (graphs, labels, notes), and object keys. Drops `log` events (timestamps vary every run). Keeps all `diagnostic` fields (code, severity, message, graphs, labels, notes) and the `summary` event. Sorts diagnostics deterministically by `(code, message, primary-crate name, version)`.
 
 ```
 cargo deny --format json check all 2>deny.ndjson
-jq -s -f filters/cargo-deny/normalize.jq deny.ndjson
+jq -s -f filters/cargo-deny/stable.jq deny.ndjson
 ```
 
 ### Limitations
@@ -19,13 +19,13 @@ jq -s -f filters/cargo-deny/normalize.jq deny.ndjson
 - **Advisory prose is preserved** — the full advisory description and references are kept verbatim. The advisory ID and content are stable across runs for a given advisory database snapshot.
 - **Log events dropped** — `log` events carry nanosecond-resolution timestamps and provide no semantic information; they are silently discarded.
 
-## identity.jq
+## deterministic.jq
 
-Deterministic projection. Does what `normalize.jq` does, and additionally drops undeterministic data (log events, dependency graph chains, source spans, advisory prose): only the fields needed to determine if two deny runs are semantically identical remain — `code`, `severity`, `message`, `crate` (primary crate as `name@version`), and `advisory_id` when present. Summary is projected to check-category error/warning counts. Suitable as a stable cache key or piped to `sha256sum`.
+Deterministic projection. Does what `stable.jq` does, and additionally drops undeterministic data (log events, dependency graph chains, source spans, advisory prose): only the fields needed to determine if two deny runs are semantically identical remain — `code`, `severity`, `message`, `crate` (primary crate as `name@version`), and `advisory_id` when present. Summary is projected to check-category error/warning counts. Suitable as a stable cache key or piped to `sha256sum`.
 
 ```
 cargo deny --format json check all 2>deny.ndjson
-jq -s -f filters/cargo-deny/identity.jq deny.ndjson
+jq -s -f filters/cargo-deny/deterministic.jq deny.ndjson
 ```
 
 ### Projected Fields

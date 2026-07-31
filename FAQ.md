@@ -31,14 +31,14 @@ Stable means: **given the same logical input, the output is byte-for-byte identi
 | Machine-specific absolute paths | Optionally stripped via `STRIP_PATHS=1` |
 | Caching-state fields (`fresh`, `executable`, timing) | Removed |
 
-## What's the difference between `normalize.jq` and `identity.jq`?
+## What's the difference between `stable.jq` and `deterministic.jq`?
 
 Every filter directory ships two variants that aim at two different guarantees:
 
-- **`normalize.jq`** — *stable* output. Sorts the variable parts of a JSON fragment (object key order, array order) so the same logical input always yields byte-for-byte identical output. All meaningful fields are preserved. Good when you want to compare complete results or store a faithful snapshot.
-- **`identity.jq`** — *deterministic* output. Does what `normalize` does, and additionally removes undeterministic data (timestamps, timing, hashes, machine-specific paths, volatile fields). Only the fields needed to decide "is this the same build/outcome as before?" remain. Smaller, faster, and ideal as a cache key.
+- **`stable.jq`** — *stable* output. Sorts the variable parts of a JSON fragment (object key order, array order) so the same logical input always yields byte-for-byte identical output. All meaningful fields are preserved. Good when you want to compare complete results or store a faithful snapshot.
+- **`deterministic.jq`** — *deterministic* output. Does what `stable.jq` does, and additionally removes undeterministic data (timestamps, timing, hashes, machine-specific paths, volatile fields). Only the fields needed to decide "is this the same build/outcome as before?" remain. Smaller, faster, and ideal as a cache key.
 
-Use `identity` when the input contains data that can never be reproduced and you only care about *sameness*; use `normalize` when you care about the *content*.
+Use `deterministic.jq` when the input contains data that can never be reproduced and you only care about *sameness*; use `stable.jq` when you care about the *content*.
 
 ## Why does the command use `-s` (slurp)?
 
@@ -67,7 +67,7 @@ The `@env:` declaration tells the test runner which environment variables the fi
 
 ```
 cargo build --message-format json 2>/dev/null \
-  | jq -s -f filters/cargo-build/identity.jq \
+  | jq -s -f filters/cargo-build/deterministic.jq \
   | sha256sum
 ```
 
@@ -75,7 +75,7 @@ The filter output is stable JSON; the `sha256sum` step is what turns it into the
 
 ```
 cache_key=$(cargo build --message-format json 2>/dev/null \
-  | jq -s -f filters/cargo-build/identity.jq | sha256sum | cut -d' ' -f1)
+  | jq -s -f filters/cargo-build/deterministic.jq | sha256sum | cut -d' ' -f1)
 ```
 
 ## Which jq version do I need?

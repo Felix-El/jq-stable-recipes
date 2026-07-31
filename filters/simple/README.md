@@ -1,7 +1,7 @@
 # simple
 
 This is a teaching showcase, not a real-tool recipe. It demonstrates what the
-`normalize` and `identity` filters do using one tiny JSON object, so you can
+`stable` and `deterministic` filters do using one tiny JSON object, so you can
 see exactly how each filter transforms its input before applying the same
 patterns to a real tool's output.
 
@@ -11,10 +11,10 @@ patterns to a real tool's output.
 {"name": "demo", "version": 3, "tags": ["z", "a", "m"], "score": 42}
 ```
 
-## normalize.jq
+## stable.jq
 
 ```
-$ jq -f filters/simple/normalize.jq
+$ jq -f filters/simple/stable.jq
 # before
 {"name": "demo", "version": 3, "tags": ["z", "a", "m"], "score": 42}
 # after
@@ -25,10 +25,10 @@ Stable output: the variable parts of the JSON fragment — key order (at every
 nesting level) and every array — are sorted. All fields are preserved. Two
 inputs that represent the same data will always produce the same output.
 
-## identity.jq
+## deterministic.jq
 
 ```
-$ jq -f filters/simple/identity.jq
+$ jq -f filters/simple/deterministic.jq
 # before
 {"name": "demo", "version": 3, "tags": ["z", "a", "m"], "score": 42}
 # after
@@ -42,7 +42,7 @@ will produce bit-for-bit identical output.
 
 ## What Each Does
 
-| Aspect                      | normalize.jq          | identity.jq            |
+| Aspect                      | stable.jq          | deterministic.jq            |
 |-----------------------------|-----------------------|------------------------|
 | Goal                        | Stable output         | Deterministic output   |
 | Object key order            | Sorted alphabetically | Sorted alphabetically  |

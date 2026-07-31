@@ -2,18 +2,18 @@
 
 Two filters for [`cargo-audit`](https://github.com/rustsec/rustsec/tree/main/cargo-audit) `--json` output, at different levels of projection.
 
-## normalize.jq
+## stable.jq
 
 Full normalization: generates stable, order-independent output from `cargo audit --json` by sorting the variable parts of the JSON — vulnerability and warning lists, package dependency arrays, advisory sub-arrays, and object keys. Drops non-deterministic database metadata that resists ordering-only treatment. All semantically meaningful fields are preserved.
 
 ```
-cargo audit --json 2>/dev/null | jq -s -f filters/cargo-audit/normalize.jq
+cargo audit --json 2>/dev/null | jq -s -f filters/cargo-audit/stable.jq
 
 # Or from a saved file:
-jq -s -f filters/cargo-audit/normalize.jq cargo-audit.json
+jq -s -f filters/cargo-audit/stable.jq cargo-audit.json
 ```
 
-### What normalize.jq Does
+### What stable.jq Does
 
 | Variation | Treatment |
 |---|---|
@@ -36,17 +36,17 @@ jq -s -f filters/cargo-audit/normalize.jq cargo-audit.json
 
 - `database.advisory-count` is preserved and may change when the advisory database is updated without new findings in the project.
 - `settings.severity`, `settings.ignore`, `settings.target_arch`, and `settings.target_os` reflect the invocation flags, not the project state, so a different invocation on the same lockfile may produce different output.
-- For a minimal stable projection, use `identity.jq`.
+- For a minimal stable projection, use `deterministic.jq`.
 
-## identity.jq
+## deterministic.jq
 
-Deterministic projection. Does what `normalize.jq` does, and additionally drops undeterministic data (database metadata, invocation settings, advisory prose): only the fields needed to determine if two audit runs found the same vulnerabilities remain — lockfile dependency count, vulnerability found/count flags, and per-vulnerability advisory id, cvss score, package name+version, and affected os list. Suitable as a stable cache key or piped to `sha256sum`.
+Deterministic projection. Does what `stable.jq` does, and additionally drops undeterministic data (database metadata, invocation settings, advisory prose): only the fields needed to determine if two audit runs found the same vulnerabilities remain — lockfile dependency count, vulnerability found/count flags, and per-vulnerability advisory id, cvss score, package name+version, and affected os list. Suitable as a stable cache key or piped to `sha256sum`.
 
 ```
-cargo audit --json 2>/dev/null | jq -s -f filters/cargo-audit/identity.jq
+cargo audit --json 2>/dev/null | jq -s -f filters/cargo-audit/deterministic.jq
 
 # Or from a saved file:
-jq -s -f filters/cargo-audit/identity.jq cargo-audit.json
+jq -s -f filters/cargo-audit/deterministic.jq cargo-audit.json
 ```
 
 ### Projected Fields
@@ -57,7 +57,7 @@ jq -s -f filters/cargo-audit/identity.jq cargo-audit.json
 | Vulnerabilities summary | `found`, `count` |
 | Per vulnerability | `advisory.id`, `advisory.cvss`, `package.name`, `package.version`, `affected.os` |
 
-### What identity.jq Drops
+### What deterministic.jq Drops
 
 | Field | Reason |
 |---|---|

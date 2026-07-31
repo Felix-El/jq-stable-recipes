@@ -2,12 +2,12 @@
 
 Two filters for `cargo build --message-format json` output, at different levels of projection.
 
-## normalize.jq
+## stable.jq
 
 Full normalization: generates stable output from non-deterministic build output by sorting the variable parts of the JSON — message order, array order, and object keys. Keeps all fields, and additionally normalizes hashes and removes caching noise.
 
 ```
-cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/normalize.jq
+cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/stable.jq
 ```
 
 ### Stripping machine-specific paths
@@ -15,7 +15,7 @@ cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/nor
 Set `STRIP_PATHS=1` to erase all absolute paths to just the filename:
 
 ```
-STRIP_PATHS=1 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/normalize.jq
+STRIP_PATHS=1 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/stable.jq
 ```
 
 ### Limitations
@@ -24,18 +24,18 @@ STRIP_PATHS=1 cargo build --message-format json 2>/dev/null | jq -s -f filters/c
 - **Procedural macro / build script stdout** outside cargo's JSON framework is silently skipped.
 - **Compiler diagnostics** are normalized for key order only — content is preserved verbatim.
 
-## identity.jq
+## deterministic.jq
 
-Deterministic projection. Does what `normalize.jq` does, and additionally drops undeterministic data: each message is projected down to only the fields needed to determine if two builds are semantically identical. Suitable as a stable build key or piped to `sha256sum`.
+Deterministic projection. Does what `stable.jq` does, and additionally drops undeterministic data: each message is projected down to only the fields needed to determine if two builds are semantically identical. Suitable as a stable build key or piped to `sha256sum`.
 
 ```
-cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/identity.jq
+cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/deterministic.jq
 ```
 
 With path stripping:
 
 ```
-STRIP_PATHS=1 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/identity.jq
+STRIP_PATHS=1 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/deterministic.jq
 ```
 
 ### Projected Fields

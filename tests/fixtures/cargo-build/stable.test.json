@@ -1,14 +1,14 @@
 {
   "strip_paths_null": {
     "env": { "STRIP_PATHS": null },
-    "expected": "output-normalize/output.strip_paths_null.json"
+    "expected": "output-stable/output.strip_paths_null.json"
   },
   "strip_paths": {
     "env": { "STRIP_PATHS": "1" },
-    "expected": "output-normalize/output.strip_paths.json"
+    "expected": "output-stable/output.strip_paths.json"
   },
   "strip_paths_0": {
     "env": { "STRIP_PATHS": "0" },
-    "expected": "output-normalize/output.strip_paths_null.json"
+    "expected": "output-stable/output.strip_paths_null.json"
   }
 }
