@@ -26,6 +26,21 @@ Every `.jq` file starts with a comment block structured as follows:
 - **Header format enforced.** The header conventions above are mandatory for machine parsing.
 - **Golden dispatcher.** Filters with `@env:` declarations need a `<name>.golden.json` in their fixture directory that maps env configurations to expected output files. The runner validates that every `@env:` declaration is covered by at least one golden entry. Without a golden file, only mutation tests run.
 
+## Env Combination Coverage
+
+CI measures how many of the possible `@env:` combinations each filter actually exercises in its golden dispatcher.
+
+- **Possible combinations** — the cartesian product of the declared values, plus `null` for each optional variable (a `?`-declared var can be unset).
+- **Tested combinations** — each golden entry's `.env` object, projected onto the declared variable names.
+- **Coverage** — `|possible ∩ tested| / |possible|`, reported per filter and overall.
+
+The check runs as part of CI via `tests/coverage.sh`. It fails when any filter's coverage, or the overall coverage, is below the target percentage.
+
+- **`ENV_COVERAGE_TARGET`** — target percentage, default `50`. Configure it as a [GitHub Actions variable](https://docs.github.com/en/actions/learn-github-actions/variables) named `ENV_COVERAGE_TARGET`; CI picks it up automatically and the default applies when unset.
+- Run locally: `ENV_COVERAGE_TARGET=90 bash tests/coverage.sh` from the repo root.
+
+To raise a filter's score, add golden dispatcher entries that exercise the missing combinations (e.g. an entry with the var set to another declared value, or one where an optional var is absent).
+
 ## Adding a Filter
 
 Create a subdirectory in `filters/<name>/` with:

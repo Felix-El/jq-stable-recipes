@@ -15,3 +15,8 @@ jobs:
 
       - name: Run tests
         run: cd tests && bash run-tests.sh
+
+      - name: Env coverage check
+        run: cd tests && bash coverage.sh
+        env:
+          ENV_COVERAGE_TARGET: ${{ vars.ENV_COVERAGE_TARGET }}

@@ -31,7 +31,7 @@ Each filter directory has its own README with detailed documentation and known l
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for filter header conventions, design rules, and how to add a new filter. Commit messages follow the [Conventional Commits](https://www.conventionalcommits.org/) specification.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for filter header conventions, design rules, the env combination coverage check, and how to add a new filter. Commit messages follow the [Conventional Commits](https://www.conventionalcommits.org/) specification.
 
 ## License
 
