@@ -1,11 +1,9 @@
 # SPDX-License-Identifier: MIT
 #
-# Normalizes cargo deny --format json NDJSON event stream into stable,
-# order-independent JSON. Drops log events (timestamps vary every run).
-# Keeps diagnostic events with sorted internal arrays (graphs, labels,
-# notes) and the summary event. Sorts diagnostics deterministically by
-# (code, message, primary-crate name, version). Recursively sorts all
-# object keys.
+# Generates stable output from cargo deny --format json NDJSON event stream by
+# sorting the variable parts of the JSON fragment: diagnostics, internal arrays
+# (graphs, labels, notes), and object keys. Drops log events (timestamps vary
+# every run). Keeps diagnostic events and the summary event.
 def sort_object_keys:
   walk(if type == "object" then to_entries | sort_by(.key) | from_entries else . end);
 

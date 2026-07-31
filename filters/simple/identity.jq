@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
 #
-# Simple showcase: minimal stable projection of a tiny JSON object. Drops volatile
-# fields (score) and keeps only what identifies the object: name, version, and
-# sorted tags.
+# Simple showcase: generates deterministic output from a tiny JSON object by
+# additionally dropping undeterministic data — volatile fields (score). Keeps
+# only what identifies the object: name, version, and sorted tags.
 
 if type == "array" then .[0] else . end
 | {name, version, tags: (.tags | sort)}

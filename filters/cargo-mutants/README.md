@@ -4,7 +4,7 @@ Two filters for [`cargo-mutants`](https://github.com/sourcefrog/cargo-mutants) `
 
 ## normalize.jq
 
-Full normalization: produces stable, order-independent JSON from mutation test output. Sorts outcomes and phase results, strips absolute paths on demand, preserves all other fields.
+Full normalization: generates stable, order-independent output from mutation test output by sorting the variable parts of the JSON — outcome order, phase result order, and object keys. Strips absolute paths on demand, preserves all other fields.
 
 ```
 jq -f filters/cargo-mutants/normalize.jq target/mutants/outcomes.json
@@ -25,7 +25,7 @@ STRIP_PATHS=1 jq -f filters/cargo-mutants/normalize.jq target/mutants/outcomes.j
 
 ## identity.jq
 
-Minimal stable projection. Projects the outcomes down to only the fields needed to determine if two mutation test runs are semantically identical: mutation counts, scenario names, per-scenario summaries, and phase-level pass/fail. Suitable as a stable test key or piped to `sha256sum`.
+Deterministic projection. Does what `normalize.jq` does, and additionally drops undeterministic data (runtime timing, timestamps, paths, tool version): only the fields needed to determine if two mutation test runs are semantically identical remain — mutation counts, scenario names, per-scenario summaries, and phase-level pass/fail. Suitable as a stable test key or piped to `sha256sum`.
 
 ```
 jq -f filters/cargo-mutants/identity.jq target/mutants/outcomes.json

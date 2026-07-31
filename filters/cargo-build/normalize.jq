@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: MIT
 #
-# Normalizes cargo build --message-format json NDJSON into stable,
-# order-independent JSON. Handles message reordering from parallel
-# compilation, hash suffixes in artifact filenames, array ordering,
-# and caching state. All fields are preserved.
+# Generates stable output from cargo build --message-format json NDJSON by
+# sorting the variable parts of the JSON fragment: message order, array order,
+# and object keys. Also normalizes hash suffixes in artifact filenames and
+# caching state. All fields are preserved.
 #
 # @env:STRIP_PATHS?:1
 def sort_array($key):

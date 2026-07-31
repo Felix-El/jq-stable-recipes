@@ -4,7 +4,7 @@ Two filters for `cargo build --message-format json` output, at different levels 
 
 ## normalize.jq
 
-Full normalization: produces stable JSON from non-deterministic build output. Keeps all fields, but normalizes order, hashes, and removes caching noise.
+Full normalization: generates stable output from non-deterministic build output by sorting the variable parts of the JSON — message order, array order, and object keys. Keeps all fields, and additionally normalizes hashes and removes caching noise.
 
 ```
 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/normalize.jq
@@ -26,7 +26,7 @@ STRIP_PATHS=1 cargo build --message-format json 2>/dev/null | jq -s -f filters/c
 
 ## identity.jq
 
-Minimal stable projection. Projects each message down to only the fields needed to determine if two builds are semantically identical. Suitable as a stable build key or piped to `sha256sum`.
+Deterministic projection. Does what `normalize.jq` does, and additionally drops undeterministic data: each message is projected down to only the fields needed to determine if two builds are semantically identical. Suitable as a stable build key or piped to `sha256sum`.
 
 ```
 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/identity.jq

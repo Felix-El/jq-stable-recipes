@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: MIT
 #
-# Projects cargo-geiger --output-format Json down to the minimum
-# fields needed to determine if two geiger runs are semantically
-# identical: per-package name, version, forbids_unsafe flag, and
-# all unsafety counts (used and unused, all five categories).
-# Drops dependency edges (structural metadata, not scan results)
-# and collapses unscanned-file detail to a count.
+# Generates deterministic output from cargo-geiger --output-format Json by
+# additionally dropping undeterministic data: dependency edges (structural
+# metadata, not scan results) and exact unscanned-file lists. Projects to the
+# minimum fields needed to determine if two geiger runs are semantically
+# identical: per-package name, version, forbids_unsafe flag, and all unsafety
+# counts (used and unused, all five categories).
 #
 # Works with both raw and -s (slurp) input: single object or [object].
 

@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: MIT
 #
-# Projects cargo deny --format json event stream to the minimum fields
-# needed to determine if two deny runs are semantically identical:
-# per-diagnostic code, severity, message, primary crate identity, and
-# advisory ID when present; summary check-category counts. Drops log
-# events, graph parent chains, label spans, and advisory prose.
+# Generates deterministic output from cargo deny --format json event stream by
+# additionally dropping undeterministic data: log events, graph parent chains,
+# label spans, and advisory prose. Projects to the minimum fields needed to
+# determine if two deny runs are semantically identical: per-diagnostic code,
+# severity, message, primary crate identity, and advisory ID when present;
+# summary check-category counts.
 def sort_object_keys:
   walk(if type == "object" then to_entries | sort_by(.key) | from_entries else . end);
 
