@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+#
 # Projects cargo build --message-format json messages down to the
 # minimum fields needed to determine if two builds are semantically
 # identical: package identity, target kind, features, diagnostic

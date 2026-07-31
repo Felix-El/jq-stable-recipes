@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+#
 # Projects cargo-mutants outcomes.json down to the minimum fields
 # needed to determine if two mutation test runs are semantically
 # identical: mutation counts, scenario names, per-scenario summary
