@@ -1,1 +1,10 @@
-{"score": 42, "tags": ["m", "a", "z"], "name": "demo", "version": 3}
+{
+  "score": 42,
+  "tags": [
+    "m",
+    "a",
+    "z"
+  ],
+  "name": "demo",
+  "version": 3
+}
