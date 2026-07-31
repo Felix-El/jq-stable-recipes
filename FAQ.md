@@ -60,7 +60,7 @@ Environment variables used by a filter must be declared at the top of the file:
 
 The `@env:` declaration tells the test runner which environment variables the filter reads, and the optional `?default` marks the default value. This matters for two reasons:
 
-1. **Coverage check** — `tests/coverage.sh` verifies every `@env:` combination is tested (both set and unset, plus non-default values).
+1. **Coverage check** — `just coverage` verifies every `@env:` combination is tested (both set and unset, plus non-default values).
 2. **Determinism contract** — an undeclared environment variable that silently changes output would break the "same input → same output" guarantee.
 
 ## How do I use a filter in CI?
@@ -90,7 +90,7 @@ Deterministically — no real tool invocations in the tests. Each filter directo
 - **Golden tests** — a dispatcher file mapping each mutation to its expected normalized output; the filter result must match byte-for-byte.
 - **Coverage** — every `@env:` combination is exercised, and each filter must hit 100% of its declared env combinations.
 
-The SPDX header is enforced by `tests/spdx-check.sh` in CI, so every filter file is guaranteed to carry its license.
+The SPDX header is enforced by `just lint` in CI, so every filter file is guaranteed to carry its license.
 
 ## Can I add my own filter?
 
