@@ -13,13 +13,19 @@ jobs:
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
 
+      - name: Install just
+        uses: extractions/setup-just@v2
+
       - name: Run tests
-        run: cd tests && bash run-tests.sh
+        run: just test
 
       - name: SPDX header check
-        run: cd tests && bash spdx-check.sh
+        run: just lint
 
       - name: Env coverage check
-        run: cd tests && bash coverage.sh
+        run: just coverage
         env:
           ENV_COVERAGE_TARGET: ${{ vars.ENV_COVERAGE_TARGET }}
+
+      - name: Check JSON fixtures
+        run: just check-json
