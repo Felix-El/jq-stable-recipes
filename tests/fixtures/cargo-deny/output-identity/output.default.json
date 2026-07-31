@@ -1,0 +1,256 @@
+[
+  {
+    "code": "duplicate",
+    "crate": "winapi@0.2.8",
+    "message": "found 2 duplicate entries for crate 'winapi'",
+    "severity": "warning",
+    "type": "diagnostic"
+  },
+  {
+    "code": "no-license-field",
+    "crate": "tools-test@0.1.0",
+    "message": "license expression was not specified in manifest for crate 'tools-test = 0.1.0'",
+    "severity": "warning",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "aho-corasick@1.1.4",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "atty@0.2.2",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "itoa@1.0.18",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "kernel32-sys@0.2.2",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "libc@0.2.189",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "memchr@2.8.3",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "proc-macro2@1.0.107",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "quote@1.0.47",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "regex-automata@0.4.16",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "regex-syntax@0.8.11",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "regex@1.13.1",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "serde@1.0.229",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "serde_core@1.0.229",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "serde_derive@1.0.229",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "serde_json@1.0.151",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "syn@3.0.3",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "time@0.1.45",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "unicode-ident@1.0.24",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "wasi@0.10.0+wasi-snapshot-preview1",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "winapi-build@0.1.1",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "winapi-i686-pc-windows-gnu@0.4.0",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "winapi-x86_64-pc-windows-gnu@0.4.0",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "winapi@0.2.8",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "winapi@0.3.9",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "rejected",
+    "crate": "zmij@1.0.23",
+    "message": "failed to satisfy license requirements",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "unlicensed",
+    "crate": "tools-test@0.1.0",
+    "message": "tools-test = 0.1.0 is unlicensed",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "code": "unlicensed",
+    "crate": "tools-test@0.1.0",
+    "message": "a valid license expression could not be retrieved for the crate",
+    "severity": "warning",
+    "type": "diagnostic"
+  },
+  {
+    "advisory_id": "RUSTSEC-2024-0375",
+    "code": "unmaintained",
+    "crate": "atty@0.2.2",
+    "message": "`atty` is unmaintained",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "advisory_id": "RUSTSEC-2021-0145",
+    "code": "unsound",
+    "crate": "atty@0.2.2",
+    "message": "Potential unaligned read",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "advisory_id": "RUSTSEC-2020-0071",
+    "code": "vulnerability",
+    "crate": "time@0.1.45",
+    "message": "Potential segfault in the time crate",
+    "severity": "error",
+    "type": "diagnostic"
+  },
+  {
+    "advisories": {
+      "errors": 3,
+      "helps": 0,
+      "notes": 0,
+      "warnings": 0
+    },
+    "bans": {
+      "errors": 0,
+      "helps": 0,
+      "notes": 0,
+      "warnings": 1
+    },
+    "licenses": {
+      "errors": 26,
+      "helps": 0,
+      "notes": 0,
+      "warnings": 2
+    },
+    "sources": {
+      "errors": 0,
+      "helps": 0,
+      "notes": 0,
+      "warnings": 0
+    },
+    "type": "summary"
+  }
+]
