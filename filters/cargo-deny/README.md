@@ -21,7 +21,7 @@ jq -s -f filters/cargo-deny/normalize.jq deny.ndjson
 
 ## identity.jq
 
-Minimal fingerprint variant. Projects each diagnostic down to only the fields needed to determine if two deny runs are semantically identical: `code`, `severity`, `message`, `crate` (primary crate as `name@version`), and `advisory_id` when present. Summary is projected to check-category error/warning counts. Suitable as a stable cache key or piped to `sha256sum`.
+Minimal stable projection. Projects each diagnostic down to only the fields needed to determine if two deny runs are semantically identical: `code`, `severity`, `message`, `crate` (primary crate as `name@version`), and `advisory_id` when present. Summary is projected to check-category error/warning counts. Suitable as a stable cache key or piped to `sha256sum`.
 
 ```
 cargo deny --format json check all 2>deny.ndjson

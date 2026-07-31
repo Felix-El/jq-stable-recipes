@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 #
-# Simple showcase: minimal fingerprint of a tiny JSON object. Drops volatile
+# Simple showcase: minimal stable projection of a tiny JSON object. Drops volatile
 # fields (score) and keeps only what identifies the object: name, version, and
 # sorted tags.
 

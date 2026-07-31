@@ -35,7 +35,7 @@ $ jq -f filters/simple/identity.jq
 {"name":"demo","tags":["a","m","z"],"version":3}
 ```
 
-Minimal fingerprint: volatile fields (`score`) are dropped. Only the fields
+Minimal stable projection: volatile fields (`score`) are dropped. Only the fields
 that identify the object (`name`, `version`, `tags`) are kept, with key order
 sorted and `tags` sorted. Two objects that are semantically the same identity
 will produce bit-for-bit identical output.

@@ -20,13 +20,13 @@ STRIP_PATHS=1 cargo build --message-format json 2>/dev/null | jq -s -f filters/c
 
 ### Limitations
 
-- **Machine-specific paths are preserved** without `STRIP_PATHS=1`. The fingerprint is stable across rebuilds on the same machine, not across different machines or CI runners.
+- **Machine-specific paths are preserved** without `STRIP_PATHS=1`. The output is stable across rebuilds on the same machine, not across different machines or CI runners.
 - **Procedural macro / build script stdout** outside cargo's JSON framework is silently skipped.
 - **Compiler diagnostics** are normalized for key order only — content is preserved verbatim.
 
 ## identity.jq
 
-Minimal fingerprint variant. Projects each message down to only the fields needed to determine if two builds are semantically identical. Suitable as a stable build key or piped to `sha256sum`.
+Minimal stable projection. Projects each message down to only the fields needed to determine if two builds are semantically identical. Suitable as a stable build key or piped to `sha256sum`.
 
 ```
 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/identity.jq

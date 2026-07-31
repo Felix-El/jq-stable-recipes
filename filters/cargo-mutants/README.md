@@ -20,12 +20,12 @@ STRIP_PATHS=1 jq -f filters/cargo-mutants/normalize.jq target/mutants/outcomes.j
 
 ### Limitations
 
-- **Machine-specific paths are preserved** without `STRIP_PATHS=1`. The fingerprint is stable across rebuilds on the same machine, not across different CI runners.
-- **All fields are preserved** — including runtime data like `duration`, `start_time`, and `end_time`. For a deterministic fingerprint, use `identity.jq`.
+- **Machine-specific paths are preserved** without `STRIP_PATHS=1`. The output is stable across rebuilds on the same machine, not across different CI runners.
+- **All fields are preserved** — including runtime data like `duration`, `start_time`, and `end_time`. For deterministic output, use `identity.jq`.
 
 ## identity.jq
 
-Minimal fingerprint variant. Projects the outcomes down to only the fields needed to determine if two mutation test runs are semantically identical: mutation counts, scenario names, per-scenario summaries, and phase-level pass/fail. Suitable as a stable test key or piped to `sha256sum`.
+Minimal stable projection. Projects the outcomes down to only the fields needed to determine if two mutation test runs are semantically identical: mutation counts, scenario names, per-scenario summaries, and phase-level pass/fail. Suitable as a stable test key or piped to `sha256sum`.
 
 ```
 jq -f filters/cargo-mutants/identity.jq target/mutants/outcomes.json
