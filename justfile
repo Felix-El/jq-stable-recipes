@@ -1,3 +1,5 @@
+set positional-arguments
+
 # Show recipe list, filter inventory, and usage hints
 default: _discover
 
@@ -110,6 +112,161 @@ _env-decls file:
         fi
     done < {{quote(file)}}
 
+# (private) print `NAME=VALUE` env override lines from a golden entry's env object
+#   (null values are skipped — those vars stay unset)
+_env-args entry:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    env_obj="$(echo "$1" | jq -c '.value.env')"
+    [ "$env_obj" = "null" ] && exit 0
+    while IFS= read -r key; do
+        [ -z "$key" ] && continue
+        val="$(echo "$env_obj" | jq -r ".[\"$key\"]")"
+        if [ "$val" != "null" ]; then
+            echo "$key=$val"
+        fi
+    done < <(echo "$env_obj" | jq -r 'keys[]')
+
+# (private) mutation test: apply filter to all fixture inputs under given env,
+#   verify all outputs match. Trailing args are `NAME=VALUE` env overrides.
+_mutation-test label filter_file fixture_dir *env_args:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    label="$1"
+    filter_file="$2"
+    fixture_dir="$3"
+    shift 3
+    env_args=("$@")
+
+    fixtures=("$fixture_dir"/mutants/*.json)
+    if [ ${#fixtures[@]} -lt 2 ]; then
+        echo "SKIP: $label mutation — need ≥2 fixtures (got ${#fixtures[@]})"
+        exit 0
+    fi
+
+    outputs=()
+    for fixture in "${fixtures[@]}"; do
+        if [ ${#env_args[@]} -eq 0 ]; then
+            output="$(jq -s -f "$filter_file" "$fixture" 2>&1)" || {
+                echo "FAIL: $label mutation — jq error on $(basename "$fixture")"
+                echo "$output"
+                exit 1
+            }
+        else
+            output="$(env "${env_args[@]}" jq -s -f "$filter_file" "$fixture" 2>&1)" || {
+                echo "FAIL: $label mutation — jq error on $(basename "$fixture")"
+                echo "$output"
+                exit 1
+            }
+        fi
+        outputs+=("$output")
+    done
+
+    first="${outputs[0]}"
+    for i in "${!outputs[@]}"; do
+        if [ "${outputs[$i]}" != "$first" ]; then
+            echo "FAIL: $label mutation — fixtures differ (fixture $i vs 0)"
+            diff <(echo "$first") <(echo "${outputs[$i]}") || true
+            exit 1
+        fi
+    done
+
+    echo "PASS: $label mutation (${#fixtures[@]} fixtures)"
+
+# (private) golden test: apply filter to a specific input with given env,
+#   compare output byte-for-byte against the expected file.
+#   Trailing args are `NAME=VALUE` env overrides.
+_golden-test label filter_file input_file expected_file *env_args:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    label="$1"
+    filter_file="$2"
+    input_file="$3"
+    expected_file="$4"
+    shift 4
+    env_args=("$@")
+
+    if [ ! -f "$input_file" ]; then
+        echo "FAIL: $label golden — input not found: $input_file"
+        exit 1
+    fi
+    if [ ! -f "$expected_file" ]; then
+        echo "FAIL: $label golden — expected output not found: $expected_file"
+        exit 1
+    fi
+
+    if [ ${#env_args[@]} -eq 0 ]; then
+        output="$(jq -s -f "$filter_file" "$input_file" 2>&1)" || {
+            echo "FAIL: $label golden — jq error"
+            echo "$output"
+            exit 1
+        }
+    else
+        output="$(env "${env_args[@]}" jq -s -f "$filter_file" "$input_file" 2>&1)" || {
+            echo "FAIL: $label golden — jq error"
+            echo "$output"
+            exit 1
+        }
+    fi
+
+    if ! diff <(echo "$output") "$expected_file" >/dev/null; then
+        echo "FAIL: $label golden — output differs from $expected_file"
+        diff <(echo "$output") "$expected_file" || true
+        exit 1
+    fi
+
+    echo "PASS: $label golden"
+
+# (private) validate that every @env: declaration is covered by golden entries.
+#   Trailing args are `name|optional|values` declaration lines.
+_validate-coverage label golden_file *decls:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    label="$1"
+    golden_file="$2"
+    shift 2
+    decls=("$@")
+
+    ok=0
+    for decl in "${decls[@]}"; do
+        name="${decl%%|*}"
+        rest="${decl#*|}"
+        optional="${rest%%|*}"
+        values="${rest#*|}"
+
+        # Collect values for this var across all golden entries
+        set_count=0
+        null_count=0
+        while IFS= read -r entry; do
+            [ -z "$entry" ] && continue
+            val="$(echo "$entry" | jq -r ".env[\"$name\"]")"
+            if [ "$val" = "null" ]; then
+                null_count=$((null_count + 1))
+            else
+                set_count=$((set_count + 1))
+            fi
+        done < <(jq -c 'to_entries[] | .value' "$golden_file")
+
+        if [ "$optional" = "no" ]; then
+            if [ "$set_count" -eq 0 ]; then
+                echo "FAIL: $label — required var $name never set in golden file"
+                ok=1
+            fi
+        else
+            # optional — must have both a set and a null entry
+            if [ "$set_count" -eq 0 ]; then
+                echo "FAIL: $label — optional var $name? has no set entry in golden file"
+                ok=1
+            fi
+            if [ "$null_count" -eq 0 ]; then
+                echo "FAIL: $label — optional var $name? has no null/unset entry in golden file"
+                ok=1
+            fi
+        fi
+    done
+
+    exit $ok
+
 # (private) test runner: golden + mutation tests + @env coverage validation.
 #   just _test               all filters
 #   just _test <family>      one family
@@ -139,163 +296,6 @@ _test family="" filter="":
         echo "ERROR: filter '$FAMILY_FILTER/$FILTER_FILTER' not found at $FILTER_DIR/$FAMILY_FILTER/$FILTER_FILTER.jq" >&2
         exit 1
     fi
-
-    # Build env argument array from a golden entry's env object.
-    # Null values = skip (don't set), string values = "NAME=VALUE".
-    build_env_args() {
-        local golden_entry="$1"
-        env_args=()
-        local env_obj
-        env_obj="$(echo "$golden_entry" | jq -c '.value.env')"
-        [ "$env_obj" = "null" ] && return 0
-        while IFS= read -r key; do
-            [ -z "$key" ] && continue
-            local val
-            val="$(echo "$env_obj" | jq -r ".[\"$key\"]")"
-            if [ "$val" != "null" ]; then
-                env_args+=("$key=$val")
-            fi
-        done < <(echo "$env_obj" | jq -r 'keys[]')
-    }
-
-    # Mutation test: apply filter to all fixture inputs under given env,
-    # verify all outputs match.
-    run_mutation_test() {
-        local label="$1"
-        local filter_file="$2"
-        local fixture_dir="$3"
-        shift 3
-        local -a env_args=("$@")
-
-        local fixtures=("$fixture_dir"/mutants/*.json)
-        if [ ${#fixtures[@]} -lt 2 ]; then
-            echo "SKIP: $label mutation — need ≥2 fixtures (got ${#fixtures[@]})"
-            return 0
-        fi
-
-        local outputs=()
-        for fixture in "${fixtures[@]}"; do
-            if [ ${#env_args[@]} -eq 0 ]; then
-                output="$(jq -s -f "$filter_file" "$fixture" 2>&1)" || {
-                    echo "FAIL: $label mutation — jq error on $(basename "$fixture")"
-                    echo "$output"
-                    return 1
-                }
-            else
-                output="$(env "${env_args[@]}" jq -s -f "$filter_file" "$fixture" 2>&1)" || {
-                    echo "FAIL: $label mutation — jq error on $(basename "$fixture")"
-                    echo "$output"
-                    return 1
-                }
-            fi
-            outputs+=("$output")
-        done
-
-        local first="${outputs[0]}"
-        for i in "${!outputs[@]}"; do
-            if [ "${outputs[$i]}" != "$first" ]; then
-                echo "FAIL: $label mutation — fixtures differ (fixture $i vs 0)"
-                diff <(echo "$first") <(echo "${outputs[$i]}") || true
-                return 1
-            fi
-        done
-
-        echo "PASS: $label mutation (${#fixtures[@]} fixtures)"
-        return 0
-    }
-
-    # Golden test: apply filter to a specific input with given env,
-    # compare output byte-for-byte against expected file.
-    run_golden_test() {
-        local label="$1"
-        local filter_file="$2"
-        local input_file="$3"
-        local expected_file="$4"
-        shift 4
-        local -a env_args=("$@")
-
-        if [ ! -f "$input_file" ]; then
-            echo "FAIL: $label golden — input not found: $input_file"
-            return 1
-        fi
-        if [ ! -f "$expected_file" ]; then
-            echo "FAIL: $label golden — expected output not found: $expected_file"
-            return 1
-        fi
-
-        local output
-        if [ ${#env_args[@]} -eq 0 ]; then
-            output="$(jq -s -f "$filter_file" "$input_file" 2>&1)" || {
-                echo "FAIL: $label golden — jq error"
-                echo "$output"
-                return 1
-            }
-        else
-            output="$(env "${env_args[@]}" jq -s -f "$filter_file" "$input_file" 2>&1)" || {
-                echo "FAIL: $label golden — jq error"
-                echo "$output"
-                return 1
-            }
-        fi
-
-        if ! diff <(echo "$output") "$expected_file" >/dev/null; then
-            echo "FAIL: $label golden — output differs from $expected_file"
-            diff <(echo "$output") "$expected_file" || true
-            return 1
-        fi
-
-        echo "PASS: $label golden"
-        return 0
-    }
-
-    # Validate that all @env: declarations are covered by golden entries.
-    validate_coverage() {
-        local label="$1"
-        local golden_file="$2"
-        shift 2
-        local -a decls=("$@")
-
-        local ok=0
-        for decl in "${decls[@]}"; do
-            local name="${decl%%|*}"
-            local rest="${decl#*|}"
-            local optional="${rest%%|*}"
-            local values="${rest#*|}"
-
-            # Collect values for this var across all golden entries
-            local set_count=0
-            local null_count=0
-            while IFS= read -r entry; do
-                [ -z "$entry" ] && continue
-                local val
-                val="$(echo "$entry" | jq -r ".env[\"$name\"]")"
-                if [ "$val" = "null" ]; then
-                    null_count=$((null_count + 1))
-                else
-                    set_count=$((set_count + 1))
-                fi
-            done < <(jq -c 'to_entries[] | .value' "$golden_file")
-
-            if [ "$optional" = "no" ]; then
-                if [ "$set_count" -eq 0 ]; then
-                    echo "FAIL: $label — required var $name never set in golden file"
-                    ok=1
-                fi
-            else
-                # optional — must have both a set and a null entry
-                if [ "$set_count" -eq 0 ]; then
-                    echo "FAIL: $label — optional var $name? has no set entry in golden file"
-                    ok=1
-                fi
-                if [ "$null_count" -eq 0 ]; then
-                    echo "FAIL: $label — optional var $name? has no null/unset entry in golden file"
-                    ok=1
-                fi
-            fi
-        done
-
-        return $ok
-    }
 
     # ---- Main loop over families and filters ----
     for filter_dir in "$FILTER_DIR"/*/; do
@@ -342,25 +342,25 @@ _test family="" filter="":
                     variant="$label_base ($entry_label)"
 
                     # Build env args from this entry
-                    build_env_args "$entry"
+                    mapfile -t env_args < <(just --justfile {{justfile()}} _env-args "$entry")
                     local_input="$(echo "$entry" | jq -r '.value.input // "mutants/input.json"')"
                     local_input_path="$fixture_base/$local_input"
                     expected_file="$fixture_base/$(echo "$entry" | jq -r '.value.expected')"
 
-                    run_mutation_test "$variant" "$filter_file" "$fixture_base" "${env_args[@]}" || exit_code=1
-                    run_golden_test "$variant" "$filter_file" "$local_input_path" "$expected_file" "${env_args[@]}" || exit_code=1
+                    just --justfile {{justfile()}} _mutation-test "$variant" "$filter_file" "$fixture_base" "${env_args[@]}" || exit_code=1
+                    just --justfile {{justfile()}} _golden-test "$variant" "$filter_file" "$local_input_path" "$expected_file" "${env_args[@]}" || exit_code=1
                 done < <(echo "$golden_entries")
 
                 # Validate coverage: every @env: declaration must be covered
                 if [ ${#env_decls[@]} -gt 0 ]; then
-                    validate_coverage "$label_base" "$golden_file" "${env_decls[@]}" || exit_code=1
+                    just --justfile {{justfile()}} _validate-coverage "$label_base" "$golden_file" "${env_decls[@]}" || exit_code=1
                 fi
             else
                 # ---- No golden file: default mutation test only ----
                 if [ ${#env_decls[@]} -gt 0 ]; then
                     echo "WARN: $label_base — @env: declared but no golden file (mutation only)"
                 fi
-                run_mutation_test "$label_base (default)" "$filter_file" "$fixture_base" || exit_code=1
+                just --justfile {{justfile()}} _mutation-test "$label_base (default)" "$filter_file" "$fixture_base" || exit_code=1
             fi
         done
     done
@@ -524,6 +524,48 @@ _coverage-check:
 
     exit $exit_code
 
+# (private) verify a single JSON file is in canonical pretty form.
+#   n > 1 → NDJSON: every non-empty line must byte-match jq -c . output
+#   n = 1 → single document: file must byte-match jq . output
+#   n = 0 → unparseable: fail
+# n is obtained via `jq -s 'length'` (slurp all top-level JSON values).
+_check-json-file f:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    f="$1"
+    n=$(jq -s 'length' "$f" 2>/dev/null || echo 0)
+
+    if [ "$n" -eq 0 ]; then
+        echo "FAIL: $f — unparseable JSON"
+        exit 1
+    fi
+
+    if [ "$n" -gt 1 ]; then
+        # NDJSON: every non-empty line must match jq -c . output
+        while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            canon=$(jq -c . <<<"$line" 2>/dev/null) || {
+                echo "FAIL: $f — unparseable NDJSON line"
+                exit 1
+            }
+            if [ "$line" != "$canon" ]; then
+                echo "FAIL: $f — NDJSON line not in canonical compact form"
+                exit 1
+            fi
+        done < "$f"
+        echo "PASS: $f"
+        exit 0
+    fi
+
+    # n == 1: single document — must byte-match jq . output
+    if diff <(jq . "$f" 2>/dev/null) "$f" >/dev/null 2>&1; then
+        echo "PASS: $f"
+        exit 0
+    else
+        echo "FAIL: $f — not in canonical pretty form (jq . mismatch)"
+        exit 1
+    fi
+
 # (private) canonical pretty-JSON check, optionally scoped to a fixture family.
 #   just _check-json             all version-controlled JSONs
 #   just _check-json <family>    only tests/fixtures/<family>/
@@ -550,49 +592,6 @@ _check-json family="":
         files=$(git ls-files '*.json')
     fi
 
-    # check_file: verify a single JSON file is in canonical pretty form.
-    #   n > 1 → NDJSON: every non-empty line must byte-match jq -c . output
-    #   n = 1 → single document: file must byte-match jq . output
-    #   n = 0 → unparseable: fail
-    # n is obtained via `jq -s 'length'` (slurp all top-level JSON values).
-    check_file() {
-        local f="$1"
-        local n
-        n=$(jq -s 'length' "$f" 2>/dev/null || echo 0)
-
-        if [ "$n" -eq 0 ]; then
-            echo "FAIL: $f — unparseable JSON"
-            return 1
-        fi
-
-        if [ "$n" -gt 1 ]; then
-            # NDJSON: every non-empty line must match jq -c . output
-            local line canon
-            while IFS= read -r line; do
-                [ -z "$line" ] && continue
-                canon=$(jq -c . <<<"$line" 2>/dev/null) || {
-                    echo "FAIL: $f — unparseable NDJSON line"
-                    return 1
-                }
-                if [ "$line" != "$canon" ]; then
-                    echo "FAIL: $f — NDJSON line not in canonical compact form"
-                    return 1
-                fi
-            done < "$f"
-            echo "PASS: $f"
-            return 0
-        fi
-
-        # n == 1: single document — must byte-match jq . output
-        if diff <(jq . "$f" 2>/dev/null) "$f" >/dev/null 2>&1; then
-            echo "PASS: $f"
-            return 0
-        else
-            echo "FAIL: $f — not in canonical pretty form (jq . mismatch)"
-            return 1
-        fi
-    }
-
     if [ -z "$files" ]; then
         echo "No version-controlled JSON files found."
         exit 0
@@ -603,7 +602,7 @@ _check-json family="":
     while IFS= read -r rel; do
         [ -z "$rel" ] && continue
         total=$((total + 1))
-        if check_file "$rel"; then
+        if just --justfile {{justfile()}} _check-json-file "$rel"; then
             passed=$((passed + 1))
         else
             exit_code=1
