@@ -7,7 +7,13 @@
 # Sorts the vulnerability list and each warning category array by advisory.id;
 # sorts package dependency arrays by name; sorts advisory sub-arrays (aliases,
 # categories, keywords, related, references) and affected os/arch arrays;
-# recursively sorts all object keys. All semantically meaningful fields kept.
+# recursively sorts all object keys. All semantically meaningful fields kept,
+# including package.checksum (the crates.io SHA-256 content hash of the exact
+# crate file), which is preserved, not dropped.
+#
+# Determinism contract: two runs are byte-identical iff they audited the same
+# lockfile against the same advisory database; the database metadata fields
+# that change on every update (last-commit, last-updated) are dropped.
 #
 # Works with both raw and -s (slurp) input: single object or [object].
 

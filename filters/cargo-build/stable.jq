@@ -2,8 +2,13 @@
 #
 # Generates stable output from cargo build --message-format json NDJSON by
 # sorting the variable parts of the JSON fragment: message order, array order,
-# and object keys. Also normalizes hash suffixes in artifact filenames and
-# caching state. All fields are preserved.
+# and object keys. Also normalizes caching state. All fields are preserved.
+#
+# Determinism contract: two runs are byte-identical iff they were built with
+# the same toolchain (rustc version, target), the same feature set, profile,
+# and RUSTFLAGS, and the same dependency graph. Artifact hash suffixes
+# (e.g. -be9f3faac0a26ef0) encode exactly that configuration and are therefore
+# preserved, not normalized.
 #
 # @env:STRIP_PATHS?:1
 def sort_array($key):
@@ -20,15 +25,12 @@ def normalize_target:
 
 def normalize_message:
   del(.fresh, .executable)
-  | if (.filenames | type) == "array" then
-      .filenames |= (map(gsub("-[0-9a-f]{16}"; "-HASH")) | sort)
-    else . end
+  | if (.filenames | type) == "array" then .filenames |= sort else . end
   | sort_array("features")
   | sort_array("linked_libs")
   | sort_array("linked_paths")
   | sort_array("cfgs")
-  | if (.env | type) == "array" then .env |= (map(map(if type == "string" then gsub("-[0-9a-f]{16}"; "-HASH") else . end)) | sort_by(.[0])) else . end
-  | if has("out_dir") then .out_dir |= gsub("-[0-9a-f]{16}"; "-HASH") else . end
+  | if (.env | type) == "array" then .env |= (sort_by(.[0])) else . end
   | normalize_target;
 
 def sort_object_keys:

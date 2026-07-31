@@ -4,7 +4,7 @@ Tested jq recipes that produce stable JSON from non-deterministic tool output.
 
 ## Problem
 
-Tools like `cargo build --message-format json` and `cargo-mutants outcomes.json` emit JSON that varies between runs: parallel execution reorders messages, build artifacts carry fresh hashes, arrays come in arbitrary order, runtime timing shifts. These filters normalize such output into stable, canonicalized JSON — the raw material a fingerprint is made of. Nothing in this repository does fingerprinting itself: the filters only canonicalize, and turning the result into a fingerprint or cache key (e.g. `| sha256sum`) is a step you add in your own pipeline. Use the stable output for caching, change detection, or reproducible builds.
+Tools like `cargo build --message-format json` and `cargo-mutants outcomes.json` emit JSON that varies between runs: parallel execution reorders messages, arrays come in arbitrary order, runtime timing shifts. (Artifact hash suffixes like `-be9f3faac0a26ef0` are *not* run-to-run noise — they are deterministic hashes of the build configuration and are preserved, see the Determinism section in each cargo filter family's README.) These filters normalize such output into stable, canonicalized JSON — the raw material a fingerprint is made of. Nothing in this repository does fingerprinting itself: the filters only canonicalize, and turning the result into a fingerprint or cache key (e.g. `| sha256sum`) is a step you add in your own pipeline. Use the stable output for caching, change detection, or reproducible builds.
 
 ## Usage
 

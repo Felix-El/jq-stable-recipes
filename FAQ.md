@@ -2,7 +2,7 @@
 
 ## What is this project?
 
-A collection of tested `jq` filters that turn non-deterministic tool output (like `cargo build --message-format json`) into stable, canonicalized JSON. Feed the same logical input to the same filter and you always get byte-for-byte identical output — regardless of machine, run order, or timing. Nothing in this repository does fingerprinting: the filters only canonicalize. Fingerprinting the output (hashing it, e.g. `| sha256sum`) is a step you add in your own pipeline — the stable output is exactly what makes that fingerprint reliable.
+A collection of tested `jq` filters that turn non-deterministic tool output (like `cargo build --message-format json`) into stable, canonicalized JSON. Feed the same logical input to the same filter and you always get byte-for-byte identical output — under the filter-specific conditions described in each filter family's README (for cargo filters: same toolchain, feature set, profile, RUSTFLAGS, and dependency graph; run order and timing never matter). Nothing in this repository does fingerprinting: the filters only canonicalize. Fingerprinting the output (hashing it, e.g. `| sha256sum`) is a step you add in your own pipeline — the stable output is exactly what makes that fingerprint reliable.
 
 ## Why do I want stable output?
 
@@ -20,23 +20,27 @@ The filters produce the stable key material: canonical JSON that is byte-for-byt
 
 ## What does "stable" mean exactly?
 
-Stable means: **given the same logical input, the output is byte-for-byte identical**. The filters remove the sources of run-to-run variance:
+Stable means: **given the same logical input, the output is byte-for-byte identical under the filter-specific conditions** (see the Determinism section of each filter family's README). The filters remove the sources of run-to-run variance:
 
 | Variation | Treatment |
 |---|---|
 | Message/line order (parallel execution) | Deterministic sort |
-| Hash suffixes in paths (`-be9f3faac0a26ef0`) | Replaced with a fixed `-HASH` marker |
+| Hash suffixes in paths (`-be9f3faac0a26ef0`) | Preserved — deterministic hashes of the build configuration, not random noise (see below) |
 | Array element order | Sorted |
 | Object key order | Recursively sorted alphabetically |
 | Machine-specific absolute paths | Optionally stripped via `STRIP_PATHS=1` |
 | Caching-state fields (`fresh`, `executable`, timing) | Removed |
+
+## Aren't those hash suffixes random per build?
+
+No. The 16-hex suffix in artifact filenames (e.g. `libserde-be9f3faac0a26ef0.rlib`) is cargo's `unit_id`: a deterministic hash over the crate's metadata (name, version, source), enabled features, resolved profile, target/host triple, rustc version, RUSTFLAGS, and the dependency graph — **not** over the crate's source contents and **not** random. Rebuilding the same project on the same machine or a different checkout path yields identical suffixes; changing a dependency version, feature set, profile, or toolchain changes them. Because they encode real build configuration, the filters preserve them. The same holds for `cargo-audit`'s `package.checksum`, which is the crates.io SHA-256 of the exact crate file.
 
 ## What's the difference between `stable.jq` and `deterministic.jq`?
 
 Every filter directory ships two variants that aim at two different guarantees:
 
 - **`stable.jq`** — *stable* output. Sorts the variable parts of a JSON fragment (object key order, array order) so the same logical input always yields byte-for-byte identical output. All meaningful fields are preserved. Good when you want to compare complete results or store a faithful snapshot.
-- **`deterministic.jq`** — *deterministic* output. Does what `stable.jq` does, and additionally removes undeterministic data (timestamps, timing, hashes, machine-specific paths, volatile fields). Only the fields needed to decide "is this the same build/outcome as before?" remain. Smaller, faster, and ideal as a cache key.
+- **`deterministic.jq`** — *deterministic* output. Does what `stable.jq` does, and additionally removes undeterministic data (timestamps, timing, volatile fields, machine-specific paths where applicable). Only the fields needed to decide "is this the same build/outcome as before?" remain. Smaller, faster, and ideal as a cache key. Hash suffixes are kept here too: they are deterministic build-configuration hashes, so they belong in a cache key.
 
 Use `deterministic.jq` when the input contains data that can never be reproduced and you only care about *sameness*; use `stable.jq` when you care about the *content*.
 
@@ -86,7 +90,7 @@ cache_key=$(cargo build --message-format json 2>/dev/null \
 
 Deterministically — no real tool invocations in the tests. Each filter directory has:
 
-- **Mutation fixtures** — hand-crafted perturbations of real tool output (reordered lines, fresh hash suffixes, shuffled arrays) that a filter must normalize away.
+- **Mutation fixtures** — hand-crafted perturbations of real tool output (reordered lines, shuffled arrays, flipped caching-state flags) that a filter must normalize away.
 - **Golden tests** — a dispatcher file mapping each mutation to its expected normalized output; the filter result must match byte-for-byte.
 - **Coverage** — every `@env:` combination is exercised, and each filter must hit 100% of its declared env combinations.
 

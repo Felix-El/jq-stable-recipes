@@ -2,9 +2,13 @@
 
 Two filters for `cargo build --message-format json` output, at different levels of projection.
 
+## Determinism
+
+Both filters are deterministic under filter-specific conditions: two runs produce byte-identical output iff they were built with the same toolchain (rustc version, target), the same feature set, profile, and RUSTFLAGS, and the same dependency graph. Artifact hash suffixes (e.g. `-be9f3faac0a26ef0` in `libserde-…rlib`) are not random: they are a deterministic hash of exactly that build configuration (crate name/version/source, features, profile, target, rustc version, RUSTFLAGS, dependency graph), so they are **preserved**. Two builds that differ in any of those inputs legitimately produce different output — that difference is the point of a build fingerprint. A change in the rustc/clippy version or target triple is visible as a change in these suffixes.
+
 ## stable.jq
 
-Full normalization: generates stable output from non-deterministic build output by sorting the variable parts of the JSON — message order, array order, and object keys. Keeps all fields, and additionally normalizes hashes and removes caching noise.
+Full normalization: generates stable output from non-deterministic build output by sorting the variable parts of the JSON — message order, array order, and object keys. Keeps all fields, and removes caching noise.
 
 ```
 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/stable.jq
@@ -58,7 +62,7 @@ STRIP_PATHS=1 cargo build --message-format json 2>/dev/null | jq -s -f filters/c
 | Variation | Treatment |
 |---|---|
 | Message line order (parallel compilation) | Sort by `(package_id, reason)` |
-| Artifact hash suffixes (`-be9f3faac0a26ef0`) | Replace with `-HASH` in filenames, `out_dir`, and `env` values |
+| Artifact hash suffixes (`-be9f3faac0a26ef0`) | Preserved (deterministic hash of build configuration, see above) |
 | Array element order (`features`, `filenames`, `cfgs`, `env`, etc.) | Sort each array deterministically |
 | `fresh` / `executable` fields | Remove (vary with caching state) |
 | Object key ordering | Recursively sort keys alphabetically |

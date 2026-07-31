@@ -6,7 +6,7 @@
   {
     "features": [],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libtools_test-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libtools_test-4630876fe6d422b8.rmeta"
     ],
     "manifest_path": "/tmp/opencode/tools-test/Cargo.toml",
     "package_id": "path+file:///tmp/opencode/tools-test#0.1.0",
@@ -134,7 +134,7 @@
       "std"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libaho_corasick-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libaho_corasick-59c951e6da5f6ef3.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aho-corasick-1.1.4/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#aho-corasick@1.1.4",
@@ -164,7 +164,7 @@
   {
     "features": [],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libatty-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libatty-3d1f20e5c53db3c3.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/atty-0.2.2/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#atty@0.2.2",
@@ -194,7 +194,7 @@
   {
     "features": [],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libitoa-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libitoa-6ddde9f8d1eacb1c.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/itoa-1.0.18/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#itoa@1.0.18",
@@ -228,7 +228,7 @@
     "env": [],
     "linked_libs": [],
     "linked_paths": [],
-    "out_dir": "/tmp/opencode/tools-test/target/debug/build/libc-HASH/out",
+    "out_dir": "/tmp/opencode/tools-test/target/debug/build/libc-a72ef1f50d94be8f/out",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#libc@0.2.189",
     "reason": "build-script-executed"
   },
@@ -238,7 +238,7 @@
       "std"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/build/libc-HASH/build-script-build"
+      "/tmp/opencode/tools-test/target/debug/build/libc-19124a20af635abc/build-script-build"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.189/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#libc@0.2.189",
@@ -271,7 +271,7 @@
       "std"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/liblibc-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/liblibc-72577fe584cae775.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.189/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#libc@0.2.189",
@@ -304,7 +304,7 @@
       "std"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libmemchr-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libmemchr-0263503a7d6f4437.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/memchr-2.8.3/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#memchr@2.8.3",
@@ -340,7 +340,7 @@
     "env": [],
     "linked_libs": [],
     "linked_paths": [],
-    "out_dir": "/tmp/opencode/tools-test/target/debug/build/proc-macro2-HASH/out",
+    "out_dir": "/tmp/opencode/tools-test/target/debug/build/proc-macro2-e84b7413c9ee9ead/out",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107",
     "reason": "build-script-executed"
   },
@@ -349,7 +349,7 @@
       "proc-macro"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/build/proc-macro2-HASH/build-script-build"
+      "/tmp/opencode/tools-test/target/debug/build/proc-macro2-b687888273c8b209/build-script-build"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107",
@@ -381,8 +381,8 @@
       "proc-macro"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libproc_macro2-HASH.rlib",
-      "/tmp/opencode/tools-test/target/debug/deps/libproc_macro2-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libproc_macro2-404452a690452e61.rlib",
+      "/tmp/opencode/tools-test/target/debug/deps/libproc_macro2-404452a690452e61.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107",
@@ -414,7 +414,7 @@
     "env": [],
     "linked_libs": [],
     "linked_paths": [],
-    "out_dir": "/tmp/opencode/tools-test/target/debug/build/quote-HASH/out",
+    "out_dir": "/tmp/opencode/tools-test/target/debug/build/quote-f7e65b2c23f11dff/out",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47",
     "reason": "build-script-executed"
   },
@@ -423,7 +423,7 @@
       "proc-macro"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/build/quote-HASH/build-script-build"
+      "/tmp/opencode/tools-test/target/debug/build/quote-c641ea97ba341343/build-script-build"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.47/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47",
@@ -455,8 +455,8 @@
       "proc-macro"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libquote-HASH.rlib",
-      "/tmp/opencode/tools-test/target/debug/deps/libquote-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libquote-1f1b0729b559a784.rlib",
+      "/tmp/opencode/tools-test/target/debug/deps/libquote-1f1b0729b559a784.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.47/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47",
@@ -509,7 +509,7 @@
       "unicode-word-boundary"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libregex_automata-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libregex_automata-d16c76465ce75adb.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/regex-automata-0.4.16/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#regex-automata@0.4.16",
@@ -550,7 +550,7 @@
       "unicode-segment"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libregex_syntax-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libregex_syntax-adce5f78d8a76588.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/regex-syntax-0.8.11/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#regex-syntax@0.8.11",
@@ -598,7 +598,7 @@
       "unicode-segment"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libregex-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libregex-7e140704753da6bd.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/regex-1.13.1/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#regex@1.13.1",
@@ -632,7 +632,7 @@
     "env": [],
     "linked_libs": [],
     "linked_paths": [],
-    "out_dir": "/tmp/opencode/tools-test/target/debug/build/serde-HASH/out",
+    "out_dir": "/tmp/opencode/tools-test/target/debug/build/serde-46367230ef002103/out",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde@1.0.229",
     "reason": "build-script-executed"
   },
@@ -644,7 +644,7 @@
       "std"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/build/serde-HASH/build-script-build"
+      "/tmp/opencode/tools-test/target/debug/build/serde-047fb28ec31c7b7d/build-script-build"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde@1.0.229",
@@ -679,7 +679,7 @@
       "std"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libserde-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libserde-e566342cbf49a6d6.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde@1.0.229",
@@ -711,7 +711,7 @@
     "env": [],
     "linked_libs": [],
     "linked_paths": [],
-    "out_dir": "/tmp/opencode/tools-test/target/debug/build/serde_core-HASH/out",
+    "out_dir": "/tmp/opencode/tools-test/target/debug/build/serde_core-6e545def74310a15/out",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.229",
     "reason": "build-script-executed"
   },
@@ -721,7 +721,7 @@
       "std"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/build/serde_core-HASH/build-script-build"
+      "/tmp/opencode/tools-test/target/debug/build/serde_core-f2ae637853f690ee/build-script-build"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.229",
@@ -754,7 +754,7 @@
       "std"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libserde_core-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libserde_core-c2ece60d1ccba7c9.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.229",
@@ -786,7 +786,7 @@
       "default"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libserde_derive-HASH.so"
+      "/tmp/opencode/tools-test/target/debug/deps/libserde_derive-ff1f26ba90699cc7.so"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_derive-1.0.229/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_derive@1.0.229",
@@ -820,7 +820,7 @@
     "env": [],
     "linked_libs": [],
     "linked_paths": [],
-    "out_dir": "/tmp/opencode/tools-test/target/debug/build/serde_json-HASH/out",
+    "out_dir": "/tmp/opencode/tools-test/target/debug/build/serde_json-1b15c588822affbf/out",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.151",
     "reason": "build-script-executed"
   },
@@ -830,7 +830,7 @@
       "std"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/build/serde_json-HASH/build-script-build"
+      "/tmp/opencode/tools-test/target/debug/build/serde_json-2c0a994303fe8e5c/build-script-build"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.151/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.151",
@@ -863,7 +863,7 @@
       "std"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libserde_json-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libserde_json-dfa7fbe1582cd7ab.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.151/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.151",
@@ -899,8 +899,8 @@
       "proc-macro"
     ],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libsyn-HASH.rlib",
-      "/tmp/opencode/tools-test/target/debug/deps/libsyn-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libsyn-dee893f603239a67.rlib",
+      "/tmp/opencode/tools-test/target/debug/deps/libsyn-dee893f603239a67.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/syn-3.0.3/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#syn@3.0.3",
@@ -930,7 +930,7 @@
   {
     "features": [],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libtime-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libtime-77ccef7832dff4dd.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/time-0.1.45/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#time@0.1.45",
@@ -960,8 +960,8 @@
   {
     "features": [],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libunicode_ident-HASH.rlib",
-      "/tmp/opencode/tools-test/target/debug/deps/libunicode_ident-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libunicode_ident-8443eb632a3fbe4c.rlib",
+      "/tmp/opencode/tools-test/target/debug/deps/libunicode_ident-8443eb632a3fbe4c.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/unicode-ident-1.0.24/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#unicode-ident@1.0.24",
@@ -993,14 +993,14 @@
     "env": [],
     "linked_libs": [],
     "linked_paths": [],
-    "out_dir": "/tmp/opencode/tools-test/target/debug/build/zmij-HASH/out",
+    "out_dir": "/tmp/opencode/tools-test/target/debug/build/zmij-1d41e468114f7fa5/out",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.23",
     "reason": "build-script-executed"
   },
   {
     "features": [],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/build/zmij-HASH/build-script-build"
+      "/tmp/opencode/tools-test/target/debug/build/zmij-37c7a7b83a60607f/build-script-build"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zmij-1.0.23/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.23",
@@ -1030,7 +1030,7 @@
   {
     "features": [],
     "filenames": [
-      "/tmp/opencode/tools-test/target/debug/deps/libzmij-HASH.rmeta"
+      "/tmp/opencode/tools-test/target/debug/deps/libzmij-09764c09118bc5c9.rmeta"
     ],
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zmij-1.0.23/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.23",

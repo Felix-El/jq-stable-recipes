@@ -6,6 +6,13 @@
 # identical: package identity, target kind, features, diagnostic codes, build
 # script configuration, and build result.
 #
+# Determinism contract: two runs are byte-identical iff they were built with
+# the same toolchain (rustc version, target), the same feature set, profile,
+# and RUSTFLAGS, and the same dependency graph. Dependency-version changes are
+# visible through package identity; feature changes through the features list.
+# Artifact hash suffixes encode exactly this configuration and are therefore
+# preserved, not normalized.
+#
 # @env:STRIP_PATHS?:1
 def sort_array($key):
   if (.[$key] | type) == "array" then .[$key] |= sort else . end;
@@ -21,15 +28,10 @@ def normalize_target:
 
 def normalize_message:
   del(.fresh, .executable)
-  | if (.filenames | type) == "array" then
-      .filenames |= (map(gsub("-[0-9a-f]{16}"; "-HASH")) | sort)
-    else . end
   | sort_array("features")
   | sort_array("linked_libs")
   | sort_array("linked_paths")
   | sort_array("cfgs")
-  | if (.env | type) == "array" then .env |= (map(map(if type == "string" then gsub("-[0-9a-f]{16}"; "-HASH") else . end)) | sort_by(.[0])) else . end
-  | if has("out_dir") then .out_dir |= gsub("-[0-9a-f]{16}"; "-HASH") else . end
   | normalize_target;
 
 # Project to meaningful minimum per message type

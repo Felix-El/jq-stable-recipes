@@ -120,8 +120,8 @@
       "default"
     ],
     "filenames": [
-      "/home/user/myworkspace/target/debug/deps/libmylib-HASH.rlib",
-      "/home/user/myworkspace/target/debug/deps/libmylib-HASH.rmeta"
+      "/home/user/myworkspace/target/debug/deps/libmylib-3333333333333333.rlib",
+      "/home/user/myworkspace/target/debug/deps/libmylib-3333333333333333.rmeta"
     ],
     "manifest_path": "/home/user/myworkspace/mylib/Cargo.toml",
     "package_id": "mylib@0.1.0",
@@ -233,8 +233,8 @@
   {
     "features": [],
     "filenames": [
-      "/home/user/myworkspace/target/debug/deps/libmyutil-HASH.rlib",
-      "/home/user/myworkspace/target/debug/deps/libmyutil-HASH.rmeta"
+      "/home/user/myworkspace/target/debug/deps/libmyutil-1111111111111111.rlib",
+      "/home/user/myworkspace/target/debug/deps/libmyutil-1111111111111111.rmeta"
     ],
     "manifest_path": "/home/user/myworkspace/myutil/Cargo.toml",
     "package_id": "myutil@0.1.0",
@@ -273,13 +273,13 @@
       ],
       [
         "OUT_DIR",
-        "/home/user/myworkspace/target/debug/build/serde-HASH/out"
+        "/home/user/myworkspace/target/debug/build/serde-aabbccdd11223344/out"
       ]
     ],
     "linked_libs": [],
     "linked_paths": [],
     "manifest_path": "/home/user/.cargo/registry/src/serde-1.0.193/Cargo.toml",
-    "out_dir": "/home/user/myworkspace/target/debug/build/serde-HASH/out",
+    "out_dir": "/home/user/myworkspace/target/debug/build/serde-aabbccdd11223344/out",
     "package_id": "serde@1.0.193",
     "reason": "build-script-executed"
   },
@@ -289,8 +289,8 @@
       "std"
     ],
     "filenames": [
-      "/home/user/myworkspace/target/debug/deps/libserde-HASH.rlib",
-      "/home/user/myworkspace/target/debug/deps/libserde-HASH.rmeta"
+      "/home/user/myworkspace/target/debug/deps/libserde-be9f3faac0a26ef0.rlib",
+      "/home/user/myworkspace/target/debug/deps/libserde-be9f3faac0a26ef0.rmeta"
     ],
     "manifest_path": "/home/user/.cargo/registry/src/serde-1.0.193/Cargo.toml",
     "package_id": "serde@1.0.193",
