@@ -36,11 +36,11 @@ jq -s -f filters/cargo-audit/normalize.jq cargo-audit.json
 
 - `database.advisory-count` is preserved and may change when the advisory database is updated without new findings in the project.
 - `settings.severity`, `settings.ignore`, `settings.target_arch`, and `settings.target_os` reflect the invocation flags, not the project state, so a different invocation on the same lockfile may produce different output.
-- For a minimal stable fingerprint, use `identity.jq`.
+- For a minimal stable projection, use `identity.jq`.
 
 ## identity.jq
 
-Minimal fingerprint variant. Projects the output down to only the fields needed to determine if two audit runs found the same vulnerabilities: lockfile dependency count, vulnerability found/count flags, and per-vulnerability advisory id, cvss score, package name+version, and affected os list. Suitable as a stable cache key or piped to `sha256sum`.
+Minimal stable projection. Projects the output down to only the fields needed to determine if two audit runs found the same vulnerabilities: lockfile dependency count, vulnerability found/count flags, and per-vulnerability advisory id, cvss score, package name+version, and affected os list. Suitable as a stable cache key or piped to `sha256sum`.
 
 ```
 cargo audit --json 2>/dev/null | jq -s -f filters/cargo-audit/identity.jq

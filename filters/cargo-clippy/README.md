@@ -32,12 +32,12 @@ STRIP_PATHS=1 cargo clippy --message-format json 2>/dev/null | jq -s -f filters/
 ### Limitations
 
 - **`message.rendered` is dropped** — the human-readable diagnostic text is lost; use the structured fields (`message.message`, `message.spans`, `message.children`) for diagnostic detail.
-- **Machine-specific paths are preserved** without `STRIP_PATHS=1`. The fingerprint is stable across rebuilds on the same machine, not across different machines or CI runners.
+- **Machine-specific paths are preserved** without `STRIP_PATHS=1`. The output is stable across rebuilds on the same machine, not across different machines or CI runners.
 - **Lint count depends on rustc/clippy version** — the set of lints fired may differ between toolchain versions even on the same code.
 
 ## identity.jq
 
-Minimal fingerprint variant. Projects each message down to only the fields needed to determine if two clippy runs are semantically identical. Suitable as a stable cache key or piped to `sha256sum`.
+Minimal stable projection. Projects each message down to only the fields needed to determine if two clippy runs are semantically identical. Suitable as a stable cache key or piped to `sha256sum`.
 
 ```
 cargo clippy --message-format json 2>/dev/null | jq -s -f filters/cargo-clippy/identity.jq

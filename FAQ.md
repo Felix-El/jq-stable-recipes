@@ -2,15 +2,17 @@
 
 ## What is this project?
 
-A collection of tested `jq` filters that turn non-deterministic tool output (like `cargo build --message-format json`) into a stable JSON fingerprint. Feed the same logical input to the same filter and you always get byte-for-byte identical output — regardless of machine, run order, or timing.
+A collection of tested `jq` filters that turn non-deterministic tool output (like `cargo build --message-format json`) into stable, canonicalized JSON. Feed the same logical input to the same filter and you always get byte-for-byte identical output — regardless of machine, run order, or timing. Nothing in this repository does fingerprinting: the filters only canonicalize. Fingerprinting the output (hashing it, e.g. `| sha256sum`) is a step you add in your own pipeline — the stable output is exactly what makes that fingerprint reliable.
 
-## Why do I want a stable fingerprint?
+## Why do I want stable output?
 
 Caching and change detection need a stable key. If the key changes on every run, the cache misses every time:
 
 - **CI caching** — only rebuild/re-test when the fingerprint of the build actually changed.
 - **Change detection** — decide if an outcome is "the same" as a previous one without storing the full output.
 - **Reproducible builds** — pin down what a build actually depends on, independent of machine-specific noise.
+
+The filters produce the stable key material: canonical JSON that is byte-for-byte identical for identical logical input. Hashing that JSON into an actual fingerprint (a cache key) is the final step you add yourself, e.g. `| sha256sum`.
 
 ## Why jq? Why not a compiled tool?
 
@@ -69,7 +71,7 @@ cargo build --message-format json 2>/dev/null \
   | sha256sum
 ```
 
-Pipe the fingerprint to `sha256sum` to get a single cache key:
+The filter output is stable JSON; the `sha256sum` step is what turns it into the fingerprint. Pipe the filter output to `sha256sum` to get a single cache key:
 
 ```
 cache_key=$(cargo build --message-format json 2>/dev/null \

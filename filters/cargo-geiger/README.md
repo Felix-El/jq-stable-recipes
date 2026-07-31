@@ -29,11 +29,11 @@ Without `STRIP_PATHS=1` the raw `file://` URL is preserved — the output is sta
 ### Limitations
 
 - **`packages_without_metrics` and `used_but_not_scanned_files`** — both arrays are sorted by string representation as a safe fallback; in practice they are empty for fully-scannable workspaces.
-- **All fields preserved** — including dependency edges and source registry metadata. For a minimal fingerprint, use `identity.jq`.
+- **All fields preserved** — including dependency edges and source registry metadata. For a minimal stable projection, use `identity.jq`.
 
 ## identity.jq
 
-Minimal fingerprint variant. Projects each package down to name, version, `forbids_unsafe`, and the complete unsafety counts (used and unused, all five categories: functions, exprs, item_impls, item_traits, methods). Drops dependency edges (structural metadata, not scan results) and collapses unscanned-file detail to counts. Suitable as a stable cache key or piped to `sha256sum`.
+Minimal stable projection. Projects each package down to name, version, `forbids_unsafe`, and the complete unsafety counts (used and unused, all five categories: functions, exprs, item_impls, item_traits, methods). Drops dependency edges (structural metadata, not scan results) and collapses unscanned-file detail to counts. Suitable as a stable cache key or piped to `sha256sum`.
 
 ```
 cargo geiger --output-format Json | jq -f filters/cargo-geiger/identity.jq
