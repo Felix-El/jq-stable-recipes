@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: MIT
 #
-# Projects cargo clippy --message-format json messages down to the
-# minimum fields needed to determine if two clippy runs are semantically
-# identical: package identity, lint codes and primary source locations,
-# target info, build script configuration, and build result. Drops
-# diagnostic text, span details, profile metadata, artifact paths, and
-# all rendering noise.
+# Generates deterministic output from cargo clippy --message-format json by
+# additionally dropping undeterministic data: diagnostic text, span details,
+# profile metadata, artifact paths, and all rendering noise. Projects each
+# message down to the minimum fields needed to determine if two clippy runs
+# are semantically identical: package identity, lint codes and primary source
+# locations, target info, build script configuration, and build result.
 #
 # @env:STRIP_PATHS?:1
 def sort_array($key):

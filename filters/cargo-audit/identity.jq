@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: MIT
 #
-# Projects cargo-audit JSON to the minimum fields needed to determine
-# whether two audit runs are semantically identical: lockfile dependency
-# count, vulnerability found/count, and per-vulnerability advisory id,
-# cvss, package name+version, and affected os list. No timing, database
-# metadata, descriptions, or warning details are included.
+# Generates deterministic output from cargo-audit JSON by additionally dropping
+# undeterministic data: database metadata, timing, descriptions, and warning
+# details. Projects to the minimum fields needed to determine whether two audit
+# runs are semantically identical: lockfile dependency count, vulnerability
+# found/count, and per-vulnerability advisory id, cvss, package name+version,
+# and affected os list.
 #
 # Works with both raw and -s (slurp) input: single object or [object].
 

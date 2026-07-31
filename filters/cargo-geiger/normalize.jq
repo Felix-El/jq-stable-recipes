@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: MIT
 #
-# Normalizes cargo-geiger --output-format Json output into stable,
-# order-independent JSON. Sorts packages by name then version, sorts
-# all dependency arrays within each package, and recursively sorts
-# object keys. All unsafety metrics (used/unused per category) and
-# the forbids_unsafe flag are preserved unchanged.
+# Generates stable output from cargo-geiger --output-format Json by sorting
+# the variable parts of the JSON fragment: packages by name then version,
+# dependency arrays within each package, and object keys. All unsafety metrics
+# (used/unused per category) and the forbids_unsafe flag are preserved
+# unchanged.
 #
 # Works with both raw and -s (slurp) input: single object or [object].
 #

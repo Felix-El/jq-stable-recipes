@@ -4,7 +4,7 @@ Two filters for [`cargo-audit`](https://github.com/rustsec/rustsec/tree/main/car
 
 ## normalize.jq
 
-Full normalization: produces stable, order-independent JSON from `cargo audit --json` output. Drops non-deterministic database metadata, sorts vulnerability and warning lists, sorts package dependency arrays, sorts advisory sub-arrays, and recursively sorts all object keys. All semantically meaningful fields are preserved.
+Full normalization: generates stable, order-independent output from `cargo audit --json` by sorting the variable parts of the JSON — vulnerability and warning lists, package dependency arrays, advisory sub-arrays, and object keys. Drops non-deterministic database metadata that resists ordering-only treatment. All semantically meaningful fields are preserved.
 
 ```
 cargo audit --json 2>/dev/null | jq -s -f filters/cargo-audit/normalize.jq
@@ -40,7 +40,7 @@ jq -s -f filters/cargo-audit/normalize.jq cargo-audit.json
 
 ## identity.jq
 
-Minimal stable projection. Projects the output down to only the fields needed to determine if two audit runs found the same vulnerabilities: lockfile dependency count, vulnerability found/count flags, and per-vulnerability advisory id, cvss score, package name+version, and affected os list. Suitable as a stable cache key or piped to `sha256sum`.
+Deterministic projection. Does what `normalize.jq` does, and additionally drops undeterministic data (database metadata, invocation settings, advisory prose): only the fields needed to determine if two audit runs found the same vulnerabilities remain — lockfile dependency count, vulnerability found/count flags, and per-vulnerability advisory id, cvss score, package name+version, and affected os list. Suitable as a stable cache key or piped to `sha256sum`.
 
 ```
 cargo audit --json 2>/dev/null | jq -s -f filters/cargo-audit/identity.jq

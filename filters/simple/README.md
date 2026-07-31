@@ -21,9 +21,9 @@ $ jq -f filters/simple/normalize.jq
 {"name":"demo","score":42,"tags":["a","m","z"],"version":3}
 ```
 
-Full normalization: all fields are preserved, but key order is sorted
-alphabetically (at every nesting level) and every array is sorted. Two inputs
-that represent the same data will always produce the same output.
+Stable output: the variable parts of the JSON fragment — key order (at every
+nesting level) and every array — are sorted. All fields are preserved. Two
+inputs that represent the same data will always produce the same output.
 
 ## identity.jq
 
@@ -35,7 +35,7 @@ $ jq -f filters/simple/identity.jq
 {"name":"demo","tags":["a","m","z"],"version":3}
 ```
 
-Minimal stable projection: volatile fields (`score`) are dropped. Only the fields
+Deterministic output: undeterministic fields (`score`) are dropped. Only the fields
 that identify the object (`name`, `version`, `tags`) are kept, with key order
 sorted and `tags` sorted. Two objects that are semantically the same identity
 will produce bit-for-bit identical output.
@@ -44,9 +44,10 @@ will produce bit-for-bit identical output.
 
 | Aspect                      | normalize.jq          | identity.jq            |
 |-----------------------------|-----------------------|------------------------|
+| Goal                        | Stable output         | Deterministic output   |
 | Object key order            | Sorted alphabetically | Sorted alphabetically  |
 | Array order (`tags`)        | Sorted                | Sorted                 |
-| Volatile fields (`score`)   | Preserved             | Dropped                |
+| Undeterministic fields (`score`) | Preserved         | Dropped                |
 
 ### Notes
 

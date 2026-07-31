@@ -20,8 +20,8 @@ jq -f filters/cargo-mutants/normalize.jq target/mutants/outcomes.json
 
 ## What the filters do
 
-Every filter family ships a `normalize.jq` (stable JSON, all fields preserved)
-and an `identity.jq` (minimal stable projection, volatile fields dropped). See
+Every filter family ships a `normalize.jq` (stable output, all fields preserved)
+and an `identity.jq` (deterministic output, undeterministic fields dropped). See
 [`filters/simple/`](filters/simple/) for a tiny teaching example:
 
 ```
@@ -36,35 +36,37 @@ $ echo '{"name": "demo", "version": 3, "tags": ["z", "a", "m"], "score": 42}' \
 # after:  {"name":"demo","tags":["a","m","z"],"version":3}
 ```
 
-`normalize.jq` sorts object keys and arrays — inputs that represent the same
-data always produce identical output. `identity.jq` also drops volatile fields
-(`score`), keeping only what identifies the object. Neither filter hashes
-anything: the output is canonical JSON, and fingerprinting it (e.g. with
-`sha256sum`) is up to the caller.
+`normalize.jq` generates *stable* output: it sorts the variable parts of a
+JSON fragment — object keys and array order — so inputs that represent the
+same data always produce identical output. `identity.jq` generates
+*deterministic* output: it additionally removes undeterministic data (volatile
+fields like `score`), keeping only what identifies the object. Neither filter
+hashes anything: the output is canonical JSON, and fingerprinting it (e.g.
+with `sha256sum`) is up to the caller.
 
 ## Filters
 
 - [**cargo-build**](filters/cargo-build/) — Two filters for `cargo build --message-format json`:
-  - [`normalize.jq`](filters/cargo-build/) — Full normalization: stable JSON, all fields preserved
-  - [`identity.jq`](filters/cargo-build/) — Minimal stable projection: only fields needed to identify if two builds are the same
+  - [`normalize.jq`](filters/cargo-build/) — Stable output: sorts variable parts of the JSON; all fields preserved
+  - [`identity.jq`](filters/cargo-build/) — Deterministic output: drops undeterministic data; keeps only what decides if two builds are the same
 - [**cargo-mutants**](filters/cargo-mutants/) — Two filters for `cargo-mutants outcomes.json`:
-  - [`normalize.jq`](filters/cargo-mutants/) — Full normalization: stable JSON, all meaningful fields preserved
-  - [`identity.jq`](filters/cargo-mutants/) — Minimal stable projection: mutation counts, scenario names, phase pass/fail
+  - [`normalize.jq`](filters/cargo-mutants/) — Stable output: sorts variable parts of the JSON; all meaningful fields preserved
+  - [`identity.jq`](filters/cargo-mutants/) — Deterministic output: drops undeterministic data; keeps mutation counts, scenario names, phase pass/fail
 - [**cargo-audit**](filters/cargo-audit/) — Two filters for `cargo audit --json`:
-  - [`normalize.jq`](filters/cargo-audit/) — Full normalization: stable JSON, all fields preserved
-  - [`identity.jq`](filters/cargo-audit/) — Minimal stable projection: vulnerability list, crate + advisory IDs
+  - [`normalize.jq`](filters/cargo-audit/) — Stable output: sorts variable parts of the JSON; all fields preserved
+  - [`identity.jq`](filters/cargo-audit/) — Deterministic output: drops undeterministic data; keeps vulnerability list, crate + advisory IDs
 - [**cargo-clippy**](filters/cargo-clippy/) — Two filters for `cargo clippy --message-format json`:
-  - [`normalize.jq`](filters/cargo-clippy/) — Full normalization: stable JSON, all fields preserved
-  - [`identity.jq`](filters/cargo-clippy/) — Minimal stable projection: lints by package, code, and location
+  - [`normalize.jq`](filters/cargo-clippy/) — Stable output: sorts variable parts of the JSON; all fields preserved
+  - [`identity.jq`](filters/cargo-clippy/) — Deterministic output: drops undeterministic data; keeps lints by package, code, and location
 - [**cargo-deny**](filters/cargo-deny/) — Two filters for `cargo deny check --format json` (diagnostic events on stderr):
-  - [`normalize.jq`](filters/cargo-deny/) — Full normalization: stable JSON, all fields preserved
-  - [`identity.jq`](filters/cargo-deny/) — Minimal stable projection: advisories/bans/licenses by crate
+  - [`normalize.jq`](filters/cargo-deny/) — Stable output: sorts variable parts of the JSON; all fields preserved
+  - [`identity.jq`](filters/cargo-deny/) — Deterministic output: drops undeterministic data; keeps advisories/bans/licenses by crate
 - [**cargo-geiger**](filters/cargo-geiger/) — Two filters for `cargo geiger --output-format Json`:
-  - [`normalize.jq`](filters/cargo-geiger/) — Full normalization: stable JSON, all unsafety metrics preserved
-  - [`identity.jq`](filters/cargo-geiger/) — Minimal stable projection: per-crate unsafe counts, forbids_unsafe flag
+  - [`normalize.jq`](filters/cargo-geiger/) — Stable output: sorts variable parts of the JSON; all unsafety metrics preserved
+  - [`identity.jq`](filters/cargo-geiger/) — Deterministic output: drops undeterministic data; keeps per-crate unsafe counts, forbids_unsafe flag
 - [**simple**](filters/simple/) — Teaching showcase, not a real tool: demonstrates `normalize` vs `identity` on one tiny JSON object:
-  - [`normalize.jq`](filters/simple/) — Sorts object keys and arrays; all fields preserved
-  - [`identity.jq`](filters/simple/) — Drops volatile fields (`score`); keeps only identifying fields
+  - [`normalize.jq`](filters/simple/) — Stable output: sorts variable parts (object keys, arrays); all fields preserved
+  - [`identity.jq`](filters/simple/) — Deterministic output: drops undeterministic fields (`score`); keeps only identifying fields
 
 Each filter directory has its own README with detailed documentation and known limitations.
 

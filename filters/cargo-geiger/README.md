@@ -4,7 +4,7 @@ Two filters for [`cargo-geiger`](https://github.com/rust-secure-code/cargo-geige
 
 ## normalize.jq
 
-Full normalization: produces stable, order-independent JSON from unsafe-code audit output. Sorts packages by name then version, sorts all dependency arrays within each package, and recursively sorts object keys. All unsafety metrics and the `forbids_unsafe` flag are preserved unchanged.
+Full normalization: generates stable, order-independent output from unsafe-code audit output by sorting the variable parts of the JSON — packages by name then version, dependency arrays within each package, and object keys. All unsafety metrics and the `forbids_unsafe` flag are preserved unchanged.
 
 ```
 cargo geiger --output-format Json | jq -f filters/cargo-geiger/normalize.jq
@@ -33,7 +33,7 @@ Without `STRIP_PATHS=1` the raw `file://` URL is preserved — the output is sta
 
 ## identity.jq
 
-Minimal stable projection. Projects each package down to name, version, `forbids_unsafe`, and the complete unsafety counts (used and unused, all five categories: functions, exprs, item_impls, item_traits, methods). Drops dependency edges (structural metadata, not scan results) and collapses unscanned-file detail to counts. Suitable as a stable cache key or piped to `sha256sum`.
+Deterministic projection. Does what `normalize.jq` does, and additionally drops undeterministic data (dependency edges, source registry metadata, exact unscanned-file lists): per package, only name, version, `forbids_unsafe`, and the complete unsafety counts (used and unused, all five categories: functions, exprs, item_impls, item_traits, methods) remain. Unscanned-file detail is collapsed to counts. Suitable as a stable cache key or piped to `sha256sum`.
 
 ```
 cargo geiger --output-format Json | jq -f filters/cargo-geiger/identity.jq

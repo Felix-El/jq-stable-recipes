@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
 #
-# Normalizes cargo-mutants outcomes.json into stable, order-independent
-# JSON. Sorts outcomes and phase results for consistent ordering,
-# optionally strips absolute paths to basenames. All fields preserved.
+# Generates stable output from cargo-mutants outcomes.json by sorting the
+# variable parts of the JSON fragment: outcome order and phase result order.
+# Optionally strips absolute paths to basenames. All fields preserved.
 #
 # Works with both raw and -s (slurp) input: single object or [object].
 #

@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: MIT
 #
-# Projects cargo-mutants outcomes.json down to the minimum fields
-# needed to determine if two mutation test runs are semantically
-# identical: mutation counts, scenario names, per-scenario summary
-# statuses, and phase-level pass/fail — no timing, paths, or
-# environment-specific data.
+# Generates deterministic output from cargo-mutants outcomes.json by
+# additionally dropping undeterministic data: timing, paths, and
+# environment-specific data. Projects to the minimum fields needed to
+# determine if two mutation test runs are semantically identical: mutation
+# counts, scenario names, per-scenario summary statuses, and phase-level
+# pass/fail.
 #
 # Works with both raw and -s (slurp) input: single object or [object].
 #

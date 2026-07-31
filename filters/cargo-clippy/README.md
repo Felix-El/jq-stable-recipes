@@ -4,7 +4,7 @@ Two filters for `cargo clippy --message-format json` output, at different levels
 
 ## normalize.jq
 
-Full normalization: produces stable JSON from non-deterministic clippy output. Keeps all fields (except `message.rendered`), but normalizes order, hashes, byte offsets, and removes caching noise.
+Full normalization: generates stable output from non-deterministic clippy output by sorting the variable parts of the JSON — message order, span order, array order, and object keys. Keeps all fields (except `message.rendered`), and additionally normalizes hashes, byte offsets, and caching noise.
 
 ```
 cargo clippy --message-format json 2>/dev/null | jq -s -f filters/cargo-clippy/normalize.jq
@@ -37,7 +37,7 @@ STRIP_PATHS=1 cargo clippy --message-format json 2>/dev/null | jq -s -f filters/
 
 ## identity.jq
 
-Minimal stable projection. Projects each message down to only the fields needed to determine if two clippy runs are semantically identical. Suitable as a stable cache key or piped to `sha256sum`.
+Deterministic projection. Does what `normalize.jq` does, and additionally drops undeterministic data (rendered diagnostics, byte offsets, paths): only the fields needed to determine if two clippy runs are semantically identical remain. Suitable as a stable cache key or piped to `sha256sum`.
 
 ```
 cargo clippy --message-format json 2>/dev/null | jq -s -f filters/cargo-clippy/identity.jq

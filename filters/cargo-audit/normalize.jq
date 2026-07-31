@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: MIT
 #
-# Normalizes cargo-audit JSON output into stable, order-independent JSON.
-# Drops non-deterministic database metadata (last-commit, last-updated).
+# Generates stable output from cargo-audit JSON by sorting the variable parts
+# of the JSON fragment: vulnerability and warning lists, dependency arrays,
+# advisory sub-arrays, and object keys. Drops non-deterministic database
+# metadata (last-commit, last-updated) that resists ordering-only treatment.
 # Sorts the vulnerability list and each warning category array by advisory.id;
 # sorts package dependency arrays by name; sorts advisory sub-arrays (aliases,
 # categories, keywords, related, references) and affected os/arch arrays;

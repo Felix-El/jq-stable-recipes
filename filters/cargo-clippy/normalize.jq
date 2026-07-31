@@ -1,12 +1,11 @@
 # SPDX-License-Identifier: MIT
 #
-# Normalizes cargo clippy --message-format json NDJSON into stable,
-# order-independent JSON. Handles message reordering from parallel
-# compilation, hash suffixes in artifact filenames, non-deterministic
-# byte offsets in diagnostic spans, volatile colored rendered text
-# (dropped), and caching state. All fields are preserved except
-# message.rendered (dropped: contains color codes and machine-specific
-# absolute paths that resist normalization).
+# Generates stable output from cargo clippy --message-format json NDJSON by
+# sorting the variable parts of the JSON fragment: message order, span order,
+# array order, and object keys. Also normalizes hash suffixes in artifact
+# filenames, non-deterministic byte offsets in diagnostic spans, and caching
+# state. All fields are preserved except message.rendered (dropped: contains
+# color codes and machine-specific absolute paths that resist sorting).
 #
 # @env:STRIP_PATHS?:1
 def sort_array($key):

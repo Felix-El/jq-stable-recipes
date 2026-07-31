@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: MIT
 #
-# Projects cargo build --message-format json messages down to the
-# minimum fields needed to determine if two builds are semantically
-# identical: package identity, target kind, features, diagnostic
-# codes, build script configuration, and build result.
+# Generates deterministic output from cargo build --message-format json by
+# additionally dropping undeterministic data. Projects each message down to
+# the minimum fields needed to determine if two builds are semantically
+# identical: package identity, target kind, features, diagnostic codes, build
+# script configuration, and build result.
 #
 # @env:STRIP_PATHS?:1
 def sort_array($key):

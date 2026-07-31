@@ -33,12 +33,12 @@ Stable means: **given the same logical input, the output is byte-for-byte identi
 
 ## What's the difference between `normalize.jq` and `identity.jq`?
 
-Every filter directory ships two variants:
+Every filter directory ships two variants that aim at two different guarantees:
 
-- **`normalize.jq`** — *full* normalization. Preserves all meaningful fields, just made deterministic. Good when you want to compare complete results or store a faithful snapshot.
-- **`identity.jq`** — *minimal* fingerprint. Projects each record down to only the fields needed to decide "is this the same build/outcome as before?". Smaller, faster, and ideal as a cache key.
+- **`normalize.jq`** — *stable* output. Sorts the variable parts of a JSON fragment (object key order, array order) so the same logical input always yields byte-for-byte identical output. All meaningful fields are preserved. Good when you want to compare complete results or store a faithful snapshot.
+- **`identity.jq`** — *deterministic* output. Does what `normalize` does, and additionally removes undeterministic data (timestamps, timing, hashes, machine-specific paths, volatile fields). Only the fields needed to decide "is this the same build/outcome as before?" remain. Smaller, faster, and ideal as a cache key.
 
-Use `identity` when you only care about *sameness*; use `normalize` when you care about the *content*.
+Use `identity` when the input contains data that can never be reproduced and you only care about *sameness*; use `normalize` when you care about the *content*.
 
 ## Why does the command use `-s` (slurp)?
 
