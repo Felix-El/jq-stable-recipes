@@ -1,6 +1,0 @@
-{
-  "default": {
-    "env": {},
-    "expected": "output-normalize/output.default.json"
-  }
-}
