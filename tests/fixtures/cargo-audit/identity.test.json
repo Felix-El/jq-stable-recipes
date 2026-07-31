@@ -1,0 +1,5 @@
+{
+  "default": {
+    "expected": "output-identity/output.default.json"
+  }
+}

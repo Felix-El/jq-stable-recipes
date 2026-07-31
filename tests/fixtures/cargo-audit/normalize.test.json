@@ -1,0 +1,5 @@
+{
+  "default": {
+    "expected": "output-normalize/output.default.json"
+  }
+}
