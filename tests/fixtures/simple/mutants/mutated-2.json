@@ -1,1 +1,10 @@
-{"tags": ["a", "z", "m"], "name": "demo", "score": 42, "version": 3}
+{
+  "tags": [
+    "a",
+    "z",
+    "m"
+  ],
+  "name": "demo",
+  "score": 42,
+  "version": 3
+}

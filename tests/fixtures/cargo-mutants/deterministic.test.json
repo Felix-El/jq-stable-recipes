@@ -1,10 +1,14 @@
 {
   "strip_paths_null": {
-    "env": { "STRIP_PATHS": null },
+    "env": {
+      "STRIP_PATHS": null
+    },
     "expected": "output-deterministic/output.strip_paths_null.json"
   },
   "strip_paths": {
-    "env": { "STRIP_PATHS": "1" },
+    "env": {
+      "STRIP_PATHS": "1"
+    },
     "expected": "output-deterministic/output.strip_paths.json"
   }
 }
