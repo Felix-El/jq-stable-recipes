@@ -15,6 +15,11 @@ jobs:
 
       - name: Install just
         uses: extractions/setup-just@v2
+        with:
+          version: 1.45.0
+
+      - name: Check justfile formatting
+        run: just --unstable --fmt --check
 
       - name: Run tests
         run: just test
