@@ -1,0 +1,937 @@
+{
+  "packages": [
+    {
+      "forbids_unsafe": false,
+      "name": "aho-corasick",
+      "unused": {
+        "exprs": {
+          "safe": 556,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 3,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 5,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 18,
+          "unsafe_": 0
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 5361,
+          "unsafe_": 997
+        },
+        "functions": {
+          "safe": 24,
+          "unsafe_": 8
+        },
+        "item_impls": {
+          "safe": 169,
+          "unsafe_": 5
+        },
+        "item_traits": {
+          "safe": 18,
+          "unsafe_": 1
+        },
+        "methods": {
+          "safe": 500,
+          "unsafe_": 86
+        }
+      },
+      "version": "1.1.4"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "atty",
+      "unused": {
+        "exprs": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 1,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 0,
+          "unsafe_": 0
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 14,
+          "unsafe_": 52
+        },
+        "functions": {
+          "safe": 3,
+          "unsafe_": 2
+        },
+        "item_impls": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 0,
+          "unsafe_": 0
+        }
+      },
+      "version": "0.2.2"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "itoa",
+      "unused": {
+        "exprs": {
+          "safe": 33,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 2,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 0,
+          "unsafe_": 0
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 125,
+          "unsafe_": 145
+        },
+        "functions": {
+          "safe": 4,
+          "unsafe_": 1
+        },
+        "item_impls": {
+          "safe": 5,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 3,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 5,
+          "unsafe_": 0
+        }
+      },
+      "version": "1.0.18"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "libc",
+      "unused": {
+        "exprs": {
+          "safe": 5393,
+          "unsafe_": 703
+        },
+        "functions": {
+          "safe": 47,
+          "unsafe_": 93
+        },
+        "item_impls": {
+          "safe": 43,
+          "unsafe_": 8
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 12,
+          "unsafe_": 93
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 630,
+          "unsafe_": 35
+        },
+        "functions": {
+          "safe": 12,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 8,
+          "unsafe_": 2
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 5,
+          "unsafe_": 8
+        }
+      },
+      "version": "0.2.189"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "memchr",
+      "unused": {
+        "exprs": {
+          "safe": 802,
+          "unsafe_": 448
+        },
+        "functions": {
+          "safe": 15,
+          "unsafe_": 14
+        },
+        "item_impls": {
+          "safe": 34,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 87,
+          "unsafe_": 38
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 1487,
+          "unsafe_": 1992
+        },
+        "functions": {
+          "safe": 23,
+          "unsafe_": 34
+        },
+        "item_impls": {
+          "safe": 96,
+          "unsafe_": 2
+        },
+        "item_traits": {
+          "safe": 5,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 238,
+          "unsafe_": 110
+        }
+      },
+      "version": "2.8.3"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "proc-macro2",
+      "unused": {
+        "exprs": {
+          "safe": 414,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 29,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 15,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 2,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 26,
+          "unsafe_": 0
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 2989,
+          "unsafe_": 14
+        },
+        "functions": {
+          "safe": 71,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 132,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 1,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 312,
+          "unsafe_": 3
+        }
+      },
+      "version": "1.0.107"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "quote",
+      "unused": {
+        "exprs": {
+          "safe": 5,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 7,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 1,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 1,
+          "unsafe_": 0
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 286,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 18,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 73,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 10,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 74,
+          "unsafe_": 0
+        }
+      },
+      "version": "1.0.47"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "regex",
+      "unused": {
+        "exprs": {
+          "safe": 391,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 11,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 1,
+          "unsafe_": 1
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 4,
+          "unsafe_": 0
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 1323,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 6,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 120,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 2,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 302,
+          "unsafe_": 0
+        }
+      },
+      "version": "1.13.1"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "regex-automata",
+      "unused": {
+        "exprs": {
+          "safe": 7642,
+          "unsafe_": 555
+        },
+        "functions": {
+          "safe": 56,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 86,
+          "unsafe_": 3
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 1
+        },
+        "methods": {
+          "safe": 420,
+          "unsafe_": 10
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 15736,
+          "unsafe_": 83
+        },
+        "functions": {
+          "safe": 142,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 383,
+          "unsafe_": 4
+        },
+        "item_traits": {
+          "safe": 12,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 1477,
+          "unsafe_": 1
+        }
+      },
+      "version": "0.4.16"
+    },
+    {
+      "forbids_unsafe": true,
+      "name": "regex-syntax",
+      "unused": {
+        "exprs": {
+          "safe": 133,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 7,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 0,
+          "unsafe_": 0
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 48079,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 78,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 143,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 4,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 566,
+          "unsafe_": 0
+        }
+      },
+      "version": "0.8.11"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "serde",
+      "unused": {
+        "exprs": {
+          "safe": 1575,
+          "unsafe_": 5
+        },
+        "functions": {
+          "safe": 12,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 230,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 22,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 368,
+          "unsafe_": 0
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 1777,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 13,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 100,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 1,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 374,
+          "unsafe_": 0
+        }
+      },
+      "version": "1.0.229"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "serde_core",
+      "unused": {
+        "exprs": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 1,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 0,
+          "unsafe_": 0
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 1575,
+          "unsafe_": 5
+        },
+        "functions": {
+          "safe": 12,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 230,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 21,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 368,
+          "unsafe_": 0
+        }
+      },
+      "version": "1.0.229"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "serde_derive",
+      "unused": {
+        "exprs": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 0,
+          "unsafe_": 0
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 5946,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 152,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 49,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 141,
+          "unsafe_": 0
+        }
+      },
+      "version": "1.0.229"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "serde_json",
+      "unused": {
+        "exprs": {
+          "safe": 1657,
+          "unsafe_": 5
+        },
+        "functions": {
+          "safe": 109,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 46,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 11,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 123,
+          "unsafe_": 1
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 4705,
+          "unsafe_": 75
+        },
+        "functions": {
+          "safe": 51,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 191,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 6,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 762,
+          "unsafe_": 0
+        }
+      },
+      "version": "1.0.151"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "syn",
+      "unused": {
+        "exprs": {
+          "safe": 26701,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 656,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 1425,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 5,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 1263,
+          "unsafe_": 0
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 12706,
+          "unsafe_": 88
+        },
+        "functions": {
+          "safe": 174,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 714,
+          "unsafe_": 3
+        },
+        "item_traits": {
+          "safe": 22,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 859,
+          "unsafe_": 2
+        }
+      },
+      "version": "3.0.3"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "time",
+      "unused": {
+        "exprs": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 0,
+          "unsafe_": 0
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 1932,
+          "unsafe_": 204
+        },
+        "functions": {
+          "safe": 85,
+          "unsafe_": 1
+        },
+        "item_impls": {
+          "safe": 59,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 93,
+          "unsafe_": 0
+        }
+      },
+      "version": "0.1.45"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "tools-test",
+      "unused": {
+        "exprs": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 0,
+          "unsafe_": 0
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 15,
+          "unsafe_": 2
+        },
+        "functions": {
+          "safe": 1,
+          "unsafe_": 1
+        },
+        "item_impls": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 0,
+          "unsafe_": 0
+        }
+      },
+      "version": "0.1.0"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "unicode-ident",
+      "unused": {
+        "exprs": {
+          "safe": 1670,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 10,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 0,
+          "unsafe_": 0
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 63,
+          "unsafe_": 4
+        },
+        "functions": {
+          "safe": 2,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 0,
+          "unsafe_": 0
+        }
+      },
+      "version": "1.0.24"
+    },
+    {
+      "forbids_unsafe": false,
+      "name": "zmij",
+      "unused": {
+        "exprs": {
+          "safe": 70,
+          "unsafe_": 0
+        },
+        "functions": {
+          "safe": 4,
+          "unsafe_": 0
+        },
+        "item_impls": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 0,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 0,
+          "unsafe_": 0
+        }
+      },
+      "used": {
+        "exprs": {
+          "safe": 915,
+          "unsafe_": 620
+        },
+        "functions": {
+          "safe": 23,
+          "unsafe_": 3
+        },
+        "item_impls": {
+          "safe": 18,
+          "unsafe_": 0
+        },
+        "item_traits": {
+          "safe": 5,
+          "unsafe_": 0
+        },
+        "methods": {
+          "safe": 24,
+          "unsafe_": 6
+        }
+      },
+      "version": "1.0.23"
+    }
+  ],
+  "packages_without_metrics_count": 0,
+  "used_but_not_scanned_files_count": 0
+}
