@@ -1,0 +1,1521 @@
+{
+  "packages": [
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [
+          {
+            "name": "memchr",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "2.8.3"
+          }
+        ],
+        "dev_dependencies": [],
+        "id": {
+          "name": "aho-corasick",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "1.1.4"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 556,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 3,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 5,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 18,
+            "unsafe_": 0
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 5361,
+            "unsafe_": 997
+          },
+          "functions": {
+            "safe": 24,
+            "unsafe_": 8
+          },
+          "item_impls": {
+            "safe": 169,
+            "unsafe_": 5
+          },
+          "item_traits": {
+            "safe": 18,
+            "unsafe_": 1
+          },
+          "methods": {
+            "safe": 500,
+            "unsafe_": 86
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [
+          {
+            "name": "libc",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "0.2.189"
+          }
+        ],
+        "dev_dependencies": [],
+        "id": {
+          "name": "atty",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "0.2.2"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 1,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 0,
+            "unsafe_": 0
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 14,
+            "unsafe_": 52
+          },
+          "functions": {
+            "safe": 3,
+            "unsafe_": 2
+          },
+          "item_impls": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 0,
+            "unsafe_": 0
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [],
+        "dev_dependencies": [],
+        "id": {
+          "name": "itoa",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "1.0.18"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 33,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 2,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 0,
+            "unsafe_": 0
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 125,
+            "unsafe_": 145
+          },
+          "functions": {
+            "safe": 4,
+            "unsafe_": 1
+          },
+          "item_impls": {
+            "safe": 5,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 3,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 5,
+            "unsafe_": 0
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [],
+        "dev_dependencies": [],
+        "id": {
+          "name": "libc",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "0.2.189"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 5393,
+            "unsafe_": 703
+          },
+          "functions": {
+            "safe": 47,
+            "unsafe_": 93
+          },
+          "item_impls": {
+            "safe": 43,
+            "unsafe_": 8
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 12,
+            "unsafe_": 93
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 630,
+            "unsafe_": 35
+          },
+          "functions": {
+            "safe": 12,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 8,
+            "unsafe_": 2
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 5,
+            "unsafe_": 8
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [],
+        "dev_dependencies": [],
+        "id": {
+          "name": "memchr",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "2.8.3"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 802,
+            "unsafe_": 448
+          },
+          "functions": {
+            "safe": 15,
+            "unsafe_": 14
+          },
+          "item_impls": {
+            "safe": 34,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 87,
+            "unsafe_": 38
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 1487,
+            "unsafe_": 1992
+          },
+          "functions": {
+            "safe": 23,
+            "unsafe_": 34
+          },
+          "item_impls": {
+            "safe": 96,
+            "unsafe_": 2
+          },
+          "item_traits": {
+            "safe": 5,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 238,
+            "unsafe_": 110
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [
+          {
+            "name": "unicode-ident",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.0.24"
+          }
+        ],
+        "dev_dependencies": [],
+        "id": {
+          "name": "proc-macro2",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "1.0.107"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 414,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 29,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 15,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 2,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 26,
+            "unsafe_": 0
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 2989,
+            "unsafe_": 14
+          },
+          "functions": {
+            "safe": 71,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 132,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 1,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 312,
+            "unsafe_": 3
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [
+          {
+            "name": "proc-macro2",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.0.107"
+          }
+        ],
+        "dev_dependencies": [],
+        "id": {
+          "name": "quote",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "1.0.47"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 5,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 7,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 1,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 1,
+            "unsafe_": 0
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 286,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 18,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 73,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 10,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 74,
+            "unsafe_": 0
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [
+          {
+            "name": "aho-corasick",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.1.4"
+          },
+          {
+            "name": "memchr",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "2.8.3"
+          },
+          {
+            "name": "regex-automata",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "0.4.16"
+          },
+          {
+            "name": "regex-syntax",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "0.8.11"
+          }
+        ],
+        "dev_dependencies": [],
+        "id": {
+          "name": "regex",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "1.13.1"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 391,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 11,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 1,
+            "unsafe_": 1
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 4,
+            "unsafe_": 0
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 1323,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 6,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 120,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 2,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 302,
+            "unsafe_": 0
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [
+          {
+            "name": "aho-corasick",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.1.4"
+          },
+          {
+            "name": "memchr",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "2.8.3"
+          },
+          {
+            "name": "regex-syntax",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "0.8.11"
+          }
+        ],
+        "dev_dependencies": [],
+        "id": {
+          "name": "regex-automata",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "0.4.16"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 7642,
+            "unsafe_": 555
+          },
+          "functions": {
+            "safe": 56,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 86,
+            "unsafe_": 3
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 1
+          },
+          "methods": {
+            "safe": 420,
+            "unsafe_": 10
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 15736,
+            "unsafe_": 83
+          },
+          "functions": {
+            "safe": 142,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 383,
+            "unsafe_": 4
+          },
+          "item_traits": {
+            "safe": 12,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 1477,
+            "unsafe_": 1
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [],
+        "dev_dependencies": [],
+        "id": {
+          "name": "regex-syntax",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "0.8.11"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": true,
+        "unused": {
+          "exprs": {
+            "safe": 133,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 7,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 0,
+            "unsafe_": 0
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 48079,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 78,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 143,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 4,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 566,
+            "unsafe_": 0
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [
+          {
+            "name": "serde_core",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.0.229"
+          },
+          {
+            "name": "serde_derive",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.0.229"
+          }
+        ],
+        "dev_dependencies": [],
+        "id": {
+          "name": "serde",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "1.0.229"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 1575,
+            "unsafe_": 5
+          },
+          "functions": {
+            "safe": 12,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 230,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 22,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 368,
+            "unsafe_": 0
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 1777,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 13,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 100,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 1,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 374,
+            "unsafe_": 0
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [],
+        "dev_dependencies": [],
+        "id": {
+          "name": "serde_core",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "1.0.229"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 1,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 0,
+            "unsafe_": 0
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 1575,
+            "unsafe_": 5
+          },
+          "functions": {
+            "safe": 12,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 230,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 21,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 368,
+            "unsafe_": 0
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [
+          {
+            "name": "proc-macro2",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.0.107"
+          },
+          {
+            "name": "quote",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.0.47"
+          },
+          {
+            "name": "syn",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "3.0.3"
+          }
+        ],
+        "dev_dependencies": [],
+        "id": {
+          "name": "serde_derive",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "1.0.229"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 0,
+            "unsafe_": 0
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 5946,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 152,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 49,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 141,
+            "unsafe_": 0
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [
+          {
+            "name": "itoa",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.0.18"
+          },
+          {
+            "name": "memchr",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "2.8.3"
+          },
+          {
+            "name": "serde_core",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.0.229"
+          },
+          {
+            "name": "zmij",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.0.23"
+          }
+        ],
+        "dev_dependencies": [],
+        "id": {
+          "name": "serde_json",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "1.0.151"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 1657,
+            "unsafe_": 5
+          },
+          "functions": {
+            "safe": 109,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 46,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 11,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 123,
+            "unsafe_": 1
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 4705,
+            "unsafe_": 75
+          },
+          "functions": {
+            "safe": 51,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 191,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 6,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 762,
+            "unsafe_": 0
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [
+          {
+            "name": "proc-macro2",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.0.107"
+          },
+          {
+            "name": "quote",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.0.47"
+          },
+          {
+            "name": "unicode-ident",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.0.24"
+          }
+        ],
+        "dev_dependencies": [],
+        "id": {
+          "name": "syn",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "3.0.3"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 26701,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 656,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 1425,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 5,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 1263,
+            "unsafe_": 0
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 12706,
+            "unsafe_": 88
+          },
+          "functions": {
+            "safe": 174,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 714,
+            "unsafe_": 3
+          },
+          "item_traits": {
+            "safe": 22,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 859,
+            "unsafe_": 2
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [
+          {
+            "name": "libc",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "0.2.189"
+          }
+        ],
+        "dev_dependencies": [],
+        "id": {
+          "name": "time",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "0.1.45"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 0,
+            "unsafe_": 0
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 1932,
+            "unsafe_": 204
+          },
+          "functions": {
+            "safe": 85,
+            "unsafe_": 1
+          },
+          "item_impls": {
+            "safe": 59,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 93,
+            "unsafe_": 0
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [
+          {
+            "name": "atty",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "0.2.2"
+          },
+          {
+            "name": "regex",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.13.1"
+          },
+          {
+            "name": "serde",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.0.229"
+          },
+          {
+            "name": "serde_json",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "1.0.151"
+          },
+          {
+            "name": "time",
+            "source": {
+              "Registry": {
+                "name": "crates.io",
+                "url": "https://github.com/rust-lang/crates.io-index"
+              }
+            },
+            "version": "0.1.45"
+          }
+        ],
+        "dev_dependencies": [],
+        "id": {
+          "name": "tools-test",
+          "source": {
+            "Path": "tools-test%230.1."
+          },
+          "version": "0.1.0"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 0,
+            "unsafe_": 0
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 15,
+            "unsafe_": 2
+          },
+          "functions": {
+            "safe": 1,
+            "unsafe_": 1
+          },
+          "item_impls": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 0,
+            "unsafe_": 0
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [],
+        "dev_dependencies": [],
+        "id": {
+          "name": "unicode-ident",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "1.0.24"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 1670,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 10,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 0,
+            "unsafe_": 0
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 63,
+            "unsafe_": 4
+          },
+          "functions": {
+            "safe": 2,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 0,
+            "unsafe_": 0
+          }
+        }
+      }
+    },
+    {
+      "package": {
+        "build_dependencies": [],
+        "dependencies": [],
+        "dev_dependencies": [],
+        "id": {
+          "name": "zmij",
+          "source": {
+            "Registry": {
+              "name": "crates.io",
+              "url": "https://github.com/rust-lang/crates.io-index"
+            }
+          },
+          "version": "1.0.23"
+        }
+      },
+      "unsafety": {
+        "forbids_unsafe": false,
+        "unused": {
+          "exprs": {
+            "safe": 70,
+            "unsafe_": 0
+          },
+          "functions": {
+            "safe": 4,
+            "unsafe_": 0
+          },
+          "item_impls": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 0,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 0,
+            "unsafe_": 0
+          }
+        },
+        "used": {
+          "exprs": {
+            "safe": 915,
+            "unsafe_": 620
+          },
+          "functions": {
+            "safe": 23,
+            "unsafe_": 3
+          },
+          "item_impls": {
+            "safe": 18,
+            "unsafe_": 0
+          },
+          "item_traits": {
+            "safe": 5,
+            "unsafe_": 0
+          },
+          "methods": {
+            "safe": 24,
+            "unsafe_": 6
+          }
+        }
+      }
+    }
+  ],
+  "packages_without_metrics": [],
+  "used_but_not_scanned_files": []
+}
