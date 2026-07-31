@@ -12,6 +12,37 @@ FIXTURE_DIR="$ROOT/tests/fixtures"
 exit_code=0
 
 # ----------------------------------------------------------------
+# Argument parsing: tests/run-tests.sh [family] [filter]
+#   no args  → run every family and every filter (current behavior)
+#   1 arg    → only filters/<family>/ (e.g. cargo-audit)
+#   2 args   → only filters/<family>/<filter>.jq (filter = basename
+#              without .jq, e.g. stable)
+# If the requested family/filter does not exist, or zero tests run,
+# exit non-zero with a clear message — never silently pass.
+# ----------------------------------------------------------------
+FAMILY_FILTER=""
+FILTER_FILTER=""
+if [ $# -gt 2 ]; then
+  echo "ERROR: too many arguments. Usage: $0 [family] [filter]" >&2
+  exit 2
+fi
+if [ $# -ge 1 ]; then
+  FAMILY_FILTER="$1"
+  if [ ! -d "$FILTER_DIR/$FAMILY_FILTER" ]; then
+    echo "ERROR: family '$FAMILY_FILTER' not found at $FILTER_DIR/$FAMILY_FILTER" >&2
+    exit 1
+  fi
+fi
+if [ $# -ge 2 ]; then
+  FILTER_FILTER="$2"
+  if [ ! -f "$FILTER_DIR/$FAMILY_FILTER/$FILTER_FILTER.jq" ]; then
+    echo "ERROR: filter '$FAMILY_FILTER/$FILTER_FILTER' not found at $FILTER_DIR/$FAMILY_FILTER/$FILTER_FILTER.jq" >&2
+    exit 1
+  fi
+fi
+tests_run=0
+
+# ----------------------------------------------------------------
 # Parse @env: declarations from .jq header
 #   # @env:VAR:values       — VAR is required
 #   # @env:VAR?:values      — VAR is optional, null/unset is valid
@@ -208,6 +239,12 @@ validate_coverage() {
 for filter_dir in "$FILTER_DIR"/*/; do
   [ -d "$filter_dir" ] || continue
   dir_name="$(basename "$filter_dir")"
+
+  # Family filter: when a family is requested, skip all others silently.
+  if [ -n "$FAMILY_FILTER" ] && [ "$dir_name" != "$FAMILY_FILTER" ]; then
+    continue
+  fi
+
   fixture_base="$FIXTURE_DIR/$dir_name"
 
   if [ ! -d "$fixture_base" ]; then
@@ -218,6 +255,13 @@ for filter_dir in "$FILTER_DIR"/*/; do
   for filter_file in "$filter_dir"/*.jq; do
     [ -f "$filter_file" ] || continue
     filter_name="$(basename "$filter_file" .jq)"
+
+    # Filter filter: when a specific filter is requested, skip all others.
+    if [ -n "$FILTER_FILTER" ] && [ "$filter_name" != "$FILTER_FILTER" ]; then
+      continue
+    fi
+    tests_run=$((tests_run + 1))
+
     label_base="$dir_name/$filter_name"
 
     # Parse @env: declarations from header
@@ -258,5 +302,12 @@ for filter_dir in "$FILTER_DIR"/*/; do
     fi
   done
 done
+
+# When a family/filter was explicitly requested, zero tests run means the
+# request matched nothing runnable (e.g. family has no fixtures) — fail loudly.
+if [ $# -gt 0 ] && [ "$tests_run" -eq 0 ]; then
+  echo "ERROR: no tests ran for '$FAMILY_FILTER${FILTER_FILTER:+/$FILTER_FILTER}'" >&2
+  exit 1
+fi
 
 exit $exit_code
