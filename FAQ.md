@@ -2,7 +2,7 @@
 
 ## What is this project?
 
-A collection of tested `jq` filters that turn non-deterministic tool output (like `cargo build --message-format json`) into stable, canonicalized JSON. Feed the same logical input to the same filter and you always get byte-for-byte identical output — under the filter-specific conditions described in each filter family's README (for cargo filters: same toolchain, feature set, profile, RUSTFLAGS, and dependency graph; run order and timing never matter). Nothing in this repository does fingerprinting: the filters only canonicalize. Fingerprinting the output (hashing it, e.g. `| sha256sum`) is a step you add in your own pipeline — the stable output is exactly what makes that fingerprint reliable.
+A collection of tested `jq` filters that turn non-deterministic tool output (like `cargo build --message-format json`) into stable, canonicalized JSON. Feed the same logical input to the same filter and you always get byte-for-byte identical output — under the filter-specific conditions described in each filter family's README (for cargo filters: same toolchain, feature set, profile, RUSTFLAGS, and dependency graph; run order never matters, and timing never matters for `deterministic.jq`, which drops timestamp/timing fields). Nothing in this repository does fingerprinting: the filters only canonicalize. Fingerprinting the output (hashing it, e.g. `| sha256sum`) is a step you add in your own pipeline — the stable output is exactly what makes that fingerprint reliable.
 
 ## Why do I want stable output?
 
@@ -12,7 +12,7 @@ Caching and change detection need a stable key. If the key changes on every run,
 - **Change detection** — decide if an outcome is "the same" as a previous one without storing the full output.
 - **Reproducible builds** — pin down what a build actually depends on, independent of machine-specific noise.
 
-The filters produce the stable key material: canonical JSON that is byte-for-byte identical for identical logical input. Hashing that JSON into an actual fingerprint (a cache key) is the final step you add yourself, e.g. `| sha256sum`.
+For these uses you need output that collapses run-to-run noise, so reach for the `deterministic.jq` filters: they produce canonical JSON that is byte-for-byte identical for semantically identical runs (timestamps, timing, and machine-specific paths dropped). Hashing that JSON into an actual fingerprint (a cache key) is the final step you add yourself, e.g. `| sha256sum`. The `stable.jq` filters are not suitable here — they preserve volatile fields, so a key built from their output would change on every run.
 
 ## Why jq? Why not a compiled tool?
 
@@ -20,16 +20,22 @@ The filters produce the stable key material: canonical JSON that is byte-for-byt
 
 ## What does "stable" mean exactly?
 
-Stable means: **given the same logical input, the output is byte-for-byte identical under the filter-specific conditions** (see the Determinism section of each filter family's README). The filters remove the sources of run-to-run variance:
+Stable means: **given the same logical input, the output is byte-for-byte identical under the filter-specific conditions** (see the Determinism section of each filter family's README). The filters remove the sources of run-to-run variance in *ordering* — and, in the `deterministic.jq` variants, also the volatile *content*:
 
 | Variation | Treatment |
 |---|---|
-| Message/line order (parallel execution) | Deterministic sort |
+| Message/line order (parallel execution) | Deterministic sort (both variants) |
 | Hash suffixes in paths (`-be9f3faac0a26ef0`) | Preserved — deterministic hashes of the build configuration, not random noise (see below) |
-| Array element order | Sorted |
-| Object key order | Recursively sorted alphabetically |
-| Machine-specific absolute paths | Optionally stripped via `STRIP_PATHS=1` |
-| Caching-state fields (`fresh`, `executable`, timing) | Removed |
+| Array element order | Sorted (both variants) |
+| Object key order | Recursively sorted alphabetically (both variants) |
+| Machine-specific absolute paths | Optionally stripped via `STRIP_PATHS=1` (both variants) |
+| Caching-state fields (`fresh`, `executable`) | Removed (both variants) |
+| Timestamps and timing (`start_time`, `end_time`, `duration`) | Removed by `deterministic.jq` only — `stable.jq` preserves them, so two runs of the tool at different times may produce different stable output |
+
+Stable output is therefore a faithful, order-canonicalized snapshot of one
+specific run's output; it is not a cache key. If you need output that collapses
+run-to-run noise (timestamps, timing, machine-specific paths) so that
+semantically identical runs produce identical output, use `deterministic.jq`.
 
 ## Aren't those hash suffixes random per build?
 

@@ -4,14 +4,14 @@ Tested jq recipes that produce stable JSON from non-deterministic tool output.
 
 ## Problem
 
-Tools like `cargo build --message-format json` and `cargo-mutants outcomes.json` emit JSON that varies between runs: parallel execution reorders messages, arrays come in arbitrary order, runtime timing shifts. (Artifact hash suffixes like `-be9f3faac0a26ef0` are *not* run-to-run noise — they are deterministic hashes of the build configuration and are preserved, see the Determinism section in each cargo filter family's README.) These filters normalize such output into stable, canonicalized JSON — the raw material a fingerprint is made of. Nothing in this repository does fingerprinting itself: the filters only canonicalize, and turning the result into a fingerprint or cache key (e.g. `| sha256sum`) is a step you add in your own pipeline. Use the stable output for caching, change detection, or reproducible builds.
+Tools like `cargo build --message-format json` and `cargo-mutants outcomes.json` emit JSON that varies between runs: parallel execution reorders messages, arrays come in arbitrary order, runtime timing shifts. (Artifact hash suffixes like `-be9f3faac0a26ef0` are *not* run-to-run noise — they are deterministic hashes of the build configuration and are preserved, see the Determinism section in each cargo filter family's README.) These filters normalize such output into stable, canonicalized JSON — the raw material a fingerprint is made of. Nothing in this repository does fingerprinting itself: the filters only canonicalize, and turning the result into a fingerprint or cache key (e.g. `| sha256sum`) is a step you add in your own pipeline. For caching, change detection, or reproducible builds, use the `deterministic.jq` filters — they drop the volatile fields (timestamps, timing, machine-specific paths) that would otherwise make the fingerprint change on every run. `stable.jq` only guarantees identical output for identical input, so it is the wrong choice when a cache key must survive reruns.
 
 ## Usage
 
 ```
 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/stable.jq
 
-# Or for a minimal stable projection:
+# Or for a deterministic projection (volatile fields dropped):
 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/deterministic.jq
 
 # For cargo-mutants outcomes (single JSON object, not NDJSON):
@@ -43,6 +43,19 @@ $ echo '{"name": "demo", "version": 3, "tags": ["z", "a", "m"], "score": 42}' \
 # before: {"name": "demo", "version": 3, "tags": ["z", "a", "m"], "score": 42}
 # after:  {"name":"demo","tags":["a","m","z"],"version":3}
 ```
+
+**What "stable" means.** *Stable* output is a pure canonicalization: given
+the *same input*, the output is byte-for-byte identical — key order, array
+order, and message order are sorted so the same data always serializes the
+same way. It is **not** a reproducibility guarantee: if the input itself
+carries volatile data (timestamps, timing, machine-specific paths), stable
+output preserves it, so two runs of the underlying tool at different times can
+produce different stable output. The `deterministic.jq` filters exist for
+exactly that case: they additionally drop the volatile fields, so two runs
+that differ only in noise collapse to the same output. Use `deterministic.jq`
+for cache keys, change detection, and reproducible builds; use `stable.jq`
+when you want a faithful, order-canonicalized snapshot of a specific run's
+output.
 
 `stable.jq` generates *stable* output: it sorts the variable parts of a
 JSON fragment — object keys and array order — so inputs that represent the
