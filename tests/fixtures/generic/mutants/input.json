@@ -1,0 +1,24 @@
+{
+  "result": {
+    "items": [
+      {
+        "id": 3,
+        "name": "three"
+      },
+      {
+        "id": 1,
+        "name": "one"
+      }
+    ],
+    "tags": [
+      "b",
+      "a"
+    ],
+    "meta": {
+      "z": 1,
+      "a": 2
+    }
+  },
+  "count": 2,
+  "name": "demo"
+}
