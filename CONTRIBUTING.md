@@ -28,7 +28,7 @@ Every `.jq` file starts with a comment block structured as follows:
 - **Self-contained.** Each `.jq` file must work independently. Never reference other recipes — not even in comments or READMEs. Users should be able to grab a single `.jq` file, understand it in isolation, and use it without reading anything else.
 - **Two canonical filters per recipe.** Recipes ship `stable.jq` (stable output — sorts the variable parts of the JSON fragment, all fields preserved) and `deterministic.jq` (deterministic output — additionally drops undeterministic data such as timestamps and volatile fields). Use these names; don't introduce new ones for the same roles.
 - **Header format enforced.** The header conventions above are mandatory for machine parsing.
-- **Golden dispatcher.** Filters with `@env:` declarations need a `<name>.golden.json` in their fixture directory that maps env configurations to expected output files. The runner validates that every `@env:` declaration is covered by at least one golden entry. Without a golden file, only mutation tests run.
+- **Golden dispatcher.** Filters with `@env:` declarations need a `<name>.golden.json` in their fixture directory that maps env configurations to expected output files. The runner validates that every `@env:` declaration is covered by at least one golden entry. Without a golden file, only mutation tests run. Dispatcher entries may set `"slurp": false` to run the filter in raw mode (without `jq -s`) — use it for filters whose behavior depends on the input being a single document rather than a slurped array.
 
 ## Env Combination Coverage
 

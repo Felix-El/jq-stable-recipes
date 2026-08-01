@@ -2,5 +2,16 @@
   "default": {
     "env": null,
     "expected": "output-stable/output.default.json"
+  },
+  "raw-object": {
+    "env": null,
+    "slurp": false,
+    "expected": "output-stable/output.raw-object.json"
+  },
+  "single-element-array": {
+    "env": null,
+    "slurp": false,
+    "input": "single-element-array.json",
+    "expected": "output-stable/output.single-element-array.json"
   }
 }
