@@ -1,13 +1,13 @@
-# cargo-mutants
+# cargo-mutants.outcomes
 
-Two filters for [`cargo-mutants`](https://github.com/sourcefrog/cargo-mutants) `outcomes.json` output, at different levels of projection.
+Two filters for [`cargo-mutants`](https://github.com/sourcefrog/cargo-mutants) `outcomes.json` output, at different levels of projection. See [`../cargo-mutants.mutants/`](../cargo-mutants.mutants/) for filters over the pre-test `mutants.json` mutant list.
 
 ## stable.jq
 
 Full normalization: generates stable, order-independent output from mutation test output by sorting the variable parts of the JSON — outcome order, phase result order, and object keys. Strips absolute paths on demand, preserves all other fields.
 
 ```
-jq -f filters/cargo-mutants/stable.jq target/mutants/outcomes.json
+jq -f filters/cargo-mutants.outcomes/stable.jq target/mutants/outcomes.json
 ```
 
 ### Stripping machine-specific paths
@@ -15,7 +15,7 @@ jq -f filters/cargo-mutants/stable.jq target/mutants/outcomes.json
 Set `STRIP_PATHS=1` to erase all absolute paths to just the filename:
 
 ```
-STRIP_PATHS=1 jq -f filters/cargo-mutants/stable.jq target/mutants/outcomes.json
+STRIP_PATHS=1 jq -f filters/cargo-mutants.outcomes/stable.jq target/mutants/outcomes.json
 ```
 
 ### Limitations
@@ -28,13 +28,13 @@ STRIP_PATHS=1 jq -f filters/cargo-mutants/stable.jq target/mutants/outcomes.json
 Deterministic projection. Does what `stable.jq` does, and additionally drops undeterministic data (runtime timing, timestamps, paths, tool version): only the fields needed to determine if two mutation test runs are semantically identical remain — mutation counts, scenario names, per-scenario summaries, and phase-level pass/fail. Suitable as a stable test key or piped to `sha256sum`.
 
 ```
-jq -f filters/cargo-mutants/deterministic.jq target/mutants/outcomes.json
+jq -f filters/cargo-mutants.outcomes/deterministic.jq target/mutants/outcomes.json
 ```
 
 With path stripping (no-op for identity — no path fields in the projection):
 
 ```
-STRIP_PATHS=1 jq -f filters/cargo-mutants/deterministic.jq target/mutants/outcomes.json
+STRIP_PATHS=1 jq -f filters/cargo-mutants.outcomes/deterministic.jq target/mutants/outcomes.json
 ```
 
 ### Projected Fields

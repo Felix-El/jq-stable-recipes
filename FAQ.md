@@ -50,6 +50,8 @@ Tools like `cargo build --message-format json` emit **NDJSON** — one JSON obje
 
 For tools that emit a **single JSON object** (like `cargo-mutants outcomes.json`), no slurp is needed — the filter handles a single object directly.
 
+For tools that emit a **single JSON array** (like `cargo-mutants mutants.json`), the filter expects a bare array; the test harness passes `-s`, so these filters also accept the slurped `[array]` form.
+
 ## What are the `# @env:` header lines for?
 
 Environment variables used by a filter must be declared at the top of the file:

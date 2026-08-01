@@ -1,0 +1,181 @@
+[
+  {
+    "replacement": "()",
+    "function": {
+      "function_name": "parse_number",
+      "return_type": "-> u32",
+      "span": {
+        "start": {
+          "column": 4,
+          "line": 8
+        },
+        "end": {
+          "column": 5,
+          "line": 10
+        }
+      }
+    },
+    "package": "myapp",
+    "genre": "FnValue",
+    "span": {
+      "start": {
+        "column": 5,
+        "line": 8
+      },
+      "end": {
+        "column": 5,
+        "line": 8
+      }
+    },
+    "name": "src/core.rs:8:5: replace parse_number with ()",
+    "file": "src/core.rs",
+    "diff": "--- a/src/core.rs\n+++ b/src/core.rs\n@@ -8,3 +8,3 @@\n pub fn parse_number(s: &str) -> u32 {\n-    s.parse().unwrap_or(0)\n+    ()\n }\n"
+  },
+  {
+    "replacement": "",
+    "function": {
+      "function_name": "is_valid",
+      "return_type": "-> bool",
+      "span": {
+        "start": {
+          "column": 4,
+          "line": 3
+        },
+        "end": {
+          "column": 5,
+          "line": 6
+        }
+      }
+    },
+    "package": "myapp",
+    "genre": "UnaryOperator",
+    "span": {
+      "start": {
+        "column": 9,
+        "line": 3
+      },
+      "end": {
+        "column": 10,
+        "line": 3
+      }
+    },
+    "name": "src/utils.rs:3:9: replace ! with ",
+    "file": "src/utils.rs",
+    "diff": "--- a/src/utils.rs\n+++ b/src/utils.rs\n@@ -3,4 +3,4 @@\n pub fn is_valid(n: u32) -> bool {\n-    !n.is_power_of_two()\n+    n.is_power_of_two()\n }\n"
+  },
+  {
+    "replacement": ">=",
+    "function": {
+      "function_name": "classify",
+      "return_type": "-> Category",
+      "span": {
+        "start": {
+          "column": 4,
+          "line": 13
+        },
+        "end": {
+          "column": 5,
+          "line": 21
+        }
+      }
+    },
+    "package": "myapp",
+    "genre": "MatchArmGuard",
+    "span": {
+      "start": {
+        "column": 21,
+        "line": 18
+      },
+      "end": {
+        "column": 22,
+        "line": 18
+      }
+    },
+    "name": "src/utils.rs:18:21: replace > with >=",
+    "file": "src/utils.rs",
+    "diff": "--- a/src/utils.rs\n+++ b/src/utils.rs\n@@ -18,3 +18,3 @@\n-            _ if n > 10 => Category::Large,\n+            _ if n >= 10 => Category::Large,\n }\n"
+  },
+  {
+    "replacement": "-",
+    "function": {
+      "function_name": "parse_number",
+      "return_type": "-> u32",
+      "span": {
+        "start": {
+          "column": 4,
+          "line": 8
+        },
+        "end": {
+          "column": 5,
+          "line": 10
+        }
+      }
+    },
+    "package": "myapp",
+    "genre": "BinaryOperator",
+    "span": {
+      "start": {
+        "column": 17,
+        "line": 9
+      },
+      "end": {
+        "column": 18,
+        "line": 9
+      }
+    },
+    "name": "src/core.rs:9:17: replace + with -",
+    "file": "src/core.rs",
+    "diff": "--- a/src/core.rs\n+++ b/src/core.rs\n@@ -9,3 +9,3 @@\n-    s.parse().unwrap_or(0) + 1\n+    s.parse().unwrap_or(0) - 1\n }\n"
+  },
+  {
+    "replacement": null,
+    "function": {
+      "function_name": "classify",
+      "return_type": "-> Category",
+      "span": {
+        "start": {
+          "column": 4,
+          "line": 13
+        },
+        "end": {
+          "column": 5,
+          "line": 21
+        }
+      }
+    },
+    "package": "myapp",
+    "genre": "MatchArm",
+    "span": {
+      "start": {
+        "column": 9,
+        "line": 15
+      },
+      "end": {
+        "column": 30,
+        "line": 15
+      }
+    },
+    "name": "src/utils.rs:15:9: deleted",
+    "file": "src/utils.rs",
+    "diff": "--- a/src/utils.rs\n+++ b/src/utils.rs\n@@ -15,7 +15,6 @@\n         match n {\n             0 => Category::Zero,\n-            _ => Category::Other,\n         }\n"
+  },
+  {
+    "replacement": "false",
+    "function": null,
+    "package": "myapp",
+    "genre": "StructField",
+    "span": {
+      "start": {
+        "column": 9,
+        "line": 5
+      },
+      "end": {
+        "column": 16,
+        "line": 5
+      }
+    },
+    "name": "src/models.rs:5:9: replace enabled with false",
+    "file": "src/models.rs",
+    "diff": "--- a/src/models.rs\n+++ b/src/models.rs\n@@ -5,5 +5,5 @@\n     version: u32,\n-    enabled: bool,\n+    enabled: false,\n }\n"
+  }
+]

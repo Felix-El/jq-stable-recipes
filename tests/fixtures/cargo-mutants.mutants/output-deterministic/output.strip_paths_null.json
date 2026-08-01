@@ -1,0 +1,175 @@
+[
+  {
+    "file": "src/core.rs",
+    "function": {
+      "function_name": "parse_number",
+      "return_type": "-> u32",
+      "span": {
+        "end": {
+          "column": 5,
+          "line": 10
+        },
+        "start": {
+          "column": 4,
+          "line": 8
+        }
+      }
+    },
+    "genre": "FnValue",
+    "name": "src/core.rs:8:5: replace parse_number with ()",
+    "package": "myapp",
+    "replacement": "()",
+    "span": {
+      "end": {
+        "column": 5,
+        "line": 8
+      },
+      "start": {
+        "column": 5,
+        "line": 8
+      }
+    }
+  },
+  {
+    "file": "src/core.rs",
+    "function": {
+      "function_name": "parse_number",
+      "return_type": "-> u32",
+      "span": {
+        "end": {
+          "column": 5,
+          "line": 10
+        },
+        "start": {
+          "column": 4,
+          "line": 8
+        }
+      }
+    },
+    "genre": "BinaryOperator",
+    "name": "src/core.rs:9:17: replace + with -",
+    "package": "myapp",
+    "replacement": "-",
+    "span": {
+      "end": {
+        "column": 18,
+        "line": 9
+      },
+      "start": {
+        "column": 17,
+        "line": 9
+      }
+    }
+  },
+  {
+    "file": "src/models.rs",
+    "function": null,
+    "genre": "StructField",
+    "name": "src/models.rs:5:9: replace enabled with false",
+    "package": "myapp",
+    "replacement": "false",
+    "span": {
+      "end": {
+        "column": 16,
+        "line": 5
+      },
+      "start": {
+        "column": 9,
+        "line": 5
+      }
+    }
+  },
+  {
+    "file": "src/utils.rs",
+    "function": {
+      "function_name": "classify",
+      "return_type": "-> Category",
+      "span": {
+        "end": {
+          "column": 5,
+          "line": 21
+        },
+        "start": {
+          "column": 4,
+          "line": 13
+        }
+      }
+    },
+    "genre": "MatchArm",
+    "name": "src/utils.rs:15:9: deleted",
+    "package": "myapp",
+    "replacement": null,
+    "span": {
+      "end": {
+        "column": 30,
+        "line": 15
+      },
+      "start": {
+        "column": 9,
+        "line": 15
+      }
+    }
+  },
+  {
+    "file": "src/utils.rs",
+    "function": {
+      "function_name": "classify",
+      "return_type": "-> Category",
+      "span": {
+        "end": {
+          "column": 5,
+          "line": 21
+        },
+        "start": {
+          "column": 4,
+          "line": 13
+        }
+      }
+    },
+    "genre": "MatchArmGuard",
+    "name": "src/utils.rs:18:21: replace > with >=",
+    "package": "myapp",
+    "replacement": ">=",
+    "span": {
+      "end": {
+        "column": 22,
+        "line": 18
+      },
+      "start": {
+        "column": 21,
+        "line": 18
+      }
+    }
+  },
+  {
+    "file": "src/utils.rs",
+    "function": {
+      "function_name": "is_valid",
+      "return_type": "-> bool",
+      "span": {
+        "end": {
+          "column": 5,
+          "line": 6
+        },
+        "start": {
+          "column": 4,
+          "line": 3
+        }
+      }
+    },
+    "genre": "UnaryOperator",
+    "name": "src/utils.rs:3:9: replace ! with ",
+    "package": "myapp",
+    "replacement": "",
+    "span": {
+      "end": {
+        "column": 10,
+        "line": 3
+      },
+      "start": {
+        "column": 9,
+        "line": 3
+      }
+    }
+  }
+]
