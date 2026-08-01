@@ -81,7 +81,7 @@ tests/fixtures/<name>/
 
 ## Commit Guidelines
 
-Commit messages must follow the [Conventional Commits](https://www.conventionalcommits.org/) specification. Use a type prefix from the [standard types](https://www.conventionalcommits.org/en/v1.0.0/#summary) (`feat`, `fix`, `docs`, `test`, `refactor`, `chore`, …) and scope it to the affected recipe or area when meaningful, e.g. `feat(cargo-build): add strip-paths normalization` or `test: cover null env state for cargo-mutants`.
+Commit messages must follow the [Conventional Commits](https://www.conventionalcommits.org/) specification. Use a type prefix from the [standard types](https://www.conventionalcommits.org/en/v1.0.0/#summary) (`feat`, `fix`, `docs`, `test`, `refactor`, `chore`, …) and scope it to the affected recipe or area when meaningful, e.g. `feat(cargo-build): add strip-paths normalization` or `test: cover null env state for cargo-mutants.outcomes`.
 
 - Use the imperative mood and keep the summary under 72 characters.
 - Add a body explaining the *why* when the change isn't self-explanatory.

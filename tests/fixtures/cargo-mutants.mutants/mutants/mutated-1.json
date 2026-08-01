@@ -1,0 +1,181 @@
+[
+  {
+    "diff": "--- a/src/core.rs\n+++ b/src/core.rs\n@@ -9,3 +9,3 @@\n-    s.parse().unwrap_or(0) + 1\n+    s.parse().unwrap_or(0) - 1\n }\n",
+    "genre": "BinaryOperator",
+    "replacement": "-",
+    "span": {
+      "end": {
+        "column": 18,
+        "line": 9
+      },
+      "start": {
+        "column": 17,
+        "line": 9
+      }
+    },
+    "function": {
+      "span": {
+        "end": {
+          "column": 5,
+          "line": 10
+        },
+        "start": {
+          "column": 4,
+          "line": 8
+        }
+      },
+      "return_type": "-> u32",
+      "function_name": "parse_number"
+    },
+    "file": "src/core.rs",
+    "package": "myapp",
+    "name": "src/core.rs:9:17: replace + with -"
+  },
+  {
+    "diff": "--- a/src/utils.rs\n+++ b/src/utils.rs\n@@ -18,3 +18,3 @@\n-            _ if n > 10 => Category::Large,\n+            _ if n >= 10 => Category::Large,\n }\n",
+    "genre": "MatchArmGuard",
+    "replacement": ">=",
+    "span": {
+      "end": {
+        "column": 22,
+        "line": 18
+      },
+      "start": {
+        "column": 21,
+        "line": 18
+      }
+    },
+    "function": {
+      "span": {
+        "end": {
+          "column": 5,
+          "line": 21
+        },
+        "start": {
+          "column": 4,
+          "line": 13
+        }
+      },
+      "return_type": "-> Category",
+      "function_name": "classify"
+    },
+    "file": "src/utils.rs",
+    "package": "myapp",
+    "name": "src/utils.rs:18:21: replace > with >="
+  },
+  {
+    "diff": "--- a/src/utils.rs\n+++ b/src/utils.rs\n@@ -3,4 +3,4 @@\n pub fn is_valid(n: u32) -> bool {\n-    !n.is_power_of_two()\n+    n.is_power_of_two()\n }\n",
+    "genre": "UnaryOperator",
+    "replacement": "",
+    "span": {
+      "end": {
+        "column": 10,
+        "line": 3
+      },
+      "start": {
+        "column": 9,
+        "line": 3
+      }
+    },
+    "function": {
+      "span": {
+        "end": {
+          "column": 5,
+          "line": 6
+        },
+        "start": {
+          "column": 4,
+          "line": 3
+        }
+      },
+      "return_type": "-> bool",
+      "function_name": "is_valid"
+    },
+    "file": "src/utils.rs",
+    "package": "myapp",
+    "name": "src/utils.rs:3:9: replace ! with "
+  },
+  {
+    "diff": "--- a/src/core.rs\n+++ b/src/core.rs\n@@ -8,3 +8,3 @@\n pub fn parse_number(s: &str) -> u32 {\n-    s.parse().unwrap_or(0)\n+    ()\n }\n",
+    "genre": "FnValue",
+    "replacement": "()",
+    "span": {
+      "end": {
+        "column": 5,
+        "line": 8
+      },
+      "start": {
+        "column": 5,
+        "line": 8
+      }
+    },
+    "function": {
+      "span": {
+        "end": {
+          "column": 5,
+          "line": 10
+        },
+        "start": {
+          "column": 4,
+          "line": 8
+        }
+      },
+      "return_type": "-> u32",
+      "function_name": "parse_number"
+    },
+    "file": "src/core.rs",
+    "package": "myapp",
+    "name": "src/core.rs:8:5: replace parse_number with ()"
+  },
+  {
+    "diff": "--- a/src/models.rs\n+++ b/src/models.rs\n@@ -5,5 +5,5 @@\n     version: u32,\n-    enabled: bool,\n+    enabled: false,\n }\n",
+    "genre": "StructField",
+    "replacement": "false",
+    "span": {
+      "end": {
+        "column": 16,
+        "line": 5
+      },
+      "start": {
+        "column": 9,
+        "line": 5
+      }
+    },
+    "function": null,
+    "file": "src/models.rs",
+    "package": "myapp",
+    "name": "src/models.rs:5:9: replace enabled with false"
+  },
+  {
+    "diff": "--- a/src/utils.rs\n+++ b/src/utils.rs\n@@ -15,7 +15,6 @@\n         match n {\n             0 => Category::Zero,\n-            _ => Category::Other,\n         }\n",
+    "genre": "MatchArm",
+    "replacement": null,
+    "span": {
+      "end": {
+        "column": 30,
+        "line": 15
+      },
+      "start": {
+        "column": 9,
+        "line": 15
+      }
+    },
+    "function": {
+      "span": {
+        "end": {
+          "column": 5,
+          "line": 21
+        },
+        "start": {
+          "column": 4,
+          "line": 13
+        }
+      },
+      "return_type": "-> Category",
+      "function_name": "classify"
+    },
+    "file": "src/utils.rs",
+    "package": "myapp",
+    "name": "src/utils.rs:15:9: deleted"
+  }
+]

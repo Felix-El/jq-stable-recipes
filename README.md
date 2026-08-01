@@ -15,7 +15,10 @@ cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/sta
 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/deterministic.jq
 
 # For cargo-mutants outcomes (single JSON object, not NDJSON):
-jq -f filters/cargo-mutants/stable.jq target/mutants/outcomes.json
+jq -f filters/cargo-mutants.outcomes/stable.jq target/mutants/outcomes.json
+
+# For cargo-mutants mutants list (JSON array, not NDJSON):
+jq -s -f filters/cargo-mutants.mutants/stable.jq target/mutants/mutants.json
 ```
 
 ## What the filters do
@@ -49,9 +52,12 @@ with `sha256sum`) is up to the caller.
 - [**cargo-build**](filters/cargo-build/) — Two filters for `cargo build --message-format json`:
   - [`stable.jq`](filters/cargo-build/) — Stable output: sorts variable parts of the JSON; all fields preserved
   - [`deterministic.jq`](filters/cargo-build/) — Deterministic output: drops undeterministic data; keeps only what decides if two builds are the same
-- [**cargo-mutants**](filters/cargo-mutants/) — Two filters for `cargo-mutants outcomes.json`:
-  - [`stable.jq`](filters/cargo-mutants/) — Stable output: sorts variable parts of the JSON; all meaningful fields preserved
-  - [`deterministic.jq`](filters/cargo-mutants/) — Deterministic output: drops undeterministic data; keeps mutation counts, scenario names, phase pass/fail
+- [**cargo-mutants.outcomes**](filters/cargo-mutants.outcomes/) — Two filters for `cargo-mutants outcomes.json`:
+  - [`stable.jq`](filters/cargo-mutants.outcomes/) — Stable output: sorts variable parts of the JSON; all meaningful fields preserved
+  - [`deterministic.jq`](filters/cargo-mutants.outcomes/) — Deterministic output: drops undeterministic data; keeps mutation counts, scenario names, phase pass/fail
+- [**cargo-mutants.mutants**](filters/cargo-mutants.mutants/) — Two filters for `cargo-mutants mutants.json` (the pre-test mutant list, also `cargo mutants --list --json`):
+  - [`stable.jq`](filters/cargo-mutants.mutants/) — Stable output: sorts the mutant array by name, object keys recursively; all fields preserved
+  - [`deterministic.jq`](filters/cargo-mutants.mutants/) — Deterministic output: drops the regenerable per-mutant `diff`; keeps every identifying field
 - [**cargo-audit**](filters/cargo-audit/) — Two filters for `cargo audit --json`:
   - [`stable.jq`](filters/cargo-audit/) — Stable output: sorts variable parts of the JSON; all fields preserved
   - [`deterministic.jq`](filters/cargo-audit/) — Deterministic output: drops undeterministic data; keeps vulnerability list, crate + advisory IDs
