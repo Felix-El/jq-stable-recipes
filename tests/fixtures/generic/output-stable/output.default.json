@@ -1,24 +1,26 @@
-{
-  "count": 2,
-  "name": "demo",
-  "result": {
-    "items": [
-      {
-        "id": 3,
-        "name": "three"
+[
+  {
+    "count": 2,
+    "name": "demo",
+    "result": {
+      "items": [
+        {
+          "id": 3,
+          "name": "three"
+        },
+        {
+          "id": 1,
+          "name": "one"
+        }
+      ],
+      "meta": {
+        "a": 2,
+        "z": 1
       },
-      {
-        "id": 1,
-        "name": "one"
-      }
-    ],
-    "meta": {
-      "a": 2,
-      "z": 1
-    },
-    "tags": [
-      "b",
-      "a"
-    ]
+      "tags": [
+        "b",
+        "a"
+      ]
+    }
   }
-}
+]

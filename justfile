@@ -158,15 +158,17 @@ env-args entry:
 
 # mutation test: apply filter to all fixture inputs under given env,
 
-# verify all outputs match. Trailing args are `NAME=VALUE` env overrides.
+# verify all outputs match. `slurp` selects `jq -s` (`true`) or raw `jq`
+# (`false`). Trailing args are `NAME=VALUE` env overrides.
 [positional-arguments]
 [private]
 [script]
-mutation-test label filter_file fixture_dir *env_args:
+mutation-test label filter_file fixture_dir slurp *env_args:
     label="$1"
     filter_file="$2"
     fixture_dir="$3"
-    shift 3
+    slurp="$4"
+    shift 4
     env_args=("$@")
 
     fixtures=("$fixture_dir"/mutants/*.json)
@@ -175,16 +177,22 @@ mutation-test label filter_file fixture_dir *env_args:
         exit 0
     fi
 
+    if [ "$slurp" = "true" ]; then
+        jq_args=(-s -f "$filter_file")
+    else
+        jq_args=(-f "$filter_file")
+    fi
+
     outputs=()
     for fixture in "${fixtures[@]}"; do
         if [ ${#env_args[@]} -eq 0 ]; then
-            output="$(jq -s -f "$filter_file" "$fixture" 2>&1)" || {
+            output="$(jq "${jq_args[@]}" "$fixture" 2>&1)" || {
                 echo "FAIL: $label mutation — jq error on $(basename "$fixture")"
                 echo "$output"
                 exit 1
             }
         else
-            output="$(env "${env_args[@]}" jq -s -f "$filter_file" "$fixture" 2>&1)" || {
+            output="$(env "${env_args[@]}" jq "${jq_args[@]}" "$fixture" 2>&1)" || {
                 echo "FAIL: $label mutation — jq error on $(basename "$fixture")"
                 echo "$output"
                 exit 1
@@ -207,16 +215,18 @@ mutation-test label filter_file fixture_dir *env_args:
 # golden test: apply filter to a specific input with given env,
 #   compare output byte-for-byte against the expected file.
 
+# `slurp` selects `jq -s` (`true`) or raw `jq` (`false`).
 # Trailing args are `NAME=VALUE` env overrides.
 [positional-arguments]
 [private]
 [script]
-golden-test label filter_file input_file expected_file *env_args:
+golden-test label filter_file input_file expected_file slurp *env_args:
     label="$1"
     filter_file="$2"
     input_file="$3"
     expected_file="$4"
-    shift 4
+    slurp="$5"
+    shift 5
     env_args=("$@")
 
     if [ ! -f "$input_file" ]; then
@@ -228,14 +238,20 @@ golden-test label filter_file input_file expected_file *env_args:
         exit 1
     fi
 
+    if [ "$slurp" = "true" ]; then
+        jq_args=(-s -f "$filter_file")
+    else
+        jq_args=(-f "$filter_file")
+    fi
+
     if [ ${#env_args[@]} -eq 0 ]; then
-        output="$(jq -s -f "$filter_file" "$input_file" 2>&1)" || {
+        output="$(jq "${jq_args[@]}" "$input_file" 2>&1)" || {
             echo "FAIL: $label golden — jq error"
             echo "$output"
             exit 1
         }
     else
-        output="$(env "${env_args[@]}" jq -s -f "$filter_file" "$input_file" 2>&1)" || {
+        output="$(env "${env_args[@]}" jq "${jq_args[@]}" "$input_file" 2>&1)" || {
             echo "FAIL: $label golden — jq error"
             echo "$output"
             exit 1
@@ -381,9 +397,10 @@ test-suite family="" filter="":
                     local_input="$(echo "$entry" | jq -r '.value.input // "mutants/input.json"')"
                     local_input_path="$fixture_base/$local_input"
                     expected_file="$fixture_base/$(echo "$entry" | jq -r '.value.expected')"
+                    slurp="$(echo "$entry" | jq -r 'if .value.slurp == false then "false" else "true" end')"
 
-                    {{ just_cmd }} mutation-test "$variant" "$filter_file" "$fixture_base" "${env_args[@]}" || exit_code=1
-                    {{ just_cmd }} golden-test "$variant" "$filter_file" "$local_input_path" "$expected_file" "${env_args[@]}" || exit_code=1
+                    {{ just_cmd }} mutation-test "$variant" "$filter_file" "$fixture_base" "$slurp" "${env_args[@]}" || exit_code=1
+                    {{ just_cmd }} golden-test "$variant" "$filter_file" "$local_input_path" "$expected_file" "$slurp" "${env_args[@]}" || exit_code=1
                 done < <(echo "$golden_entries")
 
                 # Validate coverage: every @env: declaration must be covered
@@ -395,7 +412,7 @@ test-suite family="" filter="":
                 if [ ${#env_decls[@]} -gt 0 ]; then
                     echo "WARN: $label_base — @env: declared but no golden file (mutation only)"
                 fi
-                {{ just_cmd }} mutation-test "$label_base (default)" "$filter_file" "$fixture_base" || exit_code=1
+                {{ just_cmd }} mutation-test "$label_base (default)" "$filter_file" "$fixture_base" true || exit_code=1
             fi
         done
     done

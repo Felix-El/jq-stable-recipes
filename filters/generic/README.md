@@ -9,7 +9,7 @@ a schema and leaves everything else alone.
 
 ```
 $ echo '{"name": "demo", "result": {"meta": {"z": 1, "a": 2}}, "tags": ["b", "a"]}' \
-    | jq -c -s -f filters/generic/stable.jq
+    | jq -c -f filters/generic/stable.jq
 # before: {"name":"demo","result":{"meta":{"z":1,"a":2}},"tags":["b","a"]}
 # after:  {"name":"demo","result":{"meta":{"a":2,"z":1}},"tags":["b","a"]}
 ```
@@ -25,6 +25,15 @@ definition, and without a schema there is no way to tell a meaningful sequence
 nothing inside arrays and drops nothing. The mutation-test fixtures under
 `tests/fixtures/generic/mutants/` deliberately vary *only* key order for
 exactly this reason: changing an array would change the output by design.
+
+**Slurp (`jq -s`) handling.** Pipe plain input with `jq -f` (no `-s`), as in
+the example above — a single object stays a single object. If you do pipe with
+`-s`, only a *slurped array* — input that was itself a JSON array, which `-s`
+wraps as `[[...]]` — gets its outer wrapper removed, restoring the bare array.
+A genuine single-element array (`[{"id":1}]`) is **never** unwrapped: without a
+schema there is no way to tell a one-element array from a slurped object, and
+unwrapping would corrupt real data. A slurped single object therefore stays
+wrapped as `[{...}]` — pipe it without `-s` if you want the bare object.
 
 ## What is not possible
 
