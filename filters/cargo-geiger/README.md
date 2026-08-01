@@ -29,7 +29,7 @@ Without `STRIP_PATHS=1` the raw `file://` URL is preserved — the output is sta
 ### Limitations
 
 - **`packages_without_metrics` and `used_but_not_scanned_files`** — both arrays are sorted by string representation as a safe fallback; in practice they are empty for fully-scannable workspaces.
-- **All fields preserved** — including dependency edges and source registry metadata. For a minimal stable projection, use `deterministic.jq`.
+- **All fields preserved** — including dependency edges and source registry metadata. For a deterministic projection, use `deterministic.jq`.
 
 ## deterministic.jq
 
