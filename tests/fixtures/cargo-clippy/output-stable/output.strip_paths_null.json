@@ -4,10 +4,12 @@
     "success": true
   },
   {
+    "executable": null,
     "features": [],
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/libtools_test-4630876fe6d422b8.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "/tmp/opencode/tools-test/Cargo.toml",
     "package_id": "path+file:///tmp/opencode/tools-test#0.1.0",
     "profile": {
@@ -54,6 +56,8 @@
           "rendered": null,
           "spans": [
             {
+              "byte_end": 219,
+              "byte_start": 206,
               "column_end": 26,
               "column_start": 13,
               "expansion": null,
@@ -89,8 +93,11 @@
       },
       "level": "warning",
       "message": "useless use of `vec!`",
+      "rendered": "warning: useless use of `vec!`\n  --> src/main.rs:10:13\n   |\n10 |     let v = vec![1, 2, 3];\n   |             ^^^^^^^^^^^^^ help: you can use an array directly: `[1, 2, 3]`\n   |\n   = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#useless_vec\n   = note: `#[warn(clippy::useless_vec)]` on by default\n\n",
       "spans": [
         {
+          "byte_end": 219,
+          "byte_start": 206,
           "column_end": 26,
           "column_start": 13,
           "expansion": null,
@@ -129,6 +136,7 @@
     }
   },
   {
+    "executable": null,
     "features": [
       "perf-literal",
       "std"
@@ -136,6 +144,7 @@
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/libaho_corasick-59c951e6da5f6ef3.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aho-corasick-1.1.4/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#aho-corasick@1.1.4",
     "profile": {
@@ -162,10 +171,12 @@
     }
   },
   {
+    "executable": null,
     "features": [],
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/libatty-3d1f20e5c53db3c3.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/atty-0.2.2/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#atty@0.2.2",
     "profile": {
@@ -192,10 +203,12 @@
     }
   },
   {
+    "executable": null,
     "features": [],
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/libitoa-6ddde9f8d1eacb1c.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/itoa-1.0.18/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#itoa@1.0.18",
     "profile": {
@@ -233,6 +246,7 @@
     "reason": "build-script-executed"
   },
   {
+    "executable": null,
     "features": [
       "default",
       "std"
@@ -240,6 +254,7 @@
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/build/libc-19124a20af635abc/build-script-build"
     ],
+    "fresh": true,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.189/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#libc@0.2.189",
     "profile": {
@@ -266,6 +281,7 @@
     }
   },
   {
+    "executable": null,
     "features": [
       "default",
       "std"
@@ -273,6 +289,7 @@
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/liblibc-72577fe584cae775.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.189/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#libc@0.2.189",
     "profile": {
@@ -299,6 +316,7 @@
     }
   },
   {
+    "executable": null,
     "features": [
       "alloc",
       "std"
@@ -306,6 +324,7 @@
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/libmemchr-0263503a7d6f4437.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/memchr-2.8.3/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#memchr@2.8.3",
     "profile": {
@@ -345,12 +364,14 @@
     "reason": "build-script-executed"
   },
   {
+    "executable": null,
     "features": [
       "proc-macro"
     ],
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/build/proc-macro2-b687888273c8b209/build-script-build"
     ],
+    "fresh": true,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107",
     "profile": {
@@ -377,6 +398,7 @@
     }
   },
   {
+    "executable": null,
     "features": [
       "proc-macro"
     ],
@@ -384,6 +406,7 @@
       "/tmp/opencode/tools-test/target/debug/deps/libproc_macro2-404452a690452e61.rlib",
       "/tmp/opencode/tools-test/target/debug/deps/libproc_macro2-404452a690452e61.rmeta"
     ],
+    "fresh": true,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#proc-macro2@1.0.107",
     "profile": {
@@ -419,12 +442,14 @@
     "reason": "build-script-executed"
   },
   {
+    "executable": null,
     "features": [
       "proc-macro"
     ],
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/build/quote-c641ea97ba341343/build-script-build"
     ],
+    "fresh": true,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.47/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47",
     "profile": {
@@ -451,6 +476,7 @@
     }
   },
   {
+    "executable": null,
     "features": [
       "proc-macro"
     ],
@@ -458,6 +484,7 @@
       "/tmp/opencode/tools-test/target/debug/deps/libquote-1f1b0729b559a784.rlib",
       "/tmp/opencode/tools-test/target/debug/deps/libquote-1f1b0729b559a784.rmeta"
     ],
+    "fresh": true,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.47/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#quote@1.0.47",
     "profile": {
@@ -484,6 +511,7 @@
     }
   },
   {
+    "executable": null,
     "features": [
       "alloc",
       "dfa-onepass",
@@ -511,6 +539,7 @@
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/libregex_automata-d16c76465ce75adb.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/regex-automata-0.4.16/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#regex-automata@0.4.16",
     "profile": {
@@ -537,6 +566,7 @@
     }
   },
   {
+    "executable": null,
     "features": [
       "default",
       "std",
@@ -552,6 +582,7 @@
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/libregex_syntax-adce5f78d8a76588.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/regex-syntax-0.8.11/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#regex-syntax@0.8.11",
     "profile": {
@@ -578,6 +609,7 @@
     }
   },
   {
+    "executable": null,
     "features": [
       "default",
       "perf",
@@ -600,6 +632,7 @@
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/libregex-7e140704753da6bd.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/regex-1.13.1/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#regex@1.13.1",
     "profile": {
@@ -637,6 +670,7 @@
     "reason": "build-script-executed"
   },
   {
+    "executable": null,
     "features": [
       "default",
       "derive",
@@ -646,6 +680,7 @@
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/build/serde-047fb28ec31c7b7d/build-script-build"
     ],
+    "fresh": true,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde@1.0.229",
     "profile": {
@@ -672,6 +707,7 @@
     }
   },
   {
+    "executable": null,
     "features": [
       "default",
       "derive",
@@ -681,6 +717,7 @@
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/libserde-e566342cbf49a6d6.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde@1.0.229",
     "profile": {
@@ -716,6 +753,7 @@
     "reason": "build-script-executed"
   },
   {
+    "executable": null,
     "features": [
       "result",
       "std"
@@ -723,6 +761,7 @@
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/build/serde_core-f2ae637853f690ee/build-script-build"
     ],
+    "fresh": true,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.229",
     "profile": {
@@ -749,6 +788,7 @@
     }
   },
   {
+    "executable": null,
     "features": [
       "result",
       "std"
@@ -756,6 +796,7 @@
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/libserde_core-c2ece60d1ccba7c9.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_core@1.0.229",
     "profile": {
@@ -782,12 +823,14 @@
     }
   },
   {
+    "executable": null,
     "features": [
       "default"
     ],
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/libserde_derive-ff1f26ba90699cc7.so"
     ],
+    "fresh": true,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_derive-1.0.229/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_derive@1.0.229",
     "profile": {
@@ -825,6 +868,7 @@
     "reason": "build-script-executed"
   },
   {
+    "executable": null,
     "features": [
       "default",
       "std"
@@ -832,6 +876,7 @@
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/build/serde_json-2c0a994303fe8e5c/build-script-build"
     ],
+    "fresh": true,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.151/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.151",
     "profile": {
@@ -858,6 +903,7 @@
     }
   },
   {
+    "executable": null,
     "features": [
       "default",
       "std"
@@ -865,6 +911,7 @@
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/libserde_json-dfa7fbe1582cd7ab.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.151/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#serde_json@1.0.151",
     "profile": {
@@ -891,6 +938,7 @@
     }
   },
   {
+    "executable": null,
     "features": [
       "clone-impls",
       "derive",
@@ -902,6 +950,7 @@
       "/tmp/opencode/tools-test/target/debug/deps/libsyn-dee893f603239a67.rlib",
       "/tmp/opencode/tools-test/target/debug/deps/libsyn-dee893f603239a67.rmeta"
     ],
+    "fresh": true,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/syn-3.0.3/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#syn@3.0.3",
     "profile": {
@@ -928,10 +977,12 @@
     }
   },
   {
+    "executable": null,
     "features": [],
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/libtime-77ccef7832dff4dd.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/time-0.1.45/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#time@0.1.45",
     "profile": {
@@ -958,11 +1009,13 @@
     }
   },
   {
+    "executable": null,
     "features": [],
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/libunicode_ident-8443eb632a3fbe4c.rlib",
       "/tmp/opencode/tools-test/target/debug/deps/libunicode_ident-8443eb632a3fbe4c.rmeta"
     ],
+    "fresh": true,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/unicode-ident-1.0.24/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#unicode-ident@1.0.24",
     "profile": {
@@ -998,10 +1051,12 @@
     "reason": "build-script-executed"
   },
   {
+    "executable": null,
     "features": [],
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/build/zmij-37c7a7b83a60607f/build-script-build"
     ],
+    "fresh": true,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zmij-1.0.23/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.23",
     "profile": {
@@ -1028,10 +1083,12 @@
     }
   },
   {
+    "executable": null,
     "features": [],
     "filenames": [
       "/tmp/opencode/tools-test/target/debug/deps/libzmij-09764c09118bc5c9.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "/home/felix/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zmij-1.0.23/Cargo.toml",
     "package_id": "registry+https://github.com/rust-lang/crates.io-index#zmij@1.0.23",
     "profile": {

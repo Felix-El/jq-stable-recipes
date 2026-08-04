@@ -2,10 +2,7 @@
 #
 # Generates stable output from cargo clippy --message-format json NDJSON by
 # sorting the variable parts of the JSON fragment: message order, span order,
-# array order, and object keys. Also normalizes non-deterministic byte offsets
-# in diagnostic spans and caching state. All fields are preserved except
-# message.rendered (dropped: contains color codes and machine-specific
-# absolute paths that resist sorting).
+# array order, and object keys. All fields are preserved.
 #
 # Determinism contract: two runs are byte-identical iff they were built with
 # the same toolchain (rustc/clippy version, target), the same feature set,
@@ -27,8 +24,7 @@ def normalize_target:
   else . end;
 
 def normalize_span:
-  del(.byte_start, .byte_end)
-  | if (.text | type) == "array" then .text |= sort_by(.text) else . end;
+  if (.text | type) == "array" then .text |= sort_by(.text) else . end;
 
 def normalize_spans:
   if (.spans | type) == "array" then
@@ -46,15 +42,13 @@ def normalize_children:
 def normalize_compiler_message:
   if .reason == "compiler-message" then
     .message |= (
-      del(.rendered)
-      | normalize_spans
+      normalize_spans
       | normalize_children
     )
   else . end;
 
 def normalize_message:
-  del(.fresh, .executable)
-  | if (.filenames | type) == "array" then .filenames |= sort else . end
+  if (.filenames | type) == "array" then .filenames |= sort else . end
   | sort_array("features")
   | sort_array("linked_libs")
   | sort_array("linked_paths")
