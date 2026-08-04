@@ -2,11 +2,51 @@
 
 Tested jq recipes that produce stable JSON from non-deterministic tool output.
 
-## Problem
+## The Problem
 
-Tools like `cargo build --message-format json` and `cargo-mutants outcomes.json` emit JSON that varies between runs: parallel execution reorders messages, arrays come in arbitrary order, runtime timing shifts. (Artifact hash suffixes like `-be9f3faac0a26ef0` are *not* run-to-run noise — they are deterministic hashes of the build configuration and are preserved, see the Determinism section in each cargo filter family's README.) These filters normalize such output into stable, canonicalized JSON — the raw material a fingerprint is made of. Nothing in this repository does fingerprinting itself: the filters only canonicalize, and turning the result into a fingerprint or cache key (e.g. `| sha256sum`) is a step you add in your own pipeline. For caching, change detection, or reproducible builds, use the `deterministic.jq` filters — they drop the volatile fields (timestamps, timing, machine-specific paths) that would otherwise make the fingerprint change on every run. `stable.jq` only guarantees identical output for identical input, so it is the wrong choice when a cache key must survive reruns.
+For caching, change detection, or reproducible builds we need **unambiguous**
+output — syntactically and semantically.
+
+Many tools emit JSON that is machine-readable, but semantically identical
+runs of the same tool can emit slightly different JSON — entries in random
+order due to parallelism, noise from timestamps, and so on.
+
+That makes it hard to tell if anything *really* changed between runs.
+
+## How We Address It
+
+The `jq` tool is widely used to transform JSON, and even piping it through a
+bare `jq .` normalizes output to some degree:
+
+- **Numbers** are reparsed and reprinted in their shortest round-trip form:
+  `1.0` → `1`, `1e2` → `100`, `1.2300` → `1.23`.
+- **Duplicate keys** collapse to the last occurrence, so an ambiguous
+  `{"a": 1, "a": 2}` can never survive into a fingerprint.
+- **Formatting** is well-defined, no matter whether you choose minified or
+  pretty-printed output.
+
+This repository maintains **and tests** `jq` filter scripts for various
+tools/schemas that take additional steps:
+
+- a `stable.jq` filter sorts objects — and, where semantically possible, arrays —
+  into a canonical order; schema and data are preserved
+- a `deterministic.jq` filter additionally drops sources of non-determinism:
+  timestamps, execution times, machine-specific paths
+
+Pipe a tool-generated JSON through `jq` with the `deterministic.jq` script and
+you get unambiguous, byte-for-byte repeatable output for semantically equal
+tool runs.
+
+You can then use that output as a fingerprint for the tool run, e.g. via `sha256sum`.
 
 ## Usage
+
+We provide filters for many different tools. The usage pattern is always the same:
+pipe raw JSON through `jq` with one of the scripts and get a result that orders
+elements unambiguously (`stable.jq`) — or additionally drops undeterministic data
+for reproducibility (`deterministic.jq`).
+
+Here are some examples:
 
 ```
 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/stable.jq
@@ -24,65 +64,55 @@ jq -s -f filters/cargo-mutants.mutants/stable.jq target/mutants/mutants.json
 some-tool --output-format json | jq -s -f filters/generic/stable.jq
 ```
 
-## What the filters do
+## Action at a Glance
 
-Every filter family ships a `stable.jq` (stable output, all fields preserved)
-and a `deterministic.jq` (deterministic output, undeterministic fields dropped) —
-except [`generic`](filters/generic/), which has no schema to tell volatile
-fields from meaningful ones and therefore ships only the stable filter. See
-[`filters/simple/`](filters/simple/) for a tiny teaching example:
+Almost every filter family ships a `stable.jq` (stable output, all fields preserved)
+and a `deterministic.jq` (deterministic output, undeterministic fields dropped).
+Below we use [`filters/simple/`](filters/simple/) as a tiny teaching example
+(no schema; it assumes all arrays have *set* semantics — order does not matter).
+
+### Stability
+
+**First run:**
 
 ```
 $ echo '{"name": "demo", "version": 3, "tags": ["z", "a", "m"], "score": 42}' \
     | jq -c -f filters/simple/stable.jq
-# before: {"name": "demo", "version": 3, "tags": ["z", "a", "m"], "score": 42}
-# after:  {"name":"demo","score":42,"tags":["a","m","z"],"version":3}
 
-$ echo '{"name": "demo", "version": 3, "tags": ["z", "a", "m"], "score": 42}' \
-    | jq -c -f filters/simple/deterministic.jq
-# before: {"name": "demo", "version": 3, "tags": ["z", "a", "m"], "score": 42}
-# after:  {"name":"demo","tags":["a","m","z"],"version":3}
+{"name":"demo","score":42,"tags":["a","m","z"],"version":3}
 ```
 
-**What "stable" means.** *Stable* output is a pure canonicalization: given
-the *same input*, the output is byte-for-byte identical — key order, array
-order, and message order are sorted so the same data always serializes the
-same way. It is **not** a reproducibility guarantee: if the input itself
-carries volatile data (timestamps, timing, machine-specific paths), stable
-output preserves it, so two runs of the underlying tool at different times can
-produce different stable output. The `deterministic.jq` filters exist for
-exactly that case: they additionally drop the volatile fields, so two runs
-that differ only in noise collapse to the same output. Use `deterministic.jq`
-for cache keys, change detection, and reproducible builds; use `stable.jq`
-when you want a faithful, order-canonicalized snapshot of a specific run's
-output.
+As we can see, both object keys and array elements are in canonical order —
+key order in JSON is never semantically meaningful, and the `simple` family
+assumes arrays have *set* semantics.
 
-`stable.jq` generates *stable* output: it sorts the variable parts of a
-JSON fragment — object keys and array order — so inputs that represent the
-same data always produce identical output. `deterministic.jq` generates
-*deterministic* output: it additionally removes undeterministic data (volatile
-fields like `score`), keeping only what identifies the object. Neither filter
-hashes anything: the output is canonical JSON, and fingerprinting it (e.g.
-with `sha256sum`) is up to the caller.
+**Second run:**
 
-## Why jq
+```
+$ echo '{"name": "demo", "score": 42, "tags": ["m", "a", "z"], "version": 3}' \
+    | jq -c -f filters/simple/stable.jq
 
-Every recipe here is a jq program, and that choice buys canonicalization for
-free. Any JSON that passes through jq — a recipe in this repo or a bare
-`jq .` — is reserialized with jq's canonical rules:
+{"name":"demo","score":42,"tags":["a","m","z"],"version":3}
+```
 
-- **Numbers** are reparsed and reprinted in their shortest round-trip form:
-  `1.0` → `1`, `1e2` → `100`, `1.2300` → `1.23`.
-- **Duplicate keys** collapse to the last occurrence, so an ambiguous
-  `{"a": 1, "a": 2}` can never survive into a fingerprint.
-- **Formatting** is uniform — two-space indentation from jq's pretty-printer.
+The output is insensitive to the ordering of the input JSON.
 
-These are properties of the jq runtime, not of any individual filter, so every
-recipe inherits them — a core reason this repository is built on jq rather
-than hand-rolled canonicalizers. The filters themselves add only the
-schema-aware work: sorting the parts that vary between runs.
+### Determinism
 
-## Filters
+The `simple` family assumes `score` is an undeterministic outcome, so it is
+dropped for the resulting JSON to remain reproducible.
+
+```
+$ echo '{"name": "demo", "version": 3, "tags": ["z", "a", "m"], "score": 42}' \
+    | jq -c -f filters/simple/deterministic.jq
+
+{"name":"demo","tags":["a","m","z"],"version":3}
+```
+
+As you can see, the `deterministic` script stabilizes the output and also drops
+the undeterministic `score` entry.
+
+## Filter Library
 
 - [**cargo-build**](filters/cargo-build/) — Two filters for `cargo build --message-format json`:
   - [`stable.jq`](filters/cargo-build/) — Stable output: sorts variable parts of the JSON; all fields preserved

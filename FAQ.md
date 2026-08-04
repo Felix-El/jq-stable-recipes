@@ -2,7 +2,7 @@
 
 ## What is this project?
 
-A collection of tested `jq` filters that turn non-deterministic tool output (like `cargo build --message-format json`) into stable, canonicalized JSON. Feed the same logical input to the same filter and you always get byte-for-byte identical output — under the filter-specific conditions described in each filter family's README (for cargo filters: same toolchain, feature set, profile, RUSTFLAGS, and dependency graph; run order never matters, and timing never matters for `deterministic.jq`, which drops timestamp/timing fields). Nothing in this repository does fingerprinting: the filters only canonicalize. Fingerprinting the output (hashing it, e.g. `| sha256sum`) is a step you add in your own pipeline — the stable output is exactly what makes that fingerprint reliable.
+A collection of tested `jq` filters that turn non-deterministic tool output (like `cargo build --message-format json`) into stable, canonicalized JSON. Feed the same logical input to the same filter and you always get byte-for-byte identical output — under the filter-specific conditions described in each filter family's README. Run order never matters, and timing never matters for `deterministic.jq`, which drops timestamp/timing fields.
 
 ## Why do I want stable output?
 
@@ -12,7 +12,7 @@ Caching and change detection need a stable key. If the key changes on every run,
 - **Change detection** — decide if an outcome is "the same" as a previous one without storing the full output.
 - **Reproducible builds** — pin down what a build actually depends on, independent of machine-specific noise.
 
-For these uses you need output that collapses run-to-run noise, so reach for the `deterministic.jq` filters: they produce canonical JSON that is byte-for-byte identical for semantically identical runs (timestamps, timing, and machine-specific paths dropped). Hashing that JSON into an actual fingerprint (a cache key) is the final step you add yourself, e.g. `| sha256sum`. The `stable.jq` filters are not suitable here — they preserve volatile fields, so a key built from their output would change on every run.
+For these uses you need output that collapses run-to-run noise, so reach for the `deterministic.jq` filters: they produce canonical JSON that is byte-for-byte identical for semantically identical runs (timestamps, timing, and machine-specific paths dropped). The `stable.jq` filters are not suitable here — they preserve volatile fields, so a key built from their output would change on every run.
 
 ## Why jq? Why not a compiled tool?
 
@@ -25,7 +25,7 @@ Stable means: **given the same logical input, the output is byte-for-byte identi
 | Variation | Treatment |
 |---|---|
 | Message/line order (parallel execution) | Deterministic sort (both variants) |
-| Hash suffixes in paths (`-be9f3faac0a26ef0`) | Preserved — deterministic hashes of the build configuration, not random noise (see below) |
+| Hash suffixes in paths (`-be9f3faac0a26ef0`) | Preserved — deterministic hashes of the build configuration, not random noise |
 | Array element order | Sorted (both variants) |
 | Object key order | Recursively sorted alphabetically (both variants) |
 | Machine-specific absolute paths | Optionally stripped via `STRIP_PATHS=1` (both variants) |
@@ -36,10 +36,6 @@ Stable output is therefore a faithful, order-canonicalized snapshot of one
 specific run's output; it is not a cache key. If you need output that collapses
 run-to-run noise (timestamps, timing, machine-specific paths) so that
 semantically identical runs produce identical output, use `deterministic.jq`.
-
-## Aren't those hash suffixes random per build?
-
-No. The 16-hex suffix in artifact filenames (e.g. `libserde-be9f3faac0a26ef0.rlib`) is cargo's `unit_id`: a deterministic hash over the crate's metadata (name, version, source), enabled features, resolved profile, target/host triple, rustc version, RUSTFLAGS, and the dependency graph — **not** over the crate's source contents and **not** random. Rebuilding the same project on the same machine or a different checkout path yields identical suffixes; changing a dependency version, feature set, profile, or toolchain changes them. Because they encode real build configuration, the filters preserve them. The same holds for `cargo-audit`'s `package.checksum`, which is the crates.io SHA-256 of the exact crate file.
 
 ## What's the difference between `stable.jq` and `deterministic.jq`?
 
@@ -83,7 +79,7 @@ cargo build --message-format json 2>/dev/null \
   | sha256sum
 ```
 
-The filter output is stable JSON; the `sha256sum` step is what turns it into the fingerprint. Pipe the filter output to `sha256sum` to get a single cache key:
+Pipe the filter output to `sha256sum` to get a single cache key:
 
 ```
 cache_key=$(cargo build --message-format json 2>/dev/null \
