@@ -2,7 +2,7 @@
 #
 # Generates stable output from cargo build --message-format json NDJSON by
 # sorting the variable parts of the JSON fragment: message order, array order,
-# and object keys. Also normalizes caching state. All fields are preserved.
+# and object keys. All fields are preserved.
 #
 # Determinism contract: two runs are byte-identical iff they were built with
 # the same toolchain (rustc version, target), the same feature set, profile,
@@ -24,8 +24,7 @@ def normalize_target:
   else . end;
 
 def normalize_message:
-  del(.fresh, .executable)
-  | if (.filenames | type) == "array" then .filenames |= sort else . end
+  if (.filenames | type) == "array" then .filenames |= sort else . end
   | sort_array("features")
   | sort_array("linked_libs")
   | sort_array("linked_paths")

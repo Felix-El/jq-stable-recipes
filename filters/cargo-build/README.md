@@ -8,7 +8,7 @@ Both filters are deterministic under filter-specific conditions: two runs produc
 
 ## stable.jq
 
-Full normalization: generates stable output from non-deterministic build output by sorting the variable parts of the JSON — message order, array order, and object keys. Keeps all fields, and removes caching noise.
+Full normalization: generates stable output from non-deterministic build output by sorting the variable parts of the JSON — message order, array order, and object keys. All fields are preserved.
 
 ```
 cargo build --message-format json 2>/dev/null | jq -s -f filters/cargo-build/stable.jq
@@ -64,5 +64,5 @@ STRIP_PATHS=1 cargo build --message-format json 2>/dev/null | jq -s -f filters/c
 | Message line order (parallel compilation) | Sort by `(package_id, reason)` |
 | Artifact hash suffixes (`-be9f3faac0a26ef0`) | Preserved (deterministic hash of build configuration, see above) |
 | Array element order (`features`, `filenames`, `cfgs`, `env`, etc.) | Sort each array deterministically |
-| `fresh` / `executable` fields | Remove (vary with caching state) |
+| `fresh` / `executable` fields | Preserved (vary with caching state) |
 | Object key ordering | Recursively sort keys alphabetically |

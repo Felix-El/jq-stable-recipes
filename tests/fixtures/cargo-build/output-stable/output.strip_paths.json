@@ -4,10 +4,12 @@
     "success": true
   },
   {
+    "executable": "myapp",
     "features": [],
     "filenames": [
       "myapp"
     ],
+    "fresh": false,
     "manifest_path": "Cargo.toml",
     "package_id": "myapp@0.1.0",
     "profile": {
@@ -116,6 +118,7 @@
     }
   },
   {
+    "executable": null,
     "features": [
       "default"
     ],
@@ -123,6 +126,7 @@
       "libmylib-3333333333333333.rlib",
       "libmylib-3333333333333333.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "Cargo.toml",
     "package_id": "mylib@0.1.0",
     "profile": {
@@ -231,11 +235,13 @@
     }
   },
   {
+    "executable": null,
     "features": [],
     "filenames": [
       "libmyutil-1111111111111111.rlib",
       "libmyutil-1111111111111111.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "Cargo.toml",
     "package_id": "myutil@0.1.0",
     "profile": {
@@ -284,6 +290,7 @@
     "reason": "build-script-executed"
   },
   {
+    "executable": null,
     "features": [
       "derive",
       "std"
@@ -292,6 +299,7 @@
       "libserde-be9f3faac0a26ef0.rlib",
       "libserde-be9f3faac0a26ef0.rmeta"
     ],
+    "fresh": false,
     "manifest_path": "Cargo.toml",
     "package_id": "serde@1.0.193",
     "profile": {
