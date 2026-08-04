@@ -2,14 +2,13 @@
 #
 # Generates stable output from cargo-audit JSON by sorting the variable parts
 # of the JSON fragment: vulnerability and warning lists, dependency arrays,
-# advisory sub-arrays, and object keys. Drops non-deterministic database
-# metadata (last-commit, last-updated) that resists ordering-only treatment.
-# Sorts the vulnerability list and each warning category array by advisory.id;
-# sorts package dependency arrays by name; sorts advisory sub-arrays (aliases,
-# categories, keywords, related, references) and affected os/arch arrays;
-# recursively sorts all object keys. All semantically meaningful fields kept,
-# including package.checksum (the crates.io SHA-256 content hash of the exact
-# crate file), which is preserved, not dropped.
+# advisory sub-arrays, and object keys. Sorts the vulnerability list and each
+# warning category array by advisory.id; sorts package dependency arrays by
+# name; sorts advisory sub-arrays (aliases, categories, keywords, related,
+# references) and affected os/arch arrays; recursively sorts all object keys.
+# All semantically meaningful fields kept, including package.checksum (the
+# crates.io SHA-256 content hash of the exact crate file), which is preserved,
+# not dropped.
 #
 # Determinism contract: two runs are byte-identical iff they audited the same
 # lockfile against the same advisory database; the database metadata fields
@@ -35,9 +34,7 @@ def norm_entry:
     else . end;
 
 {
-  database: {
-    "advisory-count": .database["advisory-count"]
-  },
+  database,
   lockfile,
   settings: (
     .settings

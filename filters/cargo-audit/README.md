@@ -4,11 +4,11 @@ Two filters for [`cargo-audit`](https://github.com/rustsec/rustsec/tree/main/car
 
 ## Determinism
 
-Both filters are deterministic under filter-specific conditions: two runs produce byte-identical output iff they audited the same lockfile against the same advisory database. The database-metadata fields that change on every update (`database.last-commit`, `database.last-updated`) are dropped. `package.checksum` (the crates.io SHA-256 of the exact crate file) is a content hash of the audited input and is **preserved** by both filters — two lockfiles referencing different crate contents would differ here.
+Both filters are deterministic under filter-specific conditions: two runs produce byte-identical output iff they audited the same lockfile against the same advisory database. `package.checksum` (the crates.io SHA-256 of the exact crate file) is a content hash of the audited input and is **preserved** by both filters — two lockfiles referencing different crate contents would differ here.
 
 ## stable.jq
 
-Full normalization: generates stable, order-independent output from `cargo audit --json` by sorting the variable parts of the JSON — vulnerability and warning lists, package dependency arrays, advisory sub-arrays, and object keys. Drops non-deterministic database metadata that resists ordering-only treatment. All semantically meaningful fields are preserved.
+Full normalization: generates stable, order-independent output from `cargo audit --json` by sorting the variable parts of the JSON — vulnerability and warning lists, package dependency arrays, advisory sub-arrays, and object keys. All semantically meaningful fields are preserved.
 
 ```
 cargo audit --json 2>/dev/null | jq -s -f filters/cargo-audit/stable.jq
@@ -21,8 +21,6 @@ jq -s -f filters/cargo-audit/stable.jq cargo-audit.json
 
 | Variation | Treatment |
 |---|---|
-| `database.last-commit` | Dropped (changes on every DB update) |
-| `database.last-updated` | Dropped (changes on every DB update) |
 | Vulnerability list order | Sort by `advisory.id` |
 | Warning category array order | Sort by `advisory.id` within each kind |
 | `package.dependencies` order | Sort by `name` |
