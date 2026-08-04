@@ -2046,6 +2046,14 @@
   },
   {
     "fields": {
+      "level": "WARN",
+      "message": "unable to find a config path, falling back to default config",
+      "timestamp": "2026-07-31T16:57:40.700101995Z"
+    },
+    "type": "log"
+  },
+  {
+    "fields": {
       "advisories": {
         "errors": 3,
         "helps": 0,

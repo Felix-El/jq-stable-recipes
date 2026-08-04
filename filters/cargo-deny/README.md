@@ -6,7 +6,7 @@ Two filters for `cargo deny --format json check` output, at different levels of 
 
 ## stable.jq
 
-Full normalization: generates stable output from non-deterministic deny output by sorting the variable parts of the JSON — diagnostics, internal arrays (graphs, labels, notes), and object keys. Drops `log` events (timestamps vary every run). Keeps all `diagnostic` fields (code, severity, message, graphs, labels, notes) and the `summary` event. Sorts diagnostics deterministically by `(code, message, primary-crate name, version)`.
+Full normalization: generates stable output from non-deterministic deny output by sorting the variable parts of the JSON — diagnostics, log events, internal arrays (graphs, labels, notes), and object keys. Keeps all event types: diagnostic fields (code, severity, message, graphs, labels, notes), log events (sorted by timestamp), and the summary event. Sorts diagnostics deterministically by `(code, message, primary-crate name, version)`.
 
 ```
 cargo deny --format json check all 2>deny.ndjson
@@ -17,7 +17,6 @@ jq -s -f filters/cargo-deny/stable.jq deny.ndjson
 
 - **No path stripping** — `cargo deny` output does not contain machine-specific absolute filesystem paths; registry URLs (e.g. `registry+https://github.com/rust-lang/crates.io-index`) are stable across machines.
 - **Advisory prose is preserved** — the full advisory description and references are kept verbatim. The advisory ID and content are stable across runs for a given advisory database snapshot.
-- **Log events dropped** — `log` events carry nanosecond-resolution timestamps and provide no semantic information; they are silently discarded.
 
 ## deterministic.jq
 
@@ -46,7 +45,7 @@ jq -s -f filters/cargo-deny/deterministic.jq deny.ndjson
 | Variation | Treatment |
 |---|---|
 | Event line order (graph traversal order) | Sort diagnostics by `(code, message, primary-crate name, version)` |
-| `log` events (nanosecond timestamps) | Drop entirely |
+| `log` events (nanosecond timestamps) | Sort by timestamp |
 | `graphs` array order within a diagnostic | Sort by `(Krate.name, Krate.version)` recursively |
 | `labels` array order within a diagnostic | Sort by `(line, column, message)` |
 | `notes` array order | Sort lexicographically |
